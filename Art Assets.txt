@@ -1,0 +1,9 @@
+Art Assets
+
+Sprites of cars, power up and other track items
+Sprites of cars (not top down, they'll be used for displaying cars in the menu)
+Full Drawn landscapes(?)
+Sound effects (for driving, shooting, shield, power ups, etc.)
+Music (not required but it would be nice. preferably some kind of techno rock music. one for the menu, and one for each track we make.)
+
+I can take care of sprites and other 2d art
