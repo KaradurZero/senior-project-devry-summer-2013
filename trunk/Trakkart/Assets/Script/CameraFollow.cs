@@ -10,7 +10,7 @@ public class CameraFollow : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		m_default_distance = 100f ;
+		m_default_distance = 300f ;
 		m_default_rotation = 90f ;
 	}
 	
