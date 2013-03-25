@@ -26,6 +26,14 @@ public class GamepadController : MonoBehaviour {
 			rigidbody.drag = 2f ;
 		}
 		
+		//if( Input.GetKey(KeyCode.Joystick1Button5) && !Input.GetKey(KeyCode.Mouse1) ) {
+		//	controller.player.BoostVehicle( 0.05f ) ;
+		//	controller.player.RaiseTemperaturePerSecond( 10f ) ;
+		//}
+		//else{
+		//	controller.player.TurnOffTempPerSecond( ) ;
+		//}
+			
 		//Debug.Log (Input.GetAxis("Fire1"));
 	}
 }

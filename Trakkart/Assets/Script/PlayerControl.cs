@@ -26,12 +26,20 @@ public class PlayerControl : MonoBehaviour {
 			playerRotation(moveDirection) ;
 		}
 		
-		if(Input.GetKey(KeyCode.D)|| Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)){
+		//if(Input.GetKey(KeyCode.D)|| Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)){
 			rigidbody.AddForce(moveDirection * player.stat.GetAccel()) ;
-		}
+		//}
 			
 		if(Input.GetKey(KeyCode.Q)){
 			rigidbody.drag = 1.5f ;	
+		}
+		
+		if( Input.GetKey(KeyCode.Mouse1) || Input.GetKey(KeyCode.Joystick1Button5) ) {
+			player.BoostVehicle( 0f ) ;
+			player.RaiseTemperaturePerSecond( 10f ) ;
+		}
+		else {
+			player.TurnOffTempPerSecond( ) ;	
 		}
 	}
 	

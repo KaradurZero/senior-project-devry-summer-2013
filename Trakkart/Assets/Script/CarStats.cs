@@ -56,7 +56,7 @@ public class CarStats : MonoBehaviour {
 		
 		m_attack = 10f ;
 		m_defense = 10f ;
-		m_cooling = 1f ;
+		m_cooling = 10f ;
 		m_handling = 5f ;
 		m_luck = 5f ;
 		
