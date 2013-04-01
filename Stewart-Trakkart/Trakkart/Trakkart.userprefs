@@ -1,14 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="bullet.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\itemBox.cs">
     <Files>
-      <File FileName="gun.cs" Line="16" Column="17" />
-      <File FileName="bullet.cs" Line="23" Column="48" />
+      <File FileName="Assets\Scripts\itemBox.cs" Line="95" Column="20" />
       <File FileName="Assets\Scripts\Weapon.cs" Line="27" Column="5" />
       <File FileName="Assets\Scripts\BulletUpdate.cs" Line="39" Column="8" />
-      <File FileName="Assets\Scripts\basicMovementTesting.cs" Line="23" Column="68" />
+      <File FileName="Assets\Scripts\basicMovementTesting.cs" Line="19" Column="45" />
       <File FileName="Assets\Scripts\GunShieldRotation.cs" Line="39" Column="4" />
-      <File FileName="Assets\Scripts\itemBox.cs" Line="89" Column="5" />
+      <File FileName="Assets\Scripts\vehicleItems.cs" Line="37" Column="28" />
+      <File FileName="..\..\..\..\..\Desktop\Lunar Scanner Nasa Game Jam\Assets\Scripts\GUITest.cs" Line="28" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
