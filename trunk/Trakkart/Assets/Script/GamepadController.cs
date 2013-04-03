@@ -3,37 +3,53 @@ using System.Collections;
 
 public class GamepadController : MonoBehaviour {
 	
-	public PlayerControl controller ;
-	
+	public Vehicle player ;
+	private float m_maxDrag ;
+
 	// Use this for initialization
 	void Start () {
-	
+		m_maxDrag = 1f ;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		float analogHorMovement = Input.GetAxis("HorizontalJ");
 		float analogVertMovement = Input.GetAxis("VerticalJ");
+		float weaponHoriz = Input.GetAxis("Weapon_Horizontal");
+		float weaponVert = Input.GetAxis("Weapon_Vertical");
 		Vector3 analogMoveDirection= new Vector3 (analogHorMovement, 0, analogVertMovement);
+		Vector3 aimDirection= new Vector3 (weaponHoriz, 0, weaponVert);
+		
+		float angle = Mathf.Atan2(weaponHoriz, weaponVert) * Mathf.Rad2Deg ;
+		
+		rigidbody.drag = Mathf.Lerp(m_maxDrag, 0, analogMoveDirection.magnitude);
 		
 		if (analogMoveDirection != Vector3.zero){
-			controller.playerRotation(analogMoveDirection) ;
+			float MoveRotate = player.stat.GetHandling() * Time.deltaTime;
+			Quaternion newRotation = Quaternion.LookRotation(analogMoveDirection);
+			transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, MoveRotate);
+			rigidbody.AddForce(analogMoveDirection * player.stat.GetCurrentSpeed() );	
+		}
+		if (aimDirection != Vector3.zero){
+			player.weapon.Rotate( aimDirection ) ;
 		}
 		
-		rigidbody.AddForce(analogMoveDirection * controller.player.stat.GetAccel()) ;
+		rigidbody.AddForce(analogMoveDirection * player.stat.GetAccel()) ;
+		//player.weapon.Shoot(aimDirection) ;
+		
+		if( weaponHoriz != 0 || weaponVert != 0 )
+			player.weapon.Shoot( ) ;
 		
 		if( Input.GetKey (KeyCode.Joystick1Button4) ) {
 			rigidbody.drag = 2f ;
 		}
 		
-		//if( Input.GetKey(KeyCode.Joystick1Button5) && !Input.GetKey(KeyCode.Mouse1) ) {
-		//	controller.player.BoostVehicle( 0.05f ) ;
-		//	controller.player.RaiseTemperaturePerSecond( 10f ) ;
-		//}
-		//else{
-		//	controller.player.TurnOffTempPerSecond( ) ;
-		//}
-			
-		//Debug.Log (Input.GetAxis("Fire1"));
+		if( Input.GetKey(KeyCode.Joystick1Button5) ) {
+			player.BoostVehicle( 0.05f ) ;
+			player.RaiseTemperaturePerSecond( 20f ) ;
+		}
+		else{
+			player.TurnOffTempPerSecond( ) ;
+		}
 	}
 }

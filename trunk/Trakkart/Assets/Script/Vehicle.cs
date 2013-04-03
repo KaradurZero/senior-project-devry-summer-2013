@@ -4,36 +4,39 @@ using System.Collections;
 public class Vehicle : MonoBehaviour {
 	
 	public CarStats stat ;
+	public gun weapon ;
 	
 	private bool m_boosted ;
-	private bool m_tempRising ;
 	private float m_boost_time ;
 	private float m_boostPadTime ;
-	private float m_temperature ;
 
 	// Use this for initialization
 	void Start () {
-		m_boosted = m_tempRising = false ;
+		m_boosted = false ;
 		m_boost_time = 0f ;
 		m_boostPadTime = 2f ;
-		m_temperature = 0f ;
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		//weapon.transform.position = new Vector3(transform.position.x, 0.6f, transform.position.z) ;
+		
 		if( m_boosted && Time.time > m_boost_time ) {
 			stat.ResetVelocity() ;
 			stat.ResetAcceleration() ;
 			m_boosted = false ;
 		}
 		
-		if( !m_tempRising ){
-			m_temperature -= stat.GetCooling() * Time.deltaTime ;
+		if( !stat.GetTempPerSec() ){
+			stat.SetCurrTemp( stat.GetCurrTemp() - stat.GetCooling() * Time.deltaTime ) ;
 			
-			if(m_temperature < 0f)
-				m_temperature = 0f ;
-			
+			if(stat.GetCurrTemp() < 0f)
+				stat.SetCurrTemp( 0f ) ;
+		}
+		else{
+			if( stat.GetCurrTemp() > 100f )
+				stat.SetCurrTemp( 100f ) ;
 		}
 		
 		if( rigidbody.velocity.sqrMagnitude > (stat.GetMaxVelocity()*stat.GetMaxVelocity()) )
@@ -42,7 +45,7 @@ public class Vehicle : MonoBehaviour {
 		stat.SetCurrentSpeed(rigidbody.velocity.magnitude);
 		
 		//Debug.Log (stat.GetCurrentSpeed());
-		Debug.Log (m_temperature);
+		//Debug.Log (stat.GetCurrTemp());
 	}
 	
 	void OnTriggerEnter( Collider other ) {
@@ -75,11 +78,13 @@ public class Vehicle : MonoBehaviour {
 	}
 	
 	public void RaiseTemperaturePerSecond( float tempPerSecond ) {
-		m_temperature += tempPerSecond * Time.deltaTime ;	
-		m_tempRising = true ;
+		stat.SetCurrTemp(stat.GetCurrTemp() + tempPerSecond * Time.deltaTime) ;
+		
+		if( !stat.GetTempPerSec() )
+			stat.TempPerSecOn( ) ;
 	}
 	
 	public void TurnOffTempPerSecond( ) {
-		m_tempRising = false ;	
+		stat.TempPerSecOff( ) ;
 	}
 }

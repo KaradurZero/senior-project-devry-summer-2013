@@ -23,30 +23,26 @@ public class PlayerControl : MonoBehaviour {
 		 
 		// Move the player
 		if (moveDirection != Vector3.zero){
-			playerRotation(moveDirection) ;
+			float MoveRotate = player.stat.GetHandling() * Time.deltaTime;
+			Quaternion newRotation = Quaternion.LookRotation(moveDirection);
+			transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, MoveRotate);
+			rigidbody.AddForce(moveDirection * player.stat.GetCurrentSpeed() );	
 		}
 		
 		//if(Input.GetKey(KeyCode.D)|| Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)){
-			rigidbody.AddForce(moveDirection * player.stat.GetAccel()) ;
+		rigidbody.AddForce(moveDirection * player.stat.GetAccel()) ;
 		//}
 			
 		if(Input.GetKey(KeyCode.Q)){
-			rigidbody.drag = 1.5f ;	
+			rigidbody.drag = 2f ;	
 		}
 		
-		if( Input.GetKey(KeyCode.Mouse1) || Input.GetKey(KeyCode.Joystick1Button5) ) {
+		if( Input.GetKey(KeyCode.Mouse1) ) {
 			player.BoostVehicle( 0f ) ;
-			player.RaiseTemperaturePerSecond( 10f ) ;
+			player.RaiseTemperaturePerSecond( 20f ) ;
 		}
 		else {
 			player.TurnOffTempPerSecond( ) ;	
 		}
-	}
-	
-	public void playerRotation( Vector3 direction ) {
-		float MoveRotate = player.stat.GetHandling() * Time.deltaTime;
-		Quaternion newRotation = Quaternion.LookRotation(direction);
-		transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, MoveRotate);
-		rigidbody.AddForce(direction * player.stat.GetCurrentSpeed() );	
 	}
 }
