@@ -44,16 +44,17 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\BulletUpdate.cs" />
      <Compile Include="Assets\Scripts\CarMovement.cs" />
-     <Compile Include="Assets\Scripts\GunShieldRotation.cs" />
-     <Compile Include="Assets\Scripts\V2DF.cs" />
-     <Compile Include="Assets\Scripts\V3DF.cs" />
-     <Compile Include="Assets\Scripts\Weapon.cs" />
+     <Compile Include="Assets\Scripts\Items\FreezeShotMovement.cs" />
+     <Compile Include="Assets\Scripts\Items\MissileMovement.cs" />
+     <Compile Include="Assets\Scripts\Items\OilSlickBehavior.cs" />
+     <Compile Include="Assets\Scripts\Items\itemBox.cs" />
+     <Compile Include="Assets\Scripts\Items\vehicleItems.cs" />
+     <Compile Include="Assets\Scripts\Weapons\BulletUpdate.cs" />
+     <Compile Include="Assets\Scripts\Weapons\GunShieldRotation.cs" />
+     <Compile Include="Assets\Scripts\Weapons\Weapon.cs" />
      <Compile Include="Assets\Scripts\basicMovementTesting.cs" />
-     <Compile Include="Assets\Scripts\itemBox.cs" />
      <Compile Include="Assets\Scripts\rotateToCursor.cs" />
-     <Compile Include="Assets\Scripts\vehicleItems.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
