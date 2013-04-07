@@ -34,7 +34,7 @@ public class gun : MonoBehaviour {
 		//transform.position = new Vector3(m_playerCollider.transform.position.x, 0.6f, m_playerCollider.transform.position.z) ;
 		
 		//Debug.Log (m_playerCollider.rigidbody.velocity.magnitude);
-		Debug.Log (m_direction);
+		//Debug.Log (m_direction);
 		
 		if(m_coolDownTime > 0f){
 			m_coolDownTime -= Time.deltaTime;
@@ -96,24 +96,24 @@ public class gun : MonoBehaviour {
 				shotFiredSingle.GetComponent<bullet>().SetDeathTime(2.5f);
 				break;
 			case FIRETYPE.MACHINE_GUN:
-				m_coolDownTime = .25f;
+				m_coolDownTime = .3f;
 				GameObject shotFiredMachineGun = (GameObject) Instantiate(m_bullet,transform.position, transform.rotation);
 				Physics.IgnoreCollision(shotFiredMachineGun.collider, m_playerCollider);
 				
 				//shotFiredMachineGun.AddComponent<bullet>();
-				//shotFiredMachineGun.GetComponent<bullet>().SetDirection(m_direction, rigidbody.velocity.magnitude);
+				shotFiredMachineGun.GetComponent<bullet>().SetDirection(m_direction, m_playerCollider.rigidbody.velocity.magnitude);
+				shotFiredMachineGun.GetComponent<bullet>().SetDeathTime(2.5f);
 				break;
 			case FIRETYPE.SHOTGUN:
 				m_coolDownTime = 2f;
 				for(int i = 0; i < 8; i++)
 				{
-					GameObject shotFiredShotgun = (GameObject) Instantiate(m_bullet,transform.position, transform.rotation);
-					Physics.IgnoreCollision(shotFiredShotgun.collider, m_playerCollider);
+					GameObject shotFiredShotgun =(GameObject) Instantiate(m_bullet,transform.position, transform.rotation);
 					Physics.IgnoreCollision(shotFiredShotgun.collider, m_playerCollider);
 					
 					//shotFiredShotgun.AddComponent<bullet>();
-					//shotFiredShotgun.GetComponent<bullet>().SetDirection(m_direction, rigidbody.velocity.magnitude);
-					//shotFiredShotgun.GetComponent<bullet>().SetDeathTime(2.5f);
+					shotFiredShotgun.GetComponent<bullet>().SetDirection(m_direction, m_playerCollider.rigidbody.velocity.magnitude);
+					shotFiredShotgun.GetComponent<bullet>().SetDeathTime(1f);
 				}
 				break;
 			case FIRETYPE.BIG_GUN:
@@ -122,7 +122,8 @@ public class gun : MonoBehaviour {
 				Physics.IgnoreCollision(shotFiredBigGun.collider, m_playerCollider);
 				
 				//shotFiredBigGun.AddComponent<bullet>();
-				//shotFiredBigGun.GetComponent<bullet>().SetDirection(m_direction, rigidbody.velocity.magnitude);
+				shotFiredBigGun.GetComponent<bullet>().SetDirection(m_direction, m_playerCollider.rigidbody.velocity.magnitude);
+				shotFiredBigGun.GetComponent<bullet>().SetDeathTime(2f);
 				break;
 			}
 		}
