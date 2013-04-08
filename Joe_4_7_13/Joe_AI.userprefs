@@ -1,0 +1,25 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\itemBox.cs">
+    <Files>
+      <File FileName="Assets\Scripts\itemBox.cs" Line="99" Column="27" />
+      <File FileName="Assets\Scripts\StatsGUI.cs" Line="5" Column="3" />
+      <File FileName="Assets\Scripts\AIState.cs" Line="184" Column="28" />
+      <File FileName="Assets\Scripts\BulletUpdate.cs" Line="27" Column="49" />
+      <File FileName="Assets\Scripts\Weapon.cs" Line="30" Column="4" />
+      <File FileName="Assets\Scripts\AIDriver.cs" Line="91" Column="38" />
+      <File FileName="Assets\Scripts\GunShieldRotation.cs" Line="101" Column="1" />
+      <File FileName="Assets\Scripts\vehicleItems.cs" Line="12" Column="14" />
+      <File FileName="Assets\Scripts\Vehicle.cs" Line="41" Column="20" />
+      <File FileName="Assets\Scripts\minimapItem.cs" Line="13" Column="2" />
+      <File FileName="Assets\Scripts\driverHealth.cs" Line="32" Column="61" />
+      <File FileName="Assets\Scripts\CarStat.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\waypointManager.cs" Line="32" Column="35" />
+      <File FileName="Assets\Scripts\tireTraks.cs" Line="14" Column="127" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
