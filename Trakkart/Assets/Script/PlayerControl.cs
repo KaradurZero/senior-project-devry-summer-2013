@@ -30,21 +30,23 @@ public class PlayerControl : MonoBehaviour {
 				player.AddForce(moveDirection, player.stat.GetCurrentSpeed());	
 			}
 			
-			//if(Input.GetKey(KeyCode.D)|| Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)){
-			player.AddForce(moveDirection, player.stat.GetAccel()) ;
-			//}
+			if( !player.stat.isOverheated() ) {
+				//if(Input.GetKey(KeyCode.D)|| Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)){
+				player.AddForce(moveDirection, player.stat.GetAccel()) ;
+				//}
+					
+				if(Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.Joystick1Button4)){
+					player.SetDrag( 2f ) ;
+					//Debug.Log ("SCREECH!");
+				}
 				
-			if(Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.Joystick1Button4)){
-				player.SetDrag( 2f ) ;
-				//Debug.Log ("SCREECH!");
-			}
-			
-			if( Input.GetKey(KeyCode.Mouse1) ) {
-				player.BoostVehicle( 0f ) ;
-				player.RaiseTemperaturePerSecond( 20f ) ;
-			}
-			else {
-				player.TurnOffTempPerSecond( ) ;	
+				if( Input.GetKey(KeyCode.Mouse1) ) {
+					player.BoostVehicle( 0f ) ;
+					player.RaiseTemperaturePerSecond( 20f ) ;
+				}
+				else {
+					player.TurnOffTempPerSecond( ) ;	
+				}
 			}
 		}
 	}

@@ -32,26 +32,33 @@ public class GamepadController : MonoBehaviour {
 				transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, MoveRotate);
 				player.AddForce(analogMoveDirection, player.stat.GetCurrentSpeed());	
 			}
-			if (aimDirection != Vector3.zero){
-				player.weapon.Rotate( aimDirection ) ;
-			}
 			
-			player.AddForce(analogMoveDirection,  player.stat.GetAccel()) ;
-			//player.weapon.Shoot(aimDirection) ;
+			if( !player.stat.isOverheated() ) {
+				if (aimDirection != Vector3.zero){
+					player.weapon.Rotate( aimDirection ) ;
+				}
 			
-			if( weaponHoriz != 0 || weaponVert != 0 )
-				player.weapon.Shoot( ) ;
-			
-			if( Input.GetKey(KeyCode.Joystick1Button4) ) {
-				player.SetDrag( 2f ) ;
-			}
-			
-			if( Input.GetKey(KeyCode.Joystick1Button5) ) {
-				player.BoostVehicle( 0.05f ) ;
-				player.RaiseTemperaturePerSecond( 20f ) ;
-			}
-			else{
-				player.TurnOffTempPerSecond( ) ;
+				player.AddForce(analogMoveDirection,  player.stat.GetAccel()) ;
+				//player.weapon.Shoot(aimDirection) ;
+				
+				if( weaponHoriz != 0 || weaponVert != 0 ) {
+					if( player.weapon.CanShoot() ) {
+						player.weapon.Shoot( ) ;
+						player.RaiseTemp(player.weapon.GetCost()) ;
+					}
+				}
+				
+				if( Input.GetKey(KeyCode.Joystick1Button4) ) {
+					player.SetDrag( 2f ) ;
+				}
+				
+				if( Input.GetKey(KeyCode.Joystick1Button5) ) {
+					player.BoostVehicle( 0.05f ) ;
+					player.RaiseTemperaturePerSecond( 20f ) ;
+				}
+				else{
+					player.TurnOffTempPerSecond( ) ;
+				}
 			}
 		}
 	}
