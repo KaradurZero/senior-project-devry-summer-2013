@@ -47,13 +47,6 @@ public class Vehicle : MonoBehaviour {
 		
 		if( !stat.GetTempPerSec() ){
 			stat.SetCurrTemp( stat.GetCurrTemp() - stat.GetCooling() * Time.deltaTime ) ;
-			
-			if(stat.GetCurrTemp() < 0f)
-				stat.SetCurrTemp( 0f ) ;
-		}
-		else{
-			if( stat.GetCurrTemp() > 100f )
-				stat.SetCurrTemp( 100f ) ;
 		}
 		
 		if( rigidbody.velocity.sqrMagnitude > (stat.GetMaxVelocity()*stat.GetMaxVelocity()) )
@@ -68,7 +61,7 @@ public class Vehicle : MonoBehaviour {
 		stat.SetCurrentSpeed(rigidbody.velocity.magnitude);
 		
 		//Debug.Log (stat.GetCurrentSpeed());
-		//Debug.Log (stat.GetCurrTemp());
+		Debug.Log (stat.GetCurrTemp());
 	}
 	
 	void OnTriggerEnter( Collider other ) {
@@ -108,10 +101,14 @@ public class Vehicle : MonoBehaviour {
 	}
 	
 	public void RaiseTemperaturePerSecond( float tempPerSecond ) {
-		stat.SetCurrTemp(stat.GetCurrTemp() + tempPerSecond * Time.deltaTime) ;
-		
 		if( !stat.GetTempPerSec() )
 			stat.TempPerSecOn( ) ;
+		
+		stat.SetCurrTemp(stat.GetCurrTemp() + tempPerSecond * Time.deltaTime) ;
+	}
+	
+	public void RaiseTemp( float a_amount ){
+		stat.SetCurrTemp ( stat.GetCurrTemp() + a_amount ) ;
 	}
 	
 	public void TurnOffTempPerSecond( ) {
@@ -120,7 +117,7 @@ public class Vehicle : MonoBehaviour {
 	
 	public void SetDrag( float intensity ) {
 		rigidbody.drag = intensity / m_slipCoeff ;
-		Debug.Log (rigidbody.drag);
+		//Debug.Log (rigidbody.drag);
 	}
 	
 	public void AddForce( Vector3 direction, float intensity ) {

@@ -6,6 +6,7 @@ public class gun : MonoBehaviour {
 	public GameObject m_bullet, m_bulletBig;
 	Vector3 m_direction ;
 	float m_coolDownTime = 0f;
+	float m_tempCost ;
 	public bool m_canShoot;
 	Collider m_playerCollider;
 	public enum FIRETYPE { SINGLE, SHOTGUN, MACHINE_GUN, BIG_GUN }
@@ -16,7 +17,8 @@ public class gun : MonoBehaviour {
 	
 	void Start () {
 		m_playerCollider = GameObject.FindWithTag("Player").GetComponent<Collider>();
-		m_gunState = FIRETYPE.SINGLE;
+		m_gunState = FIRETYPE.MACHINE_GUN;
+		m_tempCost = 5f ;
 	}
 	
 	public int GetGunType()
@@ -78,11 +80,11 @@ public class gun : MonoBehaviour {
 	
 	public void Shoot( )
 	{	
-		if( m_canShoot ) {
 			switch(m_gunState)
 			{
 			case FIRETYPE.SINGLE:
 				m_coolDownTime = 1f;
+				m_tempCost = 10f ;
 				GameObject shotFiredSingle = (GameObject) Instantiate(m_bullet,transform.position, transform.rotation);
 				//Physics.IgnoreCollision(shotFiredSingle.collider, m_playerCollider);
 				//rBody = shotFiredSingle.AddComponent<Rigidbody>();
@@ -97,15 +99,17 @@ public class gun : MonoBehaviour {
 				break;
 			case FIRETYPE.MACHINE_GUN:
 				m_coolDownTime = .3f;
+				m_tempCost = 5f ;
 				GameObject shotFiredMachineGun = (GameObject) Instantiate(m_bullet,transform.position, transform.rotation);
 				Physics.IgnoreCollision(shotFiredMachineGun.collider, m_playerCollider);
 				
 				//shotFiredMachineGun.AddComponent<bullet>();
 				shotFiredMachineGun.GetComponent<bullet>().SetDirection(m_direction, m_playerCollider.rigidbody.velocity.magnitude);
-				shotFiredMachineGun.GetComponent<bullet>().SetDeathTime(2.5f);
+				shotFiredMachineGun.GetComponent<bullet>().SetDeathTime(1.5f);
 				break;
 			case FIRETYPE.SHOTGUN:
 				m_coolDownTime = 2f;
+				m_tempCost = 25f ;
 				for(int i = 0; i < 8; i++)
 				{
 					GameObject shotFiredShotgun =(GameObject) Instantiate(m_bullet,transform.position, transform.rotation);
@@ -118,6 +122,7 @@ public class gun : MonoBehaviour {
 				break;
 			case FIRETYPE.BIG_GUN:
 				m_coolDownTime = 1f;
+				m_tempCost = 50f ;
 				GameObject shotFiredBigGun = (GameObject) Instantiate(m_bulletBig,transform.position, transform.rotation);
 				Physics.IgnoreCollision(shotFiredBigGun.collider, m_playerCollider);
 				
@@ -126,7 +131,6 @@ public class gun : MonoBehaviour {
 				shotFiredBigGun.GetComponent<bullet>().SetDeathTime(2f);
 				break;
 			}
-		}
 		
 		//SoundPalette.PlaySound("Gunshot/" + clipNames[(int)m_gunState], 66f);
 		
@@ -139,5 +143,8 @@ public class gun : MonoBehaviour {
 		while(isFiring = playMe.isPlaying)
 			yield return null;
 	}
+	
+	public float GetCost() {return m_tempCost;}
+	public bool CanShoot() {return m_canShoot;}
 	
 }

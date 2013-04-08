@@ -16,6 +16,7 @@ public class CarStats : MonoBehaviour {
 	private float m_maxTemp ;
 	private float m_currTemp ;
 	private bool m_tempPerSec ;
+	private bool m_overheated ;
 	
 	private float m_currVelocity ;
 	
@@ -37,6 +38,7 @@ public class CarStats : MonoBehaviour {
 	public float GetMaxTemp( ) {return m_maxTemp ;}
 	public float GetCurrTemp( ) {return m_currTemp ;}
 	public bool GetTempPerSec( ) {return m_tempPerSec ;}
+	public bool isOverheated( ) {return m_overheated ;}
 	
 	public float GetCurrentSpeed( ) {return m_currVelocity ;}
 	public float GetBoostSpeed( ) {return m_boostVelocity ;}
@@ -52,7 +54,20 @@ public class CarStats : MonoBehaviour {
 	public void SetLuck( float a_luck ) {m_luck = a_luck ;}
 	
 	public void SetMaxTemp( float a_maxTemp ) {m_maxTemp = a_maxTemp ;}
-	public void SetCurrTemp( float a_currTemp ) {m_currTemp = a_currTemp ;}
+	public void SetCurrTemp( float a_currTemp ) {
+		m_currTemp = a_currTemp ;
+		
+		if( m_currTemp >= m_maxTemp ) {
+			m_currTemp = m_maxTemp ;
+			m_tempPerSec = false ;
+			m_overheated = true ;
+		}
+		if( m_currTemp <= 0 ) {
+			m_currTemp = 0 ;
+			m_overheated = false ;
+		}
+	
+	}
 	public void TempPerSecOn( ) {m_tempPerSec = true ;}
 	public void TempPerSecOff( ) {m_tempPerSec = false ;}
 	
@@ -83,7 +98,7 @@ public class CarStats : MonoBehaviour {
 		
 		m_maxTemp = 100f ;
 		m_currTemp = 0f ;
-		m_tempPerSec = false ;
+		m_tempPerSec = m_overheated = false ;
 		
 		m_maxHealth = 100f ;
 		m_currHealth = m_maxHealth ;
