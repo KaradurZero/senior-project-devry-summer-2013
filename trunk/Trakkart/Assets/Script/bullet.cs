@@ -36,7 +36,7 @@ public class bullet : MonoBehaviour {
 		
 		if(other.transform.tag == "enemy")
 		{
-			//other.gameObject.GetComponent("CarStats").TakeDamage(m_bulletStrength);
+			other.gameObject.GetComponent<CarStats>().TakeDamage(m_bulletStrength);
 			if(!m_amIBigBullet)
 			{
 				//Debug.Log("HIT HERE");

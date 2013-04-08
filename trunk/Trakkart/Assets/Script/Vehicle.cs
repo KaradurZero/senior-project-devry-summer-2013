@@ -10,6 +10,9 @@ public class Vehicle : MonoBehaviour {
 	private float m_boost_time ;
 	private float m_boostPadTime ;
 	
+	private bool m_slowed ;
+	private float m_slowDrag = 2f;
+	
 	private float m_slipTime ;
 	private float m_slipCoeff ;
 	
@@ -19,7 +22,7 @@ public class Vehicle : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		m_boosted = m_frozen = false ;
+		m_boosted = m_frozen = m_slowed = false ;
 		m_boost_time = 0f ;
 		m_boostPadTime = 2f ;
 		m_slipTime = 3f ;
@@ -37,8 +40,6 @@ public class Vehicle : MonoBehaviour {
 			stat.ResetAcceleration() ;
 			m_boosted = false ;
 		}
-		
-		//Debug.Log (rigidbody.drag);
 		
 		if( Time.time > m_slipTime ) {
 			m_slipCoeff = 1f ;
@@ -61,31 +62,42 @@ public class Vehicle : MonoBehaviour {
 		stat.SetCurrentSpeed(rigidbody.velocity.magnitude);
 		
 		//Debug.Log (stat.GetCurrentSpeed());
-		Debug.Log (stat.GetCurrTemp());
+		//Debug.Log (stat.GetCurrTemp());
+		Debug.Log (rigidbody.drag);
 	}
 	
-	void OnTriggerEnter( Collider other ) {
+	void OnCollisionEnter( Collision other ) {
 		if( other.gameObject.tag == "Oil Slick" ){
-			m_slipCoeff = 5f ;
+			m_slipCoeff = 2f ;
 			m_slipTime = Time.time + 3f ;
 		}
 		if( other.gameObject.tag == "Freeze" ) {
 			m_freezeTime = Time.time + m_freezeDuration ;
 			m_frozen = true ;
 		}
+		if( other.gameObject.tag == "Slow" ){
+			SetDrag(m_slowDrag) ;
+			m_slowed = true ;
+			//Debug.Log ("DRAAAAAAAG!");
+		}
 			
 	}
 	
-	void OnTriggerStay( Collider other ){
+	void OnCollisionStay( Collision other ){
 		if( other.gameObject.tag == "Slow" && !m_boosted ){
-			rigidbody.drag = 10f ;
+			SetDrag(m_slowDrag) ;
+			m_slowed = true ;
 		}
 		if( other.gameObject.tag == "Boost" ){
 			BoostVehicle(m_boostPadTime);
 		}
 	}
 	
-	void OnTriggerExit( Collider other ) {
+	void OnCollisionExit( Collision other ) {
+		if( other.gameObject.tag == "Slow" ){
+			m_slowed = false ;
+			//Debug.Log ( "UNDRAGGED" );
+		}
 		
 	}
 	
@@ -116,7 +128,8 @@ public class Vehicle : MonoBehaviour {
 	}
 	
 	public void SetDrag( float intensity ) {
-		rigidbody.drag = intensity / m_slipCoeff ;
+		if( (m_slowed && intensity == m_slowDrag) || (!m_slowed && intensity <= m_slowDrag) )
+			rigidbody.drag = intensity / m_slipCoeff ;
 		//Debug.Log (rigidbody.drag);
 	}
 	

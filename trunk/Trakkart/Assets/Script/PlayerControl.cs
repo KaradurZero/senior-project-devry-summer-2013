@@ -4,11 +4,10 @@ using System.Collections;
 public class PlayerControl : MonoBehaviour {
 	
 	public Vehicle player ;
-	private float m_maxDrag ;
+	private float m_maxDrag = 1f;
 
 	// Use this for initialization
 	void Start () {
-		m_maxDrag = 1f ;
 	}
 	
 	// Update is called once per frame
@@ -20,7 +19,6 @@ public class PlayerControl : MonoBehaviour {
 			Vector3 moveDirection= new Vector3 (horMovement, 0, vertMovement);
 			
 			player.SetDrag(Mathf.Lerp(m_maxDrag, 0, moveDirection.magnitude)) ;
-			
 			 
 			// Move the player
 			if (moveDirection != Vector3.zero){
@@ -48,6 +46,8 @@ public class PlayerControl : MonoBehaviour {
 					player.TurnOffTempPerSecond( ) ;	
 				}
 			}
+			else
+				player.SetDrag(0f) ;
 		}
 	}
 }
