@@ -4,11 +4,10 @@ using System.Collections;
 public class GamepadController : MonoBehaviour {
 	
 	public Vehicle player ;
-	private float m_maxDrag ;
+	private float m_maxDrag = 1f ;
 
 	// Use this for initialization
 	void Start () {
-		m_maxDrag = 1f ;
 	}
 	
 	// Update is called once per frame
@@ -24,7 +23,6 @@ public class GamepadController : MonoBehaviour {
 			float angle = Mathf.Atan2(weaponHoriz, weaponVert) * Mathf.Rad2Deg ;
 			
 			player.SetDrag(Mathf.Lerp(m_maxDrag, 0, analogMoveDirection.magnitude)) ;
-			
 			
 			if (analogMoveDirection != Vector3.zero){
 				float MoveRotate = player.stat.GetHandling() * Time.deltaTime;
@@ -61,5 +59,7 @@ public class GamepadController : MonoBehaviour {
 				}
 			}
 		}
+		else
+			player.SetDrag(0f) ;
 	}
 }
