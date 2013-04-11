@@ -22,11 +22,11 @@ public class StatsGUI : MonoBehaviour {
     void OnGUI() {		
 		guiDisplayText = 
 			"Power-ups:" +
-			"\ncar 1 : " + AiDriver1Item.GetItem() + 
-			"\ncar 2 : " + AiDriver2Item.GetItem() +
-			"\ncar 3 : " + AiDriver3Item.GetItem() + 
-			"\ncar 4 : " + AiDriver4Item.GetItem() + 
-			"\ncar 5 : " + AiDriver5Item.GetItem();
+			"\ncar 1 : " + AiDriver1Item.item + 
+			"\ncar 2 : " + AiDriver2Item.item +
+			"\ncar 3 : " + AiDriver3Item.item + 
+			"\ncar 4 : " + AiDriver4Item.item + 
+			"\ncar 5 : " + AiDriver5Item.item;
         guiDisplayText = GUI.TextArea(new Rect(10, 10, 100, 100), guiDisplayText, 200);
     }
 }
