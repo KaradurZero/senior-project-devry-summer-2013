@@ -48,6 +48,7 @@
      <Compile Include="Assets\Scripts\Items\FreezeShotMovement.cs" />
      <Compile Include="Assets\Scripts\Items\MissileMovement.cs" />
      <Compile Include="Assets\Scripts\Items\OilSlickBehavior.cs" />
+     <Compile Include="Assets\Scripts\Items\VehicleShieldController.cs" />
      <Compile Include="Assets\Scripts\Items\itemBox.cs" />
      <Compile Include="Assets\Scripts\Items\vehicleItems.cs" />
      <Compile Include="Assets\Scripts\Weapons\BulletUpdate.cs" />

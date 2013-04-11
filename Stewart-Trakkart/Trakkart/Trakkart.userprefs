@@ -1,15 +1,16 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Items\FreezeShotMovement.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Items\vehicleItems.cs">
     <Files>
-      <File FileName="Assets\Scripts\Items\FreezeShotMovement.cs" Line="44" Column="53" />
-      <File FileName="Assets\Scripts\Items\MissileMovement.cs" Line="45" Column="69" />
-      <File FileName="Assets\Scripts\Items\vehicleItems.cs" Line="79" Column="62" />
+      <File FileName="Assets\Scripts\Items\FreezeShotMovement.cs" Line="51" Column="8" />
+      <File FileName="Assets\Scripts\Items\MissileMovement.cs" Line="16" Column="26" />
       <File FileName="Assets\Scripts\Weapons\GunShieldRotation.cs" Line="51" Column="97" />
       <File FileName="Assets\Scripts\Weapons\BulletUpdate.cs" Line="21" Column="1" />
       <File FileName="Assets\Scripts\Items\OilSlickBehavior.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Weapons\Weapon.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Items\itemBox.cs" Line="97" Column="9" />
+      <File FileName="Assets\Scripts\Items\itemBox.cs" Line="67" Column="25" />
+      <File FileName="Assets\Scripts\Items\vehicleItems.cs" Line="40" Column="18" />
+      <File FileName="Assets\Scripts\Items\VehicleShieldController.cs" Line="65" Column="25" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
