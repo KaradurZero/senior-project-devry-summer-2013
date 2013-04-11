@@ -4,10 +4,10 @@ using System.Collections;
 public class itemBox : MonoBehaviour {
 	
 	public GameObject crash;
-	
 	bool m_isTangible;//affects rendering
 	float m_respawnMin, m_respawnMax, m_respawnSet;//min, max, and a set amount of time before item respawns from pickup
 	float m_respawnTimer;
+	string m_hTriggerSpecific_01;
 		
 	// Use this for initialization
 	void Start () {
@@ -16,6 +16,7 @@ public class itemBox : MonoBehaviour {
 		m_respawnMin 		= 3.0f;
 		m_respawnMax		= 8.0f;
 		m_respawnSet		= 5.0f;
+		m_hTriggerSpecific_01 = "Vehicle";
 	}
 	
 	// Update is called once per frame
@@ -90,19 +91,20 @@ public class itemBox : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider c) {
 		if(m_isTangible) {
-			GameObject obj = c.transform.root.gameObject;
-			if( obj.tag == "Vehicle") {
-				if( obj.GetComponent<vehicleItems>()) {
-					obj.GetComponent<vehicleItems>().item = Random.Range( 1, 6);
-					AIState ai = obj.GetComponent<AIState>();
-					if(ai != null)
-						ai.RecievePowerUp();
+			if( c.tag == m_hTriggerSpecific_01) {//if a vehicle
+				if( c.gameObject.GetComponent<vehicleItems>()) {//if has script
+					if( c.gameObject.GetComponent<vehicleItems>().item == 0) {//if has no item
+						c.gameObject.GetComponent<vehicleItems>().item = Random.Range( 1, 7);//give item
+					if(GetComponent<AIState>() != null)
+						GetComponent<AIState>().RecievePowerUp();
+					}
+						//c.gameObject.GetComponent<vehicleItems>().item = 3;//debugging
+					itemPickedUp();
+					
+					GameObject sparks = (GameObject) Instantiate(crash, c.transform.position, Quaternion.identity);
+					sparks.transform.LookAt(transform.position + new Vector3(0f,1f,0f));
+					Destroy(sparks,2f);
 				}
-				itemPickedUp();
-				
-				GameObject sparks = (GameObject) Instantiate(crash, c.transform.position, Quaternion.identity);
-				sparks.transform.LookAt(transform.position + new Vector3(0f,1f,0f));
-				Destroy(sparks,2f);
 			}
 		}
 	}
@@ -111,5 +113,7 @@ public class itemBox : MonoBehaviour {
 		m_isTangible = false;
 		this.renderer.enabled = m_isTangible;
 		m_respawnTimer = m_respawnSet;
+		//debug testing
+		Debug.Log( "Item picked up at: " + this.transform.position.ToString());
 	}
 }

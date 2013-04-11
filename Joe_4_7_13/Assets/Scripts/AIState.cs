@@ -174,7 +174,7 @@ public class AIState : MonoBehaviour {
 			}
 			
 			//powerups
-			if(myPowerup.GetItem() != 0 && Time.time - currPowerupTime > PowerupUseStallTime)
+			if(myPowerup.item != 0 && Time.time - currPowerupTime > PowerupUseStallTime)
 			{
 				currPowerupTime = Time.time;
 				FirePowerUp();			
