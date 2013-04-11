@@ -29,8 +29,8 @@ public class GunShieldRotation : MonoBehaviour {
 			updateRotationToVec3(aiState.GetTargetPos());
 		else
 		{
-			if(Input.GetMouseButtonDown(2/*middle mouse*/)) { swapGunShield();}
-			updateRotationToMouse();
+			//if(Input.GetMouseButtonDown(2/*middle mouse*/)) { swapGunShield();}
+			//updateRotationToMouse();
 		}
 	}
 	public void TurnOnShield()
@@ -49,13 +49,15 @@ public class GunShieldRotation : MonoBehaviour {
 		m_shield.renderer.enabled = false;
 		
 	}
-	void swapGunShield() {//swaps gun out for shield and vice versa
+	public void swapGunShield() {//swaps gun out for shield and vice versa
 		isUsingGun = !isUsingGun;//makes it the oposite. only works with boolean value
 		this.renderer.enabled 		= isUsingGun;
 		m_shield.renderer.enabled 	= !isUsingGun;
 	}
 	
-	void updateRotationToMouse() {
+	public bool isGunEnabled() {return isUsingGun ;}
+	
+	public void updateRotationToMouse() {
 		 // Generate a plane that intersects the transform's position with an upwards normal.
 		Plane playerPlane = new Plane(Vector3.up, transform.parent.position);
 		 
@@ -88,13 +90,24 @@ public class GunShieldRotation : MonoBehaviour {
 		}
 	}
 	
-	void updateRotationToVec3(Vector3 targetPoint) {
+	public void updateRotationToVec3(Vector3 targetPoint) {
 		
-			Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.parent.position);
+		Quaternion targetRotation ;
+		
+		if( aiState == null ) {
+			targetRotation = Quaternion.LookRotation(targetPoint);
+		}
+		else {
+			targetRotation = Quaternion.LookRotation(targetPoint - transform.parent.position);
+		}
 			
-			float curAngle = transform.rotation.eulerAngles.y;
-			float tarAngle = targetRotation.eulerAngles.y;
-			float toAngle = tarAngle - curAngle;
-			gunAndShield.RotateAround(transform.parent.position, Vector3.up, toAngle * (Time.smoothDeltaTime*10));
+		float curAngle = transform.rotation.eulerAngles.y;
+		float tarAngle = targetRotation.eulerAngles.y;
+		float toAngle = tarAngle - curAngle;
+		gunAndShield.RotateAround(transform.parent.position, transform.parent.transform.up, toAngle * (Time.smoothDeltaTime*10));
+		
+		//Debug.Log (toAngle);
+			
+			
 	}
 }

@@ -16,7 +16,7 @@ public class AIDriver: MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		isAlive = true;
-		m_maxDrag = 0.5f ;
+		m_maxDrag = .5f ;
 		myWaypoints = gameObject.GetComponent<waypointManager>();
 		myStats = gameObject.GetComponent<CarStat>();
 		myTargetPos = myWaypoints.GetCurrWaypointPos();
@@ -60,9 +60,10 @@ public class AIDriver: MonoBehaviour {
 					vertMovement = 0;
 			}
 			Vector3 moveDirection= new Vector3 (horMovement, 0, vertMovement);
-			rigidbody.drag = Mathf.Lerp(m_maxDrag, 0, moveDirection.magnitude);
+			//rigidbody.drag = Mathf.Lerp(m_maxDrag, 0, moveDirection.magnitude);
+			player.SetDrag(Mathf.Lerp(m_maxDrag, 0, moveDirection.magnitude)) ;
 			
-			if(Vector3.Distance(transform.position, myTargetPos) < Random.Range(0,6))
+			if(Vector3.Distance(transform.position, myTargetPos) <= Random.Range(1f,5f))
 			{
 				myWaypoints.NextWaypoint();
 				myTargetPos = myWaypoints.GetCurrWaypointPos();
@@ -73,12 +74,13 @@ public class AIDriver: MonoBehaviour {
 				if (moveDirection != Vector3.zero){
 					Quaternion newRotation = Quaternion.LookRotation(moveDirection);
 					transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, MoveRotate);
-					rigidbody.AddForce(moveDirection * player.stat.GetMaxVelocity());//GetCurrentSpeed());
+					//rigidbody.AddForce(moveDirection * player.stat.GetMaxVelocity());//GetCurrentSpeed());
+					player.AddForce(moveDirection, player.stat.GetCurrentSpeed());	
 				}
 				rigidbody.drag = 0.5f ;
 			}
-			transform.position = new Vector3(transform.position.x, 1.0f, transform.position.z);
-	
+			//transform.position = new Vector3(transform.position.x, 1.0f, transform.position.z);
+			player.AddForce(moveDirection,  player.stat.GetAccel()) ;
 		}
 		else
 		{
