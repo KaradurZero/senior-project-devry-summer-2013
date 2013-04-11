@@ -117,6 +117,8 @@
      <Compile Include="Assets\Scripts\GamepadController.cs" />
      <Compile Include="Assets\Scripts\GunShieldRotation.cs" />
      <Compile Include="Assets\Scripts\IncreaseThisStat.cs" />
+     <Compile Include="Assets\Scripts\KeyboardMouseController.cs" />
+     <Compile Include="Assets\Scripts\PlayerUI.cs" />
      <Compile Include="Assets\Scripts\StatsGUI.cs" />
      <Compile Include="Assets\Scripts\Vehicle.cs" />
      <Compile Include="Assets\Scripts\Weapon.cs" />
