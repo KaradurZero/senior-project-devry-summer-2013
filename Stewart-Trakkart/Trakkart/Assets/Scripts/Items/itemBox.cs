@@ -1,6 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// main code by Jason Stewart
+/// </summary>
 public class itemBox : MonoBehaviour {
 	
 	bool m_isTangible;//affects rendering
