@@ -38,13 +38,13 @@ public class FreezeShotMovement : MonoBehaviour {
 		this.transform.position += (m_moveTo * Time.deltaTime * m_bulletSpeed) + m_parentMomentum;
 	}
 	
-	void OnCollisionEnter(Collider c) {
+	void OnCollisionEnter(Collision c) {
 		//apply freeze effect to other vehicle
 		//TODO: get other vehicle game object then movement script and call freeze function.
 		//if( c.tag == m_hTriggerSpecific_01) {//if a vehicle
 		//c.GetComponent</*scriptName*/>().freezeMovement;//sudo code
-		if(c.tag != m_hTriggerSpecific_01 && c.tag != m_hTriggerSpecific_02) {
-			Debug.Log("freeze bullet collided with: " + c.tag);
+		if(c.gameObject.tag != m_hTriggerSpecific_01 && c.gameObject.tag != m_hTriggerSpecific_02) {
+			Debug.Log("freeze bullet collided with: " + c.gameObject.tag);
 			destroyBullet();
 		}
 	}

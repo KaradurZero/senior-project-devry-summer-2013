@@ -141,7 +141,7 @@ public class Vehicle : MonoBehaviour {
 		if( other.gameObject.tag == "Freeze" ) {
 			m_freezeTime = m_freezeDuration ;
 			m_frozen = true ;
-			Destroy (other.gameObject);
+			//Destroy (other.gameObject);
 			Debug.Log ("freeze");
 		}
 		if( other.gameObject.tag == "Slow" ){
