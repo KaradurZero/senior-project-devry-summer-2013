@@ -4,10 +4,13 @@ using System.Collections;
 public class FreezeShotMovement : MonoBehaviour {
 	
 	float 		m_projectileSpeed;
-	float 		m_direction;//the euler angle based upon the Y axis
+	Quaternion 	m_direction;//the euler angle based upon the Y axis
 	Vector3 	m_moveTo = Vector3.zero;//in case value does not get set properly
 	float 		m_bulletLifespan;
+	float		m_bulletSpeed = 2f ;
 	Vector3		m_parentMomentum = Vector3.zero;//in case value does not get set properly
+	
+	GameObject m_ignoreTarget ;
 	
 	string		m_hTriggerSpecific_01;
 	string		m_hTriggerSpecific_02;
@@ -29,13 +32,13 @@ public class FreezeShotMovement : MonoBehaviour {
 	
 	void updateBulletMovement() {
 		//will update by moving the bullet forward by it's speed * deltaTime
-		this.transform.rotation = Quaternion.AngleAxis( m_direction, Vector3.up);
+		this.transform.rotation = m_direction ; //Quaternion.AngleAxis( m_direction, Vector3.up);
 		m_moveTo = this.transform.forward * m_projectileSpeed;
 		
-		this.transform.position += (m_moveTo * Time.deltaTime) + m_parentMomentum;
+		this.transform.position += (m_moveTo * Time.deltaTime * m_bulletSpeed) + m_parentMomentum;
 	}
 	
-	void OnTriggerEnter(Collider c) {
+	void OnCollisionEnter(Collider c) {
 		//apply freeze effect to other vehicle
 		//TODO: get other vehicle game object then movement script and call freeze function.
 		//if( c.tag == m_hTriggerSpecific_01) {//if a vehicle
@@ -56,7 +59,7 @@ public class FreezeShotMovement : MonoBehaviour {
 		}
 	}
 	
-	public float direction
+	public Quaternion direction
 	{
 		get {
 			return m_direction;
@@ -90,4 +93,6 @@ public class FreezeShotMovement : MonoBehaviour {
 	{
 		Destroy(this.gameObject);
 	}
+	
+	public void setIgnoreTarget(GameObject a_launcher) { m_ignoreTarget = a_launcher;}
 }

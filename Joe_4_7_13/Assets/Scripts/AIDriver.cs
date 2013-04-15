@@ -35,52 +35,56 @@ public class AIDriver: MonoBehaviour {
 	void Update () {
 		if(isAlive)
 		{
-			// Amount to Move
-			float MoveRotate = player.stat.GetHandling() * Time.deltaTime;
-			float horMovement;// = Input.GetAxisRaw("Horizontal");
-			float vertMovement;// = Input.GetAxisRaw("Vertical");
-			float xDirection = myTargetPos.x - transform.position.x;
-			float zDirection = myTargetPos.z - transform.position.z;
-			
-			horMovement = 0;
-			vertMovement = 0;
-			if(myTargetPos != null)
-			{
-				if(xDirection > 0)
-					horMovement = 1f;
-				else if(xDirection < 0)
-					horMovement = -1f;
-				else 
-					horMovement = 0;
-				if(zDirection > 0)
-					vertMovement = 1f;
-				else if(zDirection < 0)
-					vertMovement = -1f;
-				else
-					vertMovement = 0;
-			}
-			Vector3 moveDirection= new Vector3 (horMovement, 0, vertMovement);
-			//rigidbody.drag = Mathf.Lerp(m_maxDrag, 0, moveDirection.magnitude);
-			player.SetDrag(Mathf.Lerp(m_maxDrag, 0, moveDirection.magnitude)) ;
-			
-			if(Vector3.Distance(transform.position, myTargetPos) <= Random.Range(1f,5f))
-			{
-				myWaypoints.NextWaypoint();
-				myTargetPos = myWaypoints.GetCurrWaypointPos();
-			}
-			else 
-			{
+			if( !player.isFrozen() ) {
+				// Amount to Move
+				float MoveRotate = player.stat.GetHandling() * Time.deltaTime;
+				float horMovement;// = Input.GetAxisRaw("Horizontal");
+				float vertMovement;// = Input.GetAxisRaw("Vertical");
+				float xDirection = myTargetPos.x - transform.position.x;
+				float zDirection = myTargetPos.z - transform.position.z;
 				
-				if (moveDirection != Vector3.zero){
-					Quaternion newRotation = Quaternion.LookRotation(moveDirection);
-					transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, MoveRotate);
-					//rigidbody.AddForce(moveDirection * player.stat.GetMaxVelocity());//GetCurrentSpeed());
-					player.AddForce(moveDirection, player.stat.GetCurrentSpeed());	
+				horMovement = 0;
+				vertMovement = 0;
+				if(myTargetPos != null)
+				{
+					if(xDirection > 0)
+						horMovement = 1f;
+					else if(xDirection < 0)
+						horMovement = -1f;
+					else 
+						horMovement = 0;
+					if(zDirection > 0)
+						vertMovement = 1f;
+					else if(zDirection < 0)
+						vertMovement = -1f;
+					else
+						vertMovement = 0;
 				}
-				rigidbody.drag = 0.5f ;
+				Vector3 moveDirection= new Vector3 (horMovement, 0, vertMovement);
+				//rigidbody.drag = Mathf.Lerp(m_maxDrag, 0, moveDirection.magnitude);
+				player.SetDrag(Mathf.Lerp(m_maxDrag, 0, moveDirection.magnitude)) ;
+				
+				if(Vector3.Distance(transform.position, myTargetPos) <= Random.Range(1f,5f))
+				{
+					myWaypoints.NextWaypoint();
+					myTargetPos = myWaypoints.GetCurrWaypointPos();
+				}
+				else 
+				{
+					
+					if (moveDirection != Vector3.zero){
+						Quaternion newRotation = Quaternion.LookRotation(moveDirection);
+						transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, MoveRotate);
+						//rigidbody.AddForce(moveDirection * player.stat.GetMaxVelocity());//GetCurrentSpeed());
+						player.AddForce(moveDirection, player.stat.GetCurrentSpeed());	
+					}
+					rigidbody.drag = 0.5f ;
+				}
+				//transform.position = new Vector3(transform.position.x, 1.0f, transform.position.z);
+				player.AddForce(moveDirection,  player.stat.GetAccel()) ;
 			}
-			//transform.position = new Vector3(transform.position.x, 1.0f, transform.position.z);
-			player.AddForce(moveDirection,  player.stat.GetAccel()) ;
+			else
+				player.SetDrag(0) ;
 		}
 		else
 		{

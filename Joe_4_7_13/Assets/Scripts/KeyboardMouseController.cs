@@ -56,6 +56,11 @@ public class KeyboardMouseController : MonoBehaviour {
 					myWeapon.fireBullet() ;
 					}
 				
+				if(Input.GetKey(KeyCode.Space)) {
+					if( player.myPowerup.item != 0 )
+						myPowerup.UseItem() ;
+					}
+				
 				if( Input.GetKey(KeyCode.Q) ) {
 					player.SetDrag( 1f ) ;
 					}

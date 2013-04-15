@@ -4,6 +4,7 @@ using System.Collections;
 public class Vehicle : MonoBehaviour {
 	
 	public CarStat stat ;
+	public vehicleItems myPowerup;
 	
 	private bool m_boosted ;
 	private float m_boost_time ;
@@ -32,7 +33,9 @@ public class Vehicle : MonoBehaviour {
 		m_boost_time = 0f ;
 		m_slipTime = 0f ;
 		m_slipCoeff = 1f ;
+		m_freezeTime = 0f ;
 		
+		myPowerup = transform.GetComponent<vehicleItems>();
 	}
 		
 		
@@ -69,6 +72,11 @@ public class Vehicle : MonoBehaviour {
 				stat.ResetAcceleration() ;
 				m_boosted = false ;
 			}
+			
+			if( m_frozen && m_freezeTime > 0 )
+				m_freezeTime -= Time.deltaTime ;
+			else
+				m_frozen = false ;
 			
 			if(Vector3.Angle(lastFrameAngle, transform.forward) > 1f)
 			{
@@ -128,12 +136,13 @@ public class Vehicle : MonoBehaviour {
 		if( other.gameObject.tag == "Oil Slick" ){
 			m_slipCoeff = 2f ;
 			m_slipTime = Time.time + 3f ;
-			//Debug.Log ("Slick");
+			Debug.Log ("Slick");
 		}
 		if( other.gameObject.tag == "Freeze" ) {
-			m_freezeTime = Time.time + m_freezeDuration ;
+			m_freezeTime = m_freezeDuration ;
 			m_frozen = true ;
-			//Debug.Log ("freeze");
+			Destroy (other.gameObject);
+			Debug.Log ("freeze");
 		}
 		if( other.gameObject.tag == "Slow" ){
 			SetDrag(m_slowDrag) ;
@@ -193,4 +202,9 @@ public class Vehicle : MonoBehaviour {
 	}
 	
 	public bool isFrozen( ) {return m_frozen ;}
+	
+	public void FirePowerUp()
+	{
+		myPowerup.UseItem();
+	}
 }

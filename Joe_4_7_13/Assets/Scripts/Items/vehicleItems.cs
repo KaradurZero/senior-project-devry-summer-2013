@@ -34,7 +34,7 @@ public class vehicleItems : MonoBehaviour {
 		m_hWeapon 				= "AimCube";
 		m_hShield 				= "vehicleShield";
 		freezeLifespan 			= 5.0f;
-		freezeSpeed				= 40.0f;
+		freezeSpeed				= 20.0f;
 	}
 	
 	void Start () {
@@ -142,9 +142,10 @@ public class vehicleItems : MonoBehaviour {
 			switch(m_item) {
 			case (int)items.oilSlick://use oil slick item
 				GameObject droppedItem = (GameObject) Instantiate(m_oilSlickObj, 
-					(transform.position - transform.forward * (this.transform.localScale.y * 1.2f)
+					(transform.position + ( -transform.forward * 3f )
 					/*vehicle size from front to back assuming car is moving forward by y*/),
 					Quaternion.identity);
+				droppedItem.transform.position = new Vector3( transform.position.x, 0, transform.position.z ) ;
 				//droppedItem.transform.position -= this.transform.parent.transform.forward * 2;
 				break;
 			case (int)items.homingMissle://use homing missle item
@@ -174,10 +175,11 @@ public class vehicleItems : MonoBehaviour {
 				//logic behind relying upon gun is so that only one script is needed for aiming directional projectiles.
 				Vector3 frontOfGun = transform.FindChild(m_hWeapon).transform.position + 
 					transform.FindChild(m_hWeapon).transform.forward * (this.transform.localScale.y * 1.2f);
-				GameObject freezeShot = (GameObject)Instantiate(m_freezeShot, frontOfGun, Quaternion.identity);
+				GameObject freezeShot = (GameObject)Instantiate(m_freezeShot, transform.position + (transform.forward * 3f), Quaternion.identity);
+				freezeShot.GetComponent<FreezeShotMovement>().setIgnoreTarget(this.gameObject);
 				freezeShot.GetComponent<FreezeShotMovement>().lifespan 			= freezeLifespan;
 				freezeShot.GetComponent<FreezeShotMovement>().speed				= freezeSpeed;
-				freezeShot.GetComponent<FreezeShotMovement>().direction			= transform.FindChild(m_hWeapon).transform.eulerAngles.y;
+				freezeShot.GetComponent<FreezeShotMovement>().direction			= this.transform.rotation ;//transform.FindChild(m_hWeapon).transform.eulerAngles.y;
 				freezeShot.GetComponent<FreezeShotMovement>().parentMomentum	= Vector3.zero;//or can give it the momentum of the parent as well.
 				break;
 			case (int)items.enlargeShield://use  enlarge shield item

@@ -161,44 +161,49 @@ public class AIState : MonoBehaviour {
 	{
 		if(isAlive)
 			{
-			//do nothing if waitTime is set to anything
-			if(waitTime > 0)
-			{
-				myState = AI_STATE.NONE;
-			}
-			//update state
-			if(Time.time - currentStateTime > updateStateTime)
-			{
-				currentStateTime = Time.time;
-				StateChange();
-			}
-			
-			//powerups
-			if(myPowerup.item != 0 && Time.time - currPowerupTime > PowerupUseStallTime)
-			{
-				currPowerupTime = Time.time;
-				FirePowerUp();			
+			if( !GetComponent<Vehicle>().isFrozen() ) {
+				//do nothing if waitTime is set to anything
+				if(waitTime > 0)
+				{
+					myState = AI_STATE.NONE;
+				}
+				//update state
+				if(Time.time - currentStateTime > updateStateTime)
+				{
+					currentStateTime = Time.time;
+					StateChange();
+				}
+				
+				//powerups
+				if(myPowerup.item != 0 && Time.time - currPowerupTime > PowerupUseStallTime)
+				{
+					currPowerupTime = Time.time;
+					FirePowerUp();			
+				}
 			}
 		}
 		else
 			myState = AI_STATE.NONE;
-		switch(myState)
-		{
-		case AI_STATE.SHOOT:
-			myWeapon.fireBullet();
-			break;
-		case AI_STATE.SHIELD:
-			float t = Time.time - timeShotAt;
-			if(Time.time - timeShotAt > timeUntilRevengeShot)
-				NoLongerBeingShotAt();
-			break;
-		case AI_STATE.NONE:
-			if(Time.time - currWaitTime > waitTime)
+		
+		if( !GetComponent<Vehicle>().isFrozen() ) {
+			switch(myState)
 			{
-				waitTime = 0;
-				currWaitTime = Time.time;
+			case AI_STATE.SHOOT:
+				myWeapon.fireBullet();
+				break;
+			case AI_STATE.SHIELD:
+				float t = Time.time - timeShotAt;
+				if(Time.time - timeShotAt > timeUntilRevengeShot)
+					NoLongerBeingShotAt();
+				break;
+			case AI_STATE.NONE:
+				if(Time.time - currWaitTime > waitTime)
+				{
+					waitTime = 0;
+					currWaitTime = Time.time;
+				}
+				break;
 			}
-			break;
 		}
 	}
 }
