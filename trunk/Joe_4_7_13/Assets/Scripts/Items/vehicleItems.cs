@@ -198,13 +198,15 @@ public class vehicleItems : MonoBehaviour {
 				targetEnemy = null;
 				foreach (GameObject go in m_otherVehicles) {
 					//if object is not this object and object's script has m_item as non-zero
-					if(go.transform.position != this.transform.position && go.GetComponent<vehicleItems>().item != 0) {
-						didSteal = true;
-						Vector3 diff = go.transform.position - position;
-						float curDistance = diff.sqrMagnitude;
-						if (curDistance < distance) {
-							targetEnemy = go;
-						    distance = curDistance;
+					if(go.transform.position != this.transform.position) {
+						if( go.GetComponent<vehicleItems>().item != 0) {
+							didSteal = true;
+							Vector3 diff = go.transform.position - position;
+							float curDistance = diff.sqrMagnitude;
+							if (curDistance < distance) {//set this target as closer
+								targetEnemy = go;
+						   	 	distance = curDistance;
+							}
 						}
 					}
 				}
