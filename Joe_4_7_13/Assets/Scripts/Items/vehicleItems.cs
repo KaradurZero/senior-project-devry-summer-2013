@@ -142,10 +142,10 @@ public class vehicleItems : MonoBehaviour {
 			switch(m_item) {
 			case (int)items.oilSlick://use oil slick item
 				GameObject droppedItem = (GameObject) Instantiate(m_oilSlickObj, 
-					(transform.position + ( -transform.forward * 3f )
+					(transform.position - transform.forward * (transform.localScale.y * 2f)
 					/*vehicle size from front to back assuming car is moving forward by y*/),
 					Quaternion.identity);
-				droppedItem.transform.position = new Vector3( transform.position.x, 0, transform.position.z ) ;
+				droppedItem.transform.position = new Vector3( droppedItem.transform.position.x, 0.1f, droppedItem.transform.position.z ) ;
 				//droppedItem.transform.position -= this.transform.parent.transform.forward * 2;
 				break;
 			case (int)items.homingMissle://use homing missle item
