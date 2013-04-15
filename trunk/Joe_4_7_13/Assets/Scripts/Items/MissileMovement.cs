@@ -6,6 +6,7 @@ public class MissileMovement : MonoBehaviour {
 	GameObject m_targetEnemy;
 	GameObject m_ignoreTarget;
 	float m_maxMovementSpeed;
+	float m_lifeSpan = 5f ;
 	float turnSpeed;//value between 0.0f and 1.0f if not using Time.deltaTime to lower value
 	float m_closeDistance;
 	string m_hTriggerSpecific_01;
@@ -13,7 +14,7 @@ public class MissileMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//if movement speed is increased then turnspeed will need to be increased
-		m_maxMovementSpeed = 2.0f;
+		m_maxMovementSpeed = 10.0f;
 		turnSpeed = 2.0f;
 		m_closeDistance = 20.0f;
 		m_hTriggerSpecific_01 = "Vehicle";
@@ -38,6 +39,11 @@ public class MissileMovement : MonoBehaviour {
 		//transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 1); // WITHOUT SPEED!!!
 		//then update movement towards enemy.
 		this.transform.position += this.transform.forward * m_maxMovementSpeed * Time.deltaTime;
+		
+		m_lifeSpan -= Time.deltaTime;
+		if(m_lifeSpan < 0.0f) {
+			Destroy(this.gameObject);
+		}
 	}
 	
 	void OnTriggerEnter(Collider c) {

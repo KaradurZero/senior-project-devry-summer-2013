@@ -13,19 +13,21 @@ public class PlayerUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		pos = new Vector2(10,Screen.height - 50);
-		size = new Vector2(pos.x + 100,pos.y);
+		pos = new Vector2(10,430);
+		size = new Vector2(pos.x + 150,pos.y + 30);
+		
+		Debug.Log (pos.y);
 	}
 	
 	 void OnGUI() {
 		//draw the background:
 		GUI.BeginGroup(new Rect(pos.x, pos.y, size.x, size.y));
-		GUI.Box(new Rect(0,0, size.x, size.y), emptyTex);
+		GUI.Box(new Rect(pos.x, pos.y, size.x, size.y), emptyTex);
 		 
 		//draw the filled-in part:
 		GUI.BeginGroup(new Rect(pos.x, pos.y, size.x * Mathf.Clamp01(barDisplay), size.y));
 		
-		GUI.Box(new Rect(0,0, size.x, size.y), fullTex);
+		GUI.Box(new Rect(0, 0, size.x, size.y), fullTex);
 		GUI.EndGroup();
 		GUI.EndGroup();
 	}
