@@ -1,0 +1,20 @@
+Statement of Work (S.O.W.)
+What I want as the bare minimum for the game
+
+-3 Different COM cars
+-1 or 2 tracks
+-AI for the COM players
+-4 power ups (health up, rocket, oil slick, ice)
+-Stats upgradable and mod shop (customizable cars)
+-A garage, allowing the player to have up to 4 cars
+-Menus for Main, Upgrades, Car select, Track select
+-HUD for racing
+-XBOX Controller Compatable
+
+Things that would be really nice to have
+-At least some mods for shield and weapon
+-4 tracks (enough for a GP)
+-As many powerups as we can think of (there should probably be a limit of ~10)
+-A larger garage
+-A super car that is purchasable (it has more max points)
+-Kickass music

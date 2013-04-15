@@ -1,0 +1,18 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\LapCheck.cs">
+    <Files>
+      <File FileName="Assets\Scripts\checkpointManager.cs" Line="18" Column="40" />
+      <File FileName="Assets\Scripts\LapCheck.cs" Line="27" Column="1" />
+      <File FileName="Assets\Scripts\AIDriver.cs" Line="23" Column="34" />
+      <File FileName="Assets\Scripts\waypointManager.cs" Line="57" Column="2" />
+      <File FileName="Assets\Scripts\DecreaseThisStat.cs" Line="14" Column="52" />
+      <File FileName="Assets\Scripts\CoinManager.cs" Line="8" Column="17" />
+      <File FileName="c:\Documents and Settings\Matthew\Desktop\Trakkart\Joe_AI\Assets\AstarPathfindingProject\Core\AI\Seeker.cs" Line="414" Column="57" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
