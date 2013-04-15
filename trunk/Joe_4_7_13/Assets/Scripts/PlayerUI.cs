@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerUI : MonoBehaviour {
 	
 	public GameObject player ;
-	 public float barDisplay; //current progress
+	public float barDisplay; //current progress
 	public Vector2 pos;
 	public Vector2 size;
 	GUISkin skin ;
@@ -13,8 +13,8 @@ public class PlayerUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		pos = new Vector2(10,110);
-		size = new Vector2(100,20);
+		pos = new Vector2(10,Screen.height - 50);
+		size = new Vector2(pos.x + 100,pos.y);
 	}
 	
 	 void OnGUI() {
@@ -23,7 +23,8 @@ public class PlayerUI : MonoBehaviour {
 		GUI.Box(new Rect(0,0, size.x, size.y), emptyTex);
 		 
 		//draw the filled-in part:
-		GUI.BeginGroup(new Rect(0,0, size.x * Mathf.Clamp01(barDisplay), size.y));
+		GUI.BeginGroup(new Rect(pos.x, pos.y, size.x * Mathf.Clamp01(barDisplay), size.y));
+		
 		GUI.Box(new Rect(0,0, size.x, size.y), fullTex);
 		GUI.EndGroup();
 		GUI.EndGroup();

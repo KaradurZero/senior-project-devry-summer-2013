@@ -8,7 +8,8 @@ public class StatsGUI : MonoBehaviour {
 					AiDriver2Item,
 					AiDriver3Item,
 					AiDriver4Item,
-					AiDriver5Item;
+					AiDriver5Item,
+					PlayerItem;
 	string			guiDisplayText;
 	
 	void Awake() {
@@ -17,16 +18,18 @@ public class StatsGUI : MonoBehaviour {
 		AiDriver3Item = GameObject.Find("aiDriver_3").GetComponent<vehicleItems>();
 		AiDriver4Item = GameObject.Find("aiDriver_4").GetComponent<vehicleItems>();
 		AiDriver5Item = GameObject.Find("aiDriver_5").GetComponent<vehicleItems>();
+		PlayerItem = GameObject.Find("Player").GetComponent<vehicleItems>();
 
 	}
     void OnGUI() {		
 		guiDisplayText = 
 			"Power-ups:" +
+			"\nPLAYER : " + PlayerItem.item +
 			"\ncar 1 : " + AiDriver1Item.item + 
 			"\ncar 2 : " + AiDriver2Item.item +
 			"\ncar 3 : " + AiDriver3Item.item + 
 			"\ncar 4 : " + AiDriver4Item.item + 
 			"\ncar 5 : " + AiDriver5Item.item;
-        guiDisplayText = GUI.TextArea(new Rect(10, 10, 100, 100), guiDisplayText, 200);
+        guiDisplayText = GUI.TextArea(new Rect(10, 10, 130, 130), guiDisplayText, 200);
     }
 }
