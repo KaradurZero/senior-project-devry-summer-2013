@@ -1,0 +1,28 @@
+6 enemy cars [DONE]
+1 player car [DONE]
+first track
+gun [DONE]
+shield [DONE]
+bullet [DONE]
+power up box
+tire tracks
+menu
+-splash intro screen
+-customize stats
+-end race screen
+-buttons for menu
+	-Customize
+	-Start Race
+	-Replay Race
+	-Main Menu
+	-plus and minus buttons
+Sounds http://www.bfxr.net/
+-move over button
+-click button(s)
+-shoot gun
+-bullet hits car
+-bullet hits shield
+-boost
+-engine running
+-car hits wall
+-background music
