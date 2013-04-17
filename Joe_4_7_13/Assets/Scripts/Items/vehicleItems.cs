@@ -174,12 +174,12 @@ public class vehicleItems : MonoBehaviour {
 				//this will rely upon vehicle having the gun working correctly and pointing in a direction
 				//logic behind relying upon gun is so that only one script is needed for aiming directional projectiles.
 				Vector3 frontOfGun = transform.FindChild(m_hWeapon).transform.position + 
-					transform.FindChild(m_hWeapon).transform.forward * (this.transform.localScale.y * 1.2f);
-				GameObject freezeShot = (GameObject)Instantiate(m_freezeShot, transform.position + (transform.forward * 3f), Quaternion.identity);
+					transform.FindChild(m_hWeapon).transform.forward * (this.transform.localScale.y * 2.5f);
+				GameObject freezeShot = (GameObject)Instantiate(m_freezeShot, frontOfGun, Quaternion.identity);
 				freezeShot.GetComponent<FreezeShotMovement>().setIgnoreTarget(this.gameObject);
 				freezeShot.GetComponent<FreezeShotMovement>().lifespan 			= freezeLifespan;
 				freezeShot.GetComponent<FreezeShotMovement>().speed				= freezeSpeed;
-				freezeShot.GetComponent<FreezeShotMovement>().direction			= this.transform.rotation ;//transform.FindChild(m_hWeapon).transform.eulerAngles.y;
+				freezeShot.GetComponent<FreezeShotMovement>().direction			= transform.FindChild(m_hWeapon).transform.rotation;
 				freezeShot.GetComponent<FreezeShotMovement>().parentMomentum	= Vector3.zero;//or can give it the momentum of the parent as well.
 				break;
 			case (int)items.enlargeShield://use  enlarge shield item

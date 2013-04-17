@@ -16,8 +16,8 @@ public class FreezeShotMovement : MonoBehaviour {
 	string		m_hTriggerSpecific_02;
 	// Use this for initialization
 	void Start () {
-		m_hTriggerSpecific_01 = "ItemBox";
-		m_hTriggerSpecific_02 = "Item";
+		m_hTriggerSpecific_01 = "Vehicle";
+		m_hTriggerSpecific_02 = "Wall";
 	}
 	
 	// Update is called once per frame
@@ -43,7 +43,7 @@ public class FreezeShotMovement : MonoBehaviour {
 		//TODO: get other vehicle game object then movement script and call freeze function.
 		//if( c.tag == m_hTriggerSpecific_01) {//if a vehicle
 		//c.GetComponent</*scriptName*/>().freezeMovement;//sudo code
-		if(c.gameObject.tag != m_hTriggerSpecific_01 && c.gameObject.tag != m_hTriggerSpecific_02) {
+		if(c.gameObject.tag != m_hTriggerSpecific_01 && c.gameObject.transform.position != m_ignoreTarget.transform.position /*c.gameObject.tag != m_hTriggerSpecific_02*/) {
 			Debug.Log("freeze bullet collided with: " + c.gameObject.tag);
 			destroyBullet();
 		}
