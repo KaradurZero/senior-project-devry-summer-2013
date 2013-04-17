@@ -64,24 +64,26 @@ public class AIDriver: MonoBehaviour {
 				//rigidbody.drag = Mathf.Lerp(m_maxDrag, 0, moveDirection.magnitude);
 				player.SetDrag(Mathf.Lerp(m_maxDrag, 0, moveDirection.magnitude)) ;
 				
-				if(Vector3.Distance(transform.position, myTargetPos) <= Random.Range(1f,5f))
-				{
-					myWaypoints.NextWaypoint();
-					myTargetPos = myWaypoints.GetCurrWaypointPos();
-				}
-				else 
-				{
-					
-					if (moveDirection != Vector3.zero){
-						Quaternion newRotation = Quaternion.LookRotation(moveDirection);
-						transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, MoveRotate);
-						//rigidbody.AddForce(moveDirection * player.stat.GetMaxVelocity());//GetCurrentSpeed());
-						player.AddForce(moveDirection, player.stat.GetCurrentSpeed());	
+				if( !player.stat.isOverheated() ) {
+					if(Vector3.Distance(transform.position, myTargetPos) <= Random.Range(1f,5f))
+					{
+						myWaypoints.NextWaypoint();
+						myTargetPos = myWaypoints.GetCurrWaypointPos();
 					}
-					rigidbody.drag = 0.5f ;
+					else 
+					{
+						
+						if (moveDirection != Vector3.zero){
+							Quaternion newRotation = Quaternion.LookRotation(moveDirection);
+							transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, MoveRotate);
+							//rigidbody.AddForce(moveDirection * player.stat.GetMaxVelocity());//GetCurrentSpeed());
+							player.AddForce(moveDirection, player.stat.GetCurrentSpeed());	
+						}
+						rigidbody.drag = 0.5f ;
+					}
+					//transform.position = new Vector3(transform.position.x, 1.0f, transform.position.z);
+					player.AddForce(moveDirection,  player.stat.GetAccel()) ;
 				}
-				//transform.position = new Vector3(transform.position.x, 1.0f, transform.position.z);
-				player.AddForce(moveDirection,  player.stat.GetAccel()) ;
 			}
 			else
 				player.SetDrag(0) ;

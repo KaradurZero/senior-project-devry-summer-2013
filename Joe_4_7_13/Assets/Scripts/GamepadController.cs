@@ -50,8 +50,9 @@ public class GamepadController : MonoBehaviour {
 					player.AddForce(analogMoveDirection,  player.stat.GetAccel()) ;
 					//player.weapon.Shoot(aimDirection) ;
 					
-					if( (weaponHoriz != 0 || weaponVert != 0) && myGunShieldRot.isGunEnabled() ) {
+					if( (weaponHoriz != 0 || weaponVert != 0) && myGunShieldRot.isGunEnabled() && myWeapon.CanShoot()) {
 						myWeapon.fireBullet() ;
+						player.RaiseTemp(15f) ;
 					}
 					
 					if( Input.GetKey(KeyCode.Joystick1Button4) ) {

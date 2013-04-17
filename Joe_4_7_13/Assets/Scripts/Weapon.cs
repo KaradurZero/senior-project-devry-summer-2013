@@ -61,4 +61,6 @@ public class Weapon : MonoBehaviour {
 		 * by looking into that script and getting the value stored there (must be public)*/
 		}
 	}
+	
+	public bool CanShoot() {return m_canShoot;}
 }
