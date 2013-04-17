@@ -6,18 +6,21 @@ public class MissileMovement : MonoBehaviour {
 	GameObject m_targetEnemy;
 	GameObject m_ignoreTarget;
 	float m_maxMovementSpeed;
-	float m_lifeSpan = 5f ;
+	float m_lifeSpan;
 	float turnSpeed;//value between 0.0f and 1.0f if not using Time.deltaTime to lower value
 	float m_closeDistance;
 	string m_hTriggerSpecific_01;
+	int m_damageThisDeals;
 	
 	// Use this for initialization
 	void Start () {
 		//if movement speed is increased then turnspeed will need to be increased
-		m_maxMovementSpeed = 10.0f;
-		turnSpeed = 2.0f;
-		m_closeDistance = 20.0f;
-		m_hTriggerSpecific_01 = "Vehicle";
+		m_maxMovementSpeed 		= 20.0f;
+		turnSpeed 				= 2.0f;
+		m_closeDistance 		= 10.0f;
+		m_hTriggerSpecific_01 	= "Vehicle";
+		m_lifeSpan 				= 10.0f;
+		m_damageThisDeals 		= 200;
 	}
 	
 	// Update is called once per frame
@@ -49,6 +52,7 @@ public class MissileMovement : MonoBehaviour {
 	void OnTriggerEnter(Collider c) {
 		if(c.transform.position != m_ignoreTarget.transform.position && c.tag == m_hTriggerSpecific_01) {
 			//TODO: get enemy script and lower health/energy from missile hit
+			c.GetComponent<driverHealth>().DealDamage(m_damageThisDeals);
 			hasHitEnemy();
 		}
 	}
