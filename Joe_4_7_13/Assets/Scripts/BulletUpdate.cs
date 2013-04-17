@@ -98,6 +98,7 @@ public class BulletUpdate : MonoBehaviour {
 			
 			if(other.gameObject.tag == "Shield"){
 				other.gameObject.transform.parent.parent.GetComponent<Vehicle>().RaiseTemp(5f) ;
+				//Debug.Log ("SHIELD BLOCK");
 			}
 		
 		if(health != null)
