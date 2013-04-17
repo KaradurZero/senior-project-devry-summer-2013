@@ -129,32 +129,32 @@ public class AIState : MonoBehaviour {
 	}
 	void StateChange()
 	{
-		//defend
-		if(IAmBeingShotAt)
-		{
-			if(firstFrameShield)
+			//defend
+			if(IAmBeingShotAt)
 			{
-				timeShotAt = Time.time;
-				firstFrameShield = false;
+				if(firstFrameShield)
+				{
+					timeShotAt = Time.time;
+					firstFrameShield = false;
+				}
+				firstFrameGun = true;
+				myState = AI_STATE.SHIELD;
+				myGunShieldRot.TurnOnShield();
 			}
-			firstFrameGun = true;
-			myState = AI_STATE.SHIELD;
-			myGunShieldRot.TurnOnShield();
-		}
-		//attack
-		else if(Vector3.Distance(transform.position, enemyTrans.position) < 20)
-		{
-			firstFrameShield = true;
-			enemyTrans = FindClosestDriver();//.GetComponent<waypointManager>().GetFutureWaypointTransform(1);
-			myState = AI_STATE.SHOOT;
-			myGunShieldRot.TurnOnGun();
-			if(enemyTrans.GetComponent<AIState>())
-				enemyTrans.GetComponent<AIState>().BeingShotAtBy(transform);
-			
-		}
-		//nothing
-		else
-			myState = AI_STATE.NONE;
+			//attack
+			else if(Vector3.Distance(transform.position, enemyTrans.position) < 20)
+			{
+				firstFrameShield = true;
+				enemyTrans = FindClosestDriver();//.GetComponent<waypointManager>().GetFutureWaypointTransform(1);
+				myState = AI_STATE.SHOOT;
+				myGunShieldRot.TurnOnGun();
+				if(enemyTrans.GetComponent<AIState>())
+					enemyTrans.GetComponent<AIState>().BeingShotAtBy(transform);
+				
+			}
+			//nothing
+			else
+				myState = AI_STATE.NONE;
 	}
 	
 	void Update () 
@@ -182,14 +182,18 @@ public class AIState : MonoBehaviour {
 				}
 			}
 		}
-		else
+		else{
 			myState = AI_STATE.NONE;
+		}
 		
-		if( !GetComponent<Vehicle>().isFrozen() ) {
+		if( !GetComponent<Vehicle>().isFrozen() && !this.gameObject.GetComponent<CarStat>().isOverheated()) {
 			switch(myState)
 			{
 			case AI_STATE.SHOOT:
-				myWeapon.fireBullet();
+				if(myWeapon.CanShoot()){
+					myWeapon.fireBullet();
+					this.gameObject.GetComponent<Vehicle>().RaiseTemp(15f) ;
+				}
 				break;
 			case AI_STATE.SHIELD:
 				float t = Time.time - timeShotAt;
@@ -205,5 +209,7 @@ public class AIState : MonoBehaviour {
 				break;
 			}
 		}
+		else
+			myGunShieldRot.TurnOnGun();
 	}
 }

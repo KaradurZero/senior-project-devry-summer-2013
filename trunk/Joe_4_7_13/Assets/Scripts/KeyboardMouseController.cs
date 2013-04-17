@@ -52,8 +52,9 @@ public class KeyboardMouseController : MonoBehaviour {
 				player.AddForce(moveDirection,  player.stat.GetAccel()) ;
 				//player.weapon.Shoot(aimDirection) ;
 				
-				if(Input.GetKey(KeyCode.Mouse0)) {
+				if(Input.GetKey(KeyCode.Mouse0) && myGunShieldRot.isGunEnabled() && myWeapon.CanShoot()) {
 					myWeapon.fireBullet() ;
+					player.RaiseTemp(15f) ;
 					}
 				
 				if(Input.GetKey(KeyCode.Space)) {
