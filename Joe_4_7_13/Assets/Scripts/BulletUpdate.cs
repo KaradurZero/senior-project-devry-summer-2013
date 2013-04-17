@@ -95,6 +95,11 @@ public class BulletUpdate : MonoBehaviour {
 		sparks.transform.LookAt(transform.position);
 		Destroy(sparks,.15f);
 		driverHealth health = other.collider.gameObject.GetComponent<driverHealth>();
+			
+			if(other.gameObject.tag == "Shield"){
+				other.gameObject.transform.parent.parent.GetComponent<Vehicle>().RaiseTemp(5f) ;
+			}
+		
 		if(health != null)
 		{
 			health.DealDamage(10);

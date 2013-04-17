@@ -89,7 +89,7 @@ public class Vehicle : MonoBehaviour {
 			
 			//rigidbody.velocity = transform.forward * stat.GetAccel() * Time.deltaTime ;
 			
-			if( !stat.GetTempPerSec() ){
+			if( !stat.GetTempPerSec() || stat.isOverheated() ){
 			stat.SetCurrTemp( stat.GetCurrTemp() - stat.GetCooling() * Time.deltaTime ) ;
 			}
 			

@@ -124,11 +124,13 @@
      <Compile Include="Assets\Scripts\Items\itemBox.cs" />
      <Compile Include="Assets\Scripts\Items\vehicleItems.cs" />
      <Compile Include="Assets\Scripts\KeyboardMouseController.cs" />
+     <Compile Include="Assets\Scripts\LapCheck.cs" />
      <Compile Include="Assets\Scripts\PlayerUI.cs" />
      <Compile Include="Assets\Scripts\StatsGUI.cs" />
      <Compile Include="Assets\Scripts\Vehicle.cs" />
      <Compile Include="Assets\Scripts\Weapon.cs" />
      <Compile Include="Assets\Scripts\basicMovementTesting.cs" />
+     <Compile Include="Assets\Scripts\checkpointManager.cs" />
      <Compile Include="Assets\Scripts\driverHealth.cs" />
      <Compile Include="Assets\Scripts\enemyDriver.cs" />
      <Compile Include="Assets\Scripts\minimapItem.cs" />
