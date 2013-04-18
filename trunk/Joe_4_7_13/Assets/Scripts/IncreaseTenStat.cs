@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-public class IncreaseThisStat : MonoBehaviour {
-	
+public class IncreaseTenStat : MonoBehaviour {
+
 	public GUIText myStatGUI;
 	CoinManager coinManager;
 	
@@ -20,11 +20,11 @@ public class IncreaseThisStat : MonoBehaviour {
 	void OnMouseDown()
 	{
 		int statVal = int.Parse(myStatGUI.text);
-		if(coinManager.CanIncreaseStat() && statVal <= 99)
+		if(coinManager.CanIncreaseStatTen() && statVal <= 90)
 			
 		{
-			coinManager.IncreaseStat();
-			statVal++;
+			coinManager.IncreaseStatTen();
+			statVal += 10;
 			myStatGUI.text = statVal.ToString();
 		}
 	}
