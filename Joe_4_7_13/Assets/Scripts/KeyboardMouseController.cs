@@ -63,7 +63,7 @@ public class KeyboardMouseController : MonoBehaviour {
 					}
 				
 				if( Input.GetKey(KeyCode.Q) ) {
-					player.SetDrag( 1f ) ;
+					player.SetDrag( 2f ) ;
 					}
 						
 				if( Input.GetKey(KeyCode.Mouse1) ) {

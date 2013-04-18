@@ -32,8 +32,6 @@ public class GamepadController : MonoBehaviour {
 				Vector3 analogMoveDirection= new Vector3 (analogHorMovement, 0, analogVertMovement);
 				Vector3 aimDirection= new Vector3 (weaponHoriz, 0, weaponVert);
 				
-				float angle = Mathf.Atan2(weaponHoriz, weaponVert) * Mathf.Rad2Deg ;
-				
 				player.SetDrag(Mathf.Lerp(m_maxDrag, 0, analogMoveDirection.magnitude)) ;
 			
 				if( !player.stat.isOverheated() ) {
@@ -44,19 +42,22 @@ public class GamepadController : MonoBehaviour {
 						player.AddForce(analogMoveDirection, player.stat.GetCurrentSpeed());	
 					}
 				
-					if (aimDirection != Vector3.zero){
+					if (aimDirection != Vector3.zero) {
 						myGunShieldRot.updateRotationToVec3(aimDirection) ;
 					}
+				
 					player.AddForce(analogMoveDirection,  player.stat.GetAccel()) ;
 					//player.weapon.Shoot(aimDirection) ;
 					
 					if( (weaponHoriz != 0 || weaponVert != 0) && myGunShieldRot.isGunEnabled() && myWeapon.CanShoot()) {
 						myWeapon.fireBullet() ;
 						player.RaiseTemp(15f) ;
+						
 					}
 					
-					if( Input.GetKey(KeyCode.Joystick1Button4) ) {
-						player.SetDrag( 1f ) ;
+					if( Input.GetKey(KeyCode.Joystick1Button4) /*|| Input.GetKey(KeyCode.Joystick2Button4)*/) {
+						player.SetDrag( 2f ) ;
+						Debug.Log ("BRAKE");
 					}
 					
 					if(Input.GetKeyDown(KeyCode.Joystick1Button0) && !m_swapButtonDown){
@@ -67,7 +68,7 @@ public class GamepadController : MonoBehaviour {
 						m_swapButtonDown = false ;
 					}
 					
-					if( Input.GetKey(KeyCode.Joystick1Button5) ) {
+					if( Input.GetKey(KeyCode.Joystick1Button5)) {
 						player.BoostVehicle( 0.05f ) ;
 						player.RaiseTemperaturePerSecond( 10f ) ;
 					}
@@ -75,7 +76,7 @@ public class GamepadController : MonoBehaviour {
 						player.TurnOffTempPerSecond( ) ;
 					}
 				
-					if( Input.GetKey(KeyCode.Joystick1Button1) ) {
+					if( Input.GetKey(KeyCode.Joystick1Button1)) {
 					if( player.myPowerup.item != 0 )
 						player.FirePowerUp() ;
 				}
