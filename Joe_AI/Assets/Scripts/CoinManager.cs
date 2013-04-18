@@ -5,15 +5,19 @@ public class CoinManager : MonoBehaviour {
 	
 	GUIText cointText;
 	
-	int coinAmount;
+	int coinAmount, initCoinAmount;
 	
 	void Start () {
-		coinAmount = 0;//initCoinAmount = 10;
+		coinAmount = initCoinAmount = 10;
 		cointText = GameObject.Find("Text_Coins").GetComponent<GUIText>();
 	}
 	void OnGUI()
 	{
 		cointText.text = coinAmount.ToString();
+	}
+	public int GetCoinInitAmount()
+	{
+		return initCoinAmount;
 	}
 	public bool CanIncreaseStat()
 	{
