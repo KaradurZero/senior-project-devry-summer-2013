@@ -226,8 +226,8 @@ public class vehicleItems : MonoBehaviour {
 				break;
 			}
 			//Debug.Log("Item Used");
-		if(!didSteal)
-			m_item = 0;
+//		if(!didSteal)
+//			m_item = 0;
 	}
 	
 	public int item {
