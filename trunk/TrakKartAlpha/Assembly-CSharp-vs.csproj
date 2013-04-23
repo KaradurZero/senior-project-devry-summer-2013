@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+	<ProductVersion>10.0.20506</ProductVersion>
+	<SchemaVersion>2.0</SchemaVersion>
+	<ProjectGuid>{A054EC81-421B-4CDA-CE5D-B195C684D071}</ProjectGuid>
+	<OutputType>Library</OutputType>
+	<AppDesignerFolder>Properties</AppDesignerFolder>
+	<RootNamespace></RootNamespace>
+	<AssemblyName>Assembly-CSharp</AssemblyName>
+	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	<DebugSymbols>true</DebugSymbols>
+	<DebugType>full</DebugType>
+	<Optimize>false</Optimize>
+	<OutputPath>Temp\bin\Debug\</OutputPath>
+	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_NETWORK;ENABLE_MONO;ENABLE_PHYSICS;ENABLE_TERRAIN;ENABLE_CACHING;ENABLE_SUBSTANCE;ENABLE_GENERICS;ENABLE_CLOTH;ENABLE_MOVIES;ENABLE_AUDIO;ENABLE_WWW;ENABLE_SHADOWS;ENABLE_DUCK_TYPING;UNITY_4_1_2;UNITY_4_1;ENABLE_PROFILER;UNITY_EDITOR</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	<DebugType>pdbonly</DebugType>
+	<Optimize>true</Optimize>
+	<OutputPath>Temp\bin\Release\</OutputPath>
+	<DefineConstants>TRACE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System" />
+    <Reference Include="System.XML" />
+	<Reference Include="System.Core" />
+	<Reference Include="UnityEngine">
+	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	</Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Scripts\AIDriver.cs" />
+     <Compile Include="Assets\Scripts\AIState.cs" />
+     <Compile Include="Assets\Scripts\BulletUpdate.cs" />
+     <Compile Include="Assets\Scripts\Button.cs" />
+     <Compile Include="Assets\Scripts\CarMovement.cs" />
+     <Compile Include="Assets\Scripts\CarStat.cs" />
+     <Compile Include="Assets\Scripts\CheckpointManagerLevel1.cs" />
+     <Compile Include="Assets\Scripts\CoinManager.cs" />
+     <Compile Include="Assets\Scripts\DecreaseTenStat.cs" />
+     <Compile Include="Assets\Scripts\DecreaseThisStat.cs" />
+     <Compile Include="Assets\Scripts\FollowThisObject.cs" />
+     <Compile Include="Assets\Scripts\GamepadController.cs" />
+     <Compile Include="Assets\Scripts\GunShieldRotation.cs" />
+     <Compile Include="Assets\Scripts\IncreaseTenStat.cs" />
+     <Compile Include="Assets\Scripts\IncreaseThisStat.cs" />
+     <Compile Include="Assets\Scripts\Items\FreezeShotMovement.cs" />
+     <Compile Include="Assets\Scripts\Items\MissileMovement.cs" />
+     <Compile Include="Assets\Scripts\Items\OilSlickBehavior.cs" />
+     <Compile Include="Assets\Scripts\Items\PowerUpDisplay.cs" />
+     <Compile Include="Assets\Scripts\Items\VehicleShieldController.cs" />
+     <Compile Include="Assets\Scripts\Items\itemBox.cs" />
+     <Compile Include="Assets\Scripts\Items\vehicleItems.cs" />
+     <Compile Include="Assets\Scripts\KeyboardMouseController.cs" />
+     <Compile Include="Assets\Scripts\LapCheck.cs" />
+     <Compile Include="Assets\Scripts\LoadGameFromMenu.cs" />
+     <Compile Include="Assets\Scripts\LoadHelp.cs" />
+     <Compile Include="Assets\Scripts\LoadLevel1.cs" />
+     <Compile Include="Assets\Scripts\LoadMainMenu.cs" />
+     <Compile Include="Assets\Scripts\LoadStats.cs" />
+     <Compile Include="Assets\Scripts\PlayerUI.cs" />
+     <Compile Include="Assets\Scripts\Quit.cs" />
+     <Compile Include="Assets\Scripts\StatsGUI.cs" />
+     <Compile Include="Assets\Scripts\Vehicle.cs" />
+     <Compile Include="Assets\Scripts\Weapon.cs" />
+     <Compile Include="Assets\Scripts\basicMovementTesting.cs" />
+     <Compile Include="Assets\Scripts\checkpointLevel1.cs" />
+     <Compile Include="Assets\Scripts\checkpointManager.cs" />
+     <Compile Include="Assets\Scripts\driverHealth.cs" />
+     <Compile Include="Assets\Scripts\enemyDriver.cs" />
+     <Compile Include="Assets\Scripts\itemDisplay.cs" />
+     <Compile Include="Assets\Scripts\lapDisplay.cs" />
+     <Compile Include="Assets\Scripts\minimapItem.cs" />
+     <Compile Include="Assets\Scripts\ranking.cs" />
+     <Compile Include="Assets\Scripts\rankingCar.cs" />
+     <Compile Include="Assets\Scripts\rotateToCursor.cs" />
+     <Compile Include="Assets\Scripts\statsFromMenu.cs" />
+     <Compile Include="Assets\Scripts\tireTraks.cs" />
+     <Compile Include="Assets\Scripts\waypointManager.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+	   Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>
