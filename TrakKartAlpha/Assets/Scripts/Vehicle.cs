@@ -98,7 +98,10 @@ public class Vehicle : MonoBehaviour {
 			//else if( rigidbody.velocity.magnitude < -stat.GetMaxVelocity() / 4 )
 				//rigidbody.velocity = transform.forward * -stat.GetMaxVelocity() / 4 * Time.deltaTime ;
 			
-			stat.SetCurrentSpeed(rigidbody.velocity.magnitude);
+			if( rigidbody.velocity.magnitude >= 0 )
+				stat.SetCurrentSpeed(rigidbody.velocity.magnitude);
+			else
+				stat.SetCurrentSpeed(0);
 			
 			if(transform.position.y > 1f)
 				transform.position = new Vector3( transform.position.x, 0.5f, transform.position.z ) ;
@@ -170,6 +173,7 @@ public class Vehicle : MonoBehaviour {
 	}
 	
 	public void BoostVehicle( float boostTime ) {
+		stat.SetCurrentSpeed(stat.GetMaxVelocity()) ;
 		stat.SetMaxVelocity(stat.GetBoostSpeed()) ;
 		stat.SetAccel(stat.GetBoostSpeed()) ;	
 		m_boosted = true ;
@@ -202,6 +206,7 @@ public class Vehicle : MonoBehaviour {
 	}
 	
 	public bool isFrozen( ) {return m_frozen ;}
+	public bool isBoosted( ) {return m_boosted ;}
 	
 	public void FirePowerUp()
 	{
