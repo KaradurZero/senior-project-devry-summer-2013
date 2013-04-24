@@ -1,9 +1,57 @@
 Art Assets
 
-Sprites of cars, power up and other track items
-Sprites of cars (not top down, they'll be used for displaying cars in the menu)
-Full Drawn landscapes(?)
-Sound effects (for driving, shooting, shield, power ups, etc.)
-Music (not required but it would be nice. preferably some kind of techno rock music. one for the menu, and one for each track we make.)
+Top Priority
+	SCREENS
+	1. Splash screen 	(3x2)
+	2. Instructions 	(3x2)
+	3. Garage 		(3x2)
 
-I can take care of sprites and other 2d art
+	BUTTONS
+	4. Race
+	5. Help
+	6. Quit 
+	7. Garage
+	8. Sound on
+	9. Sound off
+	10. Pause
+	11. Resume
+	
+	GUI
+	HUD
+	12. Pos / Score
+	13. Health
+	14. Speed
+	15. Lap 1, Lap 2, Lap 3
+	16. Guide arrow
+	
+	POWERUP DISPLAY
+	17. Freeze
+	18. Homing missle
+	19. Oil Slick
+	20. Shield enlarge
+	21. Shield deflect
+	22. Thief
+	
+	OBJECTS
+	23. Target
+	24. Point gate
+	25. Money bags
+	26. checkpoint
+	27. checkpoint hit
+
+Second Priority
+
+	GARAGE
+	1. "Info" button
+	2. "Garage" text
+	3. "Speed" text
+	4. "Accel" text
+	5. "Brake" text
+	6. "Boost" text
+	7. "Luck" text
+	8. "Weight" test
+	9. "Attack" text
+	10. "Defense" text
+	11. "Buy" button
+	12. "Gold" Text
+
