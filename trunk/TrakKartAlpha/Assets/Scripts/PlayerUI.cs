@@ -13,10 +13,10 @@ public class PlayerUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		pos = new Vector2(10,430);
+		pos = new Vector2(10,Screen.height/2 - 30);
 		size = new Vector2(pos.x + 150,pos.y + 30);
 		
-		Debug.Log (pos.y);
+		//Debug.Log (Screen.currentResolution.height/2);
 	}
 	
 	 void OnGUI() {
@@ -35,5 +35,6 @@ public class PlayerUI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		barDisplay = player.GetComponent<CarStat>().GetCurrTemp()*0.01f;
+		//Debug.Log (Screen.currentResolution.height/2);
 	}
 }

@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{A054EC81-421B-4CDA-CE5D-B195C684D071}</ProjectGuid>
+	<ProjectGuid>{9F1D37B2-F478-BA0F-334E-859684C81511}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -37,10 +37,10 @@
     <Reference Include="System.XML" />
 	<Reference Include="System.Core" />
 	<Reference Include="UnityEngine">
-	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>E:/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>E:/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -73,11 +73,13 @@
      <Compile Include="Assets\Scripts\LoadLevel1.cs" />
      <Compile Include="Assets\Scripts\LoadMainMenu.cs" />
      <Compile Include="Assets\Scripts\LoadStats.cs" />
+     <Compile Include="Assets\Scripts\NavigationDisplay.cs" />
      <Compile Include="Assets\Scripts\PlayerUI.cs" />
      <Compile Include="Assets\Scripts\Quit.cs" />
      <Compile Include="Assets\Scripts\StatsGUI.cs" />
      <Compile Include="Assets\Scripts\Vehicle.cs" />
      <Compile Include="Assets\Scripts\Weapon.cs" />
+     <Compile Include="Assets\Scripts\Xbox360Controller.cs" />
      <Compile Include="Assets\Scripts\basicMovementTesting.cs" />
      <Compile Include="Assets\Scripts\checkpointLevel1.cs" />
      <Compile Include="Assets\Scripts\checkpointManager.cs" />
