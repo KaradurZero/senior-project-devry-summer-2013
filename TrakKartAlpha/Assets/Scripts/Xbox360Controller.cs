@@ -52,7 +52,7 @@ public class Xbox360Controller : MonoBehaviour {
 					
 					if( (weapon360_H != 0 || weapon360_V != 0) && myGunShieldRot.isGunEnabled() && myWeapon.CanShoot()) {
 						myWeapon.fireBullet() ;
-						player.RaiseTemp(15f) ;
+						player.RaiseTemp( true ) ;
 						
 					}
 					
@@ -71,7 +71,6 @@ public class Xbox360Controller : MonoBehaviour {
 					
 					if( Input.GetKey(KeyCode.Joystick1Button5)) {
 						player.BoostVehicle( 0.05f ) ;
-						player.RaiseTemperaturePerSecond( 10f ) ;
 					}
 					else{
 						player.TurnOffTempPerSecond( ) ;

@@ -5,25 +5,26 @@ public class FollowThisObject : MonoBehaviour {
 	public GameObject parentObject;
 	public float deltaX, deltaY, deltaZ;
 	float lastSpeed = 0f;
+	float min_size = 10f ;
+	float max_size = 20f ;
+	float default_size = 10f ;
 	
 	void Update()
 	{
 		transform.position = parentObject.transform.position;
 		transform.position += new Vector3(deltaX, deltaY, deltaZ);
 
-		Camera.mainCamera.orthographicSize = 25 * (parentObject.GetComponent<CarStat>().GetCurrentSpeed() / parentObject.GetComponent<CarStat>().GetMaxVelocity()) ;
+		//Camera.mainCamera.orthographicSize = 10f + (10f * (parentObject.GetComponent<CarStat>().GetCurrentSpeed() / parentObject.GetComponent<CarStat>().GetMaxVelocity())) ;
 
 		
-		if(Camera.mainCamera.orthographicSize < 10)
-			Camera.mainCamera.orthographicSize = 10;
+		//Debug.Log(parentObject.GetComponent<Vehicle>().isBoosted()) ;
 		
-		if(parentObject.GetComponent<Vehicle>().isBoosted()) {
-			if(Camera.mainCamera.orthographicSize > 25)
-				Camera.mainCamera.orthographicSize = 25;
+		if(!(parentObject.GetComponent<Vehicle>().isBoosted())) {
+			Camera.mainCamera.orthographicSize = default_size + (min_size * (parentObject.GetComponent<CarStat>().GetCurrentSpeed() / parentObject.GetComponent<CarStat>().GetMaxVelocity())) ;
 		}
-		else if(Camera.mainCamera.orthographicSize > 20)
-			Camera.mainCamera.orthographicSize = 20;
+		else 
+			Camera.mainCamera.orthographicSize = default_size + (max_size * (parentObject.GetComponent<CarStat>().GetCurrentSpeed() / parentObject.GetComponent<CarStat>().GetMaxVelocity())) ;
 		
-		lastSpeed = parentObject.GetComponent<CarStat>().GetCurrentSpeed() ;
+		//lastSpeed = parentObject.GetComponent<CarStat>().GetCurrentSpeed() ;
 	}
 }

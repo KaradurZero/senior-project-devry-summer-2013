@@ -13,7 +13,7 @@ public class PlayerUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		pos = new Vector2(10,Screen.height/2 - 30);
+		pos = new Vector2(10,Screen.height/2 - (Screen.height/30));
 		size = new Vector2(pos.x + 150,pos.y + 30);
 		
 		//Debug.Log (Screen.currentResolution.height/2);

@@ -176,6 +176,7 @@ public class Vehicle : MonoBehaviour {
 		stat.SetCurrentSpeed(stat.GetMaxVelocity()) ;
 		stat.SetMaxVelocity(stat.GetBoostSpeed()) ;
 		stat.SetAccel(stat.GetBoostSpeed()) ;	
+		RaiseTemperaturePerSecond( 10f ) ;
 		m_boosted = true ;
 		m_boost_time = Time.time + boostTime ;
 	}
@@ -187,8 +188,11 @@ public class Vehicle : MonoBehaviour {
 		stat.SetCurrTemp(stat.GetCurrTemp() + tempPerSecond * Time.deltaTime) ;
 	}
 	
-	public void RaiseTemp( float a_amount ){
-		stat.SetCurrTemp ( stat.GetCurrTemp() + a_amount ) ;
+	public void RaiseTemp( bool a_shooting ){
+		if( a_shooting )
+			stat.SetCurrTemp ( stat.GetCurrTemp() + stat.FindAttackTempCost() ) ;
+		else
+			stat.SetCurrTemp ( stat.GetCurrTemp() + stat.FindDefenseTempCost() ) ;
 	}
 	
 	public void TurnOffTempPerSecond( ) {

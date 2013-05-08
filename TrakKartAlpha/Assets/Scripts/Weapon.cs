@@ -44,7 +44,7 @@ public class Weapon : MonoBehaviour {
 	public void fireBullet() {
 		if(m_canShoot)
 		{
-			m_coolDownTime = 1f ;
+			m_coolDownTime = 0.5f ;
 			GameObject projectile = (GameObject) Instantiate(m_bullet, transform.position + (transform.forward * 1.5f), Quaternion.identity);
 	//		Physics.IgnoreCollision(projectile.collider, transform.root.collider);
 	//		Debug.Log(transform.root.transform.name);

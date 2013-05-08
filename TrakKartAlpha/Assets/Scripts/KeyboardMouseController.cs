@@ -54,7 +54,7 @@ public class KeyboardMouseController : MonoBehaviour {
 				
 				if(Input.GetKey(KeyCode.Mouse0) && myGunShieldRot.isGunEnabled() && myWeapon.CanShoot()) {
 					myWeapon.fireBullet() ;
-					player.RaiseTemp(15f) ;
+					player.RaiseTemp( true ) ;
 					}
 				
 				if(Input.GetKey(KeyCode.Space)) {
@@ -68,7 +68,6 @@ public class KeyboardMouseController : MonoBehaviour {
 						
 				if( Input.GetKey(KeyCode.Mouse1) ) {
 					player.BoostVehicle( 0.05f ) ;
-					player.RaiseTemperaturePerSecond( 10f ) ;
 					}
 				else{
 					player.TurnOffTempPerSecond( ) ;

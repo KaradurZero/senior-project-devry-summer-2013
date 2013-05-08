@@ -3,7 +3,7 @@ using System.Collections;
 
 public class driverHealth : MonoBehaviour {
 
-	public int initHealth;
+	int initHealth;
 	public int health;
 	public Object explosion;
 	//respawn
@@ -50,6 +50,7 @@ public class driverHealth : MonoBehaviour {
 	}
 	
 	void Start () {
+		initHealth = (int)gameObject.GetComponent<CarStat>().GetMaxHealth() ;
 		ReplenishHealthFull();
 		hasDied = false;
 		respawnTime = 5f;
@@ -58,6 +59,12 @@ public class driverHealth : MonoBehaviour {
 	
 	void Update()
 	{
+		//there is a bug where it doesn't initialize health at Start()
+		if( initHealth <= 0 ) {
+			initHealth = (int)gameObject.GetComponent<CarStat>().GetMaxHealth() ;
+			ReplenishHealthFull();
+		}
+		
 		if(hasDied)
 		{
 			if(Time.time - currRespawnTime > respawnTime)
