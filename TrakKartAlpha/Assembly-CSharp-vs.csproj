@@ -37,13 +37,18 @@
     <Reference Include="System.XML" />
 	<Reference Include="System.Core" />
 	<Reference Include="UnityEngine">
-	  <HintPath>E:/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>E:/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Josh&apos;s Scripts\Lock_Pin.cs" />
+     <Compile Include="Assets\Josh&apos;s Scripts\LockpickPosition.cs" />
+     <Compile Include="Assets\Josh&apos;s Scripts\pinUp.cs" />
+     <Compile Include="Assets\Josh&apos;s Scripts\rayBasedMovement.cs" />
+     <Compile Include="Assets\Josh&apos;s Scripts\scoreKeeper.cs" />
      <Compile Include="Assets\Scripts\AIDriver.cs" />
      <Compile Include="Assets\Scripts\AIState.cs" />
      <Compile Include="Assets\Scripts\BulletUpdate.cs" />
@@ -56,6 +61,10 @@
      <Compile Include="Assets\Scripts\DecreaseThisStat.cs" />
      <Compile Include="Assets\Scripts\FollowThisObject.cs" />
      <Compile Include="Assets\Scripts\GamepadController.cs" />
+     <Compile Include="Assets\Scripts\GarageInputMouseKeyboard.cs" />
+     <Compile Include="Assets\Scripts\GarageSelectionManager.cs" />
+     <Compile Include="Assets\Scripts\GarageStatManager.cs" />
+     <Compile Include="Assets\Scripts\GarageUpgradeManager.cs" />
      <Compile Include="Assets\Scripts\GunShieldRotation.cs" />
      <Compile Include="Assets\Scripts\IncreaseTenStat.cs" />
      <Compile Include="Assets\Scripts\IncreaseThisStat.cs" />
@@ -74,26 +83,99 @@
      <Compile Include="Assets\Scripts\LoadMainMenu.cs" />
      <Compile Include="Assets\Scripts\LoadStats.cs" />
      <Compile Include="Assets\Scripts\NavigationDisplay.cs" />
+     <Compile Include="Assets\Scripts\POV.cs" />
      <Compile Include="Assets\Scripts\PlayerUI.cs" />
      <Compile Include="Assets\Scripts\Quit.cs" />
      <Compile Include="Assets\Scripts\StatsGUI.cs" />
      <Compile Include="Assets\Scripts\Vehicle.cs" />
      <Compile Include="Assets\Scripts\Weapon.cs" />
+     <Compile Include="Assets\Scripts\XBox360ControllerGarage.cs" />
      <Compile Include="Assets\Scripts\Xbox360Controller.cs" />
      <Compile Include="Assets\Scripts\basicMovementTesting.cs" />
      <Compile Include="Assets\Scripts\checkpointLevel1.cs" />
      <Compile Include="Assets\Scripts\checkpointManager.cs" />
+     <Compile Include="Assets\Scripts\clothGUI.cs" />
+     <Compile Include="Assets\Scripts\clothManager.cs" />
+     <Compile Include="Assets\Scripts\clothMovement.cs" />
+     <Compile Include="Assets\Scripts\connectionA.cs" />
+     <Compile Include="Assets\Scripts\connectionB.cs" />
+     <Compile Include="Assets\Scripts\connectionMovement.cs" />
+     <Compile Include="Assets\Scripts\cubeMovement.cs" />
      <Compile Include="Assets\Scripts\driverHealth.cs" />
      <Compile Include="Assets\Scripts\enemyDriver.cs" />
+     <Compile Include="Assets\Scripts\guardMovement.cs" />
+     <Compile Include="Assets\Scripts\guardMovement10.cs" />
+     <Compile Include="Assets\Scripts\guardMovement11.cs" />
+     <Compile Include="Assets\Scripts\guardMovement2.cs" />
+     <Compile Include="Assets\Scripts\guardMovement3.cs" />
+     <Compile Include="Assets\Scripts\guardMovement4.cs" />
+     <Compile Include="Assets\Scripts\guardMovement5.cs" />
+     <Compile Include="Assets\Scripts\guardMovement6.cs" />
+     <Compile Include="Assets\Scripts\guardMovement7.cs" />
+     <Compile Include="Assets\Scripts\guardMovement8.cs" />
+     <Compile Include="Assets\Scripts\guardMovement9.cs" />
      <Compile Include="Assets\Scripts\itemDisplay.cs" />
+     <Compile Include="Assets\Scripts\keyboardMovement.cs" />
      <Compile Include="Assets\Scripts\lapDisplay.cs" />
      <Compile Include="Assets\Scripts\minimapItem.cs" />
+     <Compile Include="Assets\Scripts\pingPong.cs" />
+     <Compile Include="Assets\Scripts\pingPongAnimation.cs" />
+     <Compile Include="Assets\Scripts\pointGateManager.cs" />
+     <Compile Include="Assets\Scripts\pulsateButton.cs" />
      <Compile Include="Assets\Scripts\ranking.cs" />
      <Compile Include="Assets\Scripts\rankingCar.cs" />
+     <Compile Include="Assets\Scripts\rayClothMovement.cs" />
      <Compile Include="Assets\Scripts\rotateToCursor.cs" />
      <Compile Include="Assets\Scripts\statsFromMenu.cs" />
      <Compile Include="Assets\Scripts\tireTraks.cs" />
      <Compile Include="Assets\Scripts\waypointManager.cs" />
+     <Compile Include="Assets\Scripts\winBox.cs" />
+     <Compile Include="Assets\SimpleParticlePack\Scripts\ParticleTester.cs" />
+     <Compile Include="Assets\SimpleParticlePack\Scripts\rayCastTest.cs" />
+     <Compile Include="Assets\fpsGame\Crosshair.cs" />
+     <Compile Include="Assets\fpsGame\Explosion.cs" />
+     <Compile Include="Assets\fpsGame\Misc Scripts\DisableComponentOnPause.cs" />
+     <Compile Include="Assets\fpsGame\Misc Scripts\DrawRockets.cs" />
+     <Compile Include="Assets\fpsGame\Misc Scripts\EnableWhenPaused.cs" />
+     <Compile Include="Assets\fpsGame\Misc Scripts\FPSCounter.cs" />
+     <Compile Include="Assets\fpsGame\Misc Scripts\HideGuiWhenPaused.cs" />
+     <Compile Include="Assets\fpsGame\Misc Scripts\LevelLoadFade.cs" />
+     <Compile Include="Assets\fpsGame\Misc Scripts\LoadGame.cs" />
+     <Compile Include="Assets\fpsGame\Misc Scripts\LockCursor.cs" />
+     <Compile Include="Assets\fpsGame\Misc Scripts\MusicPlayer.cs" />
+     <Compile Include="Assets\fpsGame\Misc Scripts\VisibilityCulling\VisibilityCulingArea.cs" />
+     <Compile Include="Assets\fpsGame\Misc Scripts\VisibilityCulling\VisibilityCuller.cs" />
+     <Compile Include="Assets\fpsGame\MissleLauncher.cs" />
+     <Compile Include="Assets\fpsGame\Projectile.cs" />
+     <Compile Include="Assets\fpsGame\WeaponScript\AI.cs" />
+     <Compile Include="Assets\fpsGame\WeaponScript\AIAnimation.cs" />
+     <Compile Include="Assets\fpsGame\WeaponScript\CharacterDamage.cs" />
+     <Compile Include="Assets\fpsGame\WeaponScript\DamageReciever.cs" />
+     <Compile Include="Assets\fpsGame\WeaponScript\Explosion_Advanced.cs" />
+     <Compile Include="Assets\fpsGame\WeaponScript\Explosion_Simple.cs" />
+     <Compile Include="Assets\fpsGame\WeaponScript\FPSPlayer.cs" />
+     <Compile Include="Assets\fpsGame\WeaponScript\InstantDeathCollider.cs" />
+     <Compile Include="Assets\fpsGame\WeaponScript\MachineGun.cs" />
+     <Compile Include="Assets\fpsGame\WeaponScript\Pickup.cs" />
+     <Compile Include="Assets\fpsGame\WeaponScript\PlayerWeapons.cs" />
+     <Compile Include="Assets\fpsGame\WeaponScript\Rocket.cs" />
+     <Compile Include="Assets\fpsGame\WeaponScript\RocketLauncher.cs" />
+     <Compile Include="Assets\fpsGame\WeaponScript\SentryGun.cs" />
+     <Compile Include="Assets\fpsGame\WeaponScript\SentryGunDamageReciever.cs" />
+     <Compile Include="Assets\fpsGame\updraft.cs" />
+     <Compile Include="Assets\iTween\Plugins\iTween.cs" />
+     <Compile Include="Assets\iTween\Sample\MoveSample.cs" />
+     <Compile Include="Assets\iTween\Sample\RotateSample.cs" />
+     <Compile Include="Assets\iTween\Sample\SampleInfo.cs" />
+     <Compile Include="Assets\primitives.v1\primitives_testscene\_resources\failscript.cs" />
+     <None Include="Assets\iTween\ReadMe!\ReadMe!.txt" />
+ <Reference Include="Assembly-UnityScript-firstpass">
+ <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
+      <Project>{948FE5E7-533A-3931-554C-3C93A94A33B8}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
