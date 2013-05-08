@@ -95,7 +95,7 @@ public class BulletUpdate : MonoBehaviour {
 		driverHealth health = other.collider.gameObject.GetComponent<driverHealth>();
 			
 			if(other.gameObject.tag == "Shield"){
-				other.gameObject.transform.parent.parent.GetComponent<Vehicle>().RaiseTemp(5f) ;
+				other.gameObject.transform.parent.parent.GetComponent<Vehicle>().RaiseTemp(false) ;
 				//Debug.Log ("SHIELD BLOCK");
 			}
 		

@@ -55,6 +55,10 @@ public class MissileMovement : MonoBehaviour {
 			c.GetComponent<driverHealth>().DealDamage(m_damageThisDeals);
 			hasHitEnemy();
 		}
+		
+		if( c.gameObject.tag == "Shield" ) {
+			c.gameObject.transform.parent.parent.GetComponent<Vehicle>().RaiseTemp(false) ;	
+		}
 	}
 	
 	void hasHitEnemy() {

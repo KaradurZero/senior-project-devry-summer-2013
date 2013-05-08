@@ -193,7 +193,7 @@ public class AIState : MonoBehaviour {
 			case AI_STATE.SHOOT:
 				if(myWeapon.CanShoot()){
 					myWeapon.fireBullet();
-					this.gameObject.GetComponent<Vehicle>().RaiseTemp(15f) ;
+					this.gameObject.GetComponent<Vehicle>().RaiseTemp(true) ;
 				}
 				break;
 			case AI_STATE.SHIELD:

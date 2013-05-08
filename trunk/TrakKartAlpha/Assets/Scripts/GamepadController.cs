@@ -51,7 +51,7 @@ public class GamepadController : MonoBehaviour {
 					
 					if( (weaponHoriz != 0 || weaponVert != 0) && myGunShieldRot.isGunEnabled() && myWeapon.CanShoot()) {
 						myWeapon.fireBullet() ;
-						player.RaiseTemp(15f) ;
+						player.RaiseTemp( true ) ;
 						
 					}
 					
@@ -70,7 +70,6 @@ public class GamepadController : MonoBehaviour {
 					
 					if( Input.GetKey(KeyCode.Joystick1Button5)) {
 						player.BoostVehicle( 0.05f ) ;
-						player.RaiseTemperaturePerSecond( 10f ) ;
 					}
 					else{
 						player.TurnOffTempPerSecond( ) ;

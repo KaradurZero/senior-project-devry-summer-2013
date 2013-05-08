@@ -21,7 +21,6 @@ public class CarStat : MonoBehaviour {
 	private float m_currVelocity ;
 	
 	private float m_maxHealth ;
-	private float m_currHealth ;
 	
 	private float m_defaultMaxVelocity ;
 	private float m_defaultAcceleration ;
@@ -43,7 +42,17 @@ public class CarStat : MonoBehaviour {
 	public float GetCurrentSpeed( ) {return m_currVelocity ;}
 	public float GetBoostSpeed( ) {return m_boostVelocity ;}
 	
-	public float GetHealth( ) {return m_currHealth ;}
+	public float GetMaxHealth( ) {return m_maxHealth ;}
+	
+	public float FindAttackTempCost( ) {
+	//USE ATTACK VALUE FOR RAISING TEMPERATURE
+		return 20f ;
+	}
+	
+	public float FindDefenseTempCost( ) {
+	//USE DEFENSE VALUE FOR RAISING TEMPERATURE
+		return 25f ;
+	}
 	
 	public void SetMaxVelocity( float a_speed ) {m_maxVelocity = a_speed ;}
 	public void SetAccel( float a_acceleration ) {m_acceleration = a_acceleration ;}
@@ -75,9 +84,6 @@ public class CarStat : MonoBehaviour {
 	//keeps object from moving OVER maximum velocity
 	public void SetCurrentSpeed( float a_currSpeed ) {m_currVelocity = a_currSpeed ;}
 	
-	public void TakeDamage( float a_damage ) { m_currHealth -= a_damage ;}
-	public void Heal( float a_amount ) {m_currHealth = ((m_currHealth + a_amount) > m_maxHealth)?m_maxHealth : (m_currHealth + a_amount) ;}
-	
 	public void ResetVelocity( ) {m_maxVelocity = m_defaultMaxVelocity;}
 	public void ResetAcceleration( ) {m_acceleration = m_defaultAcceleration;}
 	public void ResetHandling( ) {m_handling = m_defaultHandling;}
@@ -101,10 +107,13 @@ public class CarStat : MonoBehaviour {
 		m_tempPerSec = m_overheated = false ;
 		
 		m_maxHealth = 100f ;
-		m_currHealth = m_maxHealth ;
 		
 		m_defaultMaxVelocity = m_maxVelocity ;
 		m_defaultAcceleration = m_acceleration ;
 		m_defaultHandling = m_handling ;
+	}
+	
+	public void LoadStats( ) {
+		
 	}
 }
