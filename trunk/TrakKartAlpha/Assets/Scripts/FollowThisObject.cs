@@ -4,15 +4,15 @@ using System.Collections;
 public class FollowThisObject : MonoBehaviour {
 	public GameObject parentObject;
 	public float deltaX, deltaY, deltaZ;
-	
 	float lastSpeed = 0f;
 	
 	void Update()
 	{
 		transform.position = parentObject.transform.position;
 		transform.position += new Vector3(deltaX, deltaY, deltaZ);
-		
+
 		Camera.mainCamera.orthographicSize = 25 * (parentObject.GetComponent<CarStat>().GetCurrentSpeed() / parentObject.GetComponent<CarStat>().GetMaxVelocity()) ;
+
 		
 		if(Camera.mainCamera.orthographicSize < 10)
 			Camera.mainCamera.orthographicSize = 10;
