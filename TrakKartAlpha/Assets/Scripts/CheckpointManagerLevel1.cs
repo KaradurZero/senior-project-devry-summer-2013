@@ -5,7 +5,6 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 	public GameObject[] checkpoints;
 	int focus;
 	int laps;
-	
 	void Awake()
 	{
 		laps = 1;
@@ -81,14 +80,15 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 			}
 		}
 	}
-	//returns the waypoint that is x amount of waypoints ahead of the driver
-	public Transform GetFutureCheckpointTransform(int futureCount)
+	public float GetDistanceFromNextCheckpoint()
 	{
-		int t = futureCount + focus;
-		while(t >= checkpoints.Length)
-		{
-			t -= checkpoints.Length;
-		}
-		return checkpoints[t].transform;
+		return Mathf.Abs(Vector3.Distance(transform.position, checkpoints[focus].transform.position));
+	}
+	public float GetDistanceFromLastCheckpoint()
+	{
+		if(focus == 0)
+			return Mathf.Abs(Vector3.Distance(transform.position, checkpoints[16].transform.position));
+		else
+			return Mathf.Abs(Vector3.Distance(transform.position, checkpoints[focus-1].transform.position));
 	}
 }

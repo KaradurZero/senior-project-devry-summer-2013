@@ -37,10 +37,10 @@
     <Reference Include="System.XML" />
 	<Reference Include="System.Core" />
 	<Reference Include="UnityEngine">
-	  <HintPath>E:/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>E:/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -56,6 +56,10 @@
      <Compile Include="Assets\Scripts\DecreaseThisStat.cs" />
      <Compile Include="Assets\Scripts\FollowThisObject.cs" />
      <Compile Include="Assets\Scripts\GamepadController.cs" />
+     <Compile Include="Assets\Scripts\GarageInputMouseKeyboard.cs" />
+     <Compile Include="Assets\Scripts\GarageSelectionManager.cs" />
+     <Compile Include="Assets\Scripts\GarageStatManager.cs" />
+     <Compile Include="Assets\Scripts\GarageUpgradeManager.cs" />
      <Compile Include="Assets\Scripts\GunShieldRotation.cs" />
      <Compile Include="Assets\Scripts\IncreaseTenStat.cs" />
      <Compile Include="Assets\Scripts\IncreaseThisStat.cs" />
