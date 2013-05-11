@@ -9,27 +9,27 @@ public class GarageStatManager : MonoBehaviour {
 	public GameObject[]
 		speedObjs,
 		accelObjs,
-		brakeObjs,
+		tempObjs,
 		boostObjs,
-		weightObjs,
+		healthObjs,
 		luckObjs,
 		attackObjs,
 		defenseObjs;
 	int 
 		speedVal,
 		accelVal,
-		brakeVal,
+		tempVal,
 		boostVal,
-		weightVal,
+		healthVal,
 		luckVal,
 		attackVal,
 		defenseVal;
 	int[] 
 		speedCost,
 		accelCost,
-		brakeCost,
+		tempCost,
 		boostCost,
-		weightCost,
+		healthCost,
 		luckCost,
 		attackCost,
 		defenseCost;
@@ -38,26 +38,26 @@ public class GarageStatManager : MonoBehaviour {
 	{
 		speedObjs 	= new GameObject[5];
 		accelObjs 	= new GameObject[5];
-		brakeObjs 	= new GameObject[5];
+		tempObjs 	= new GameObject[5];
 		boostObjs 	= new GameObject[5];
-		weightObjs 	= new GameObject[5];
+		healthObjs 	= new GameObject[5];
 		luckObjs 	= new GameObject[5];
 		attackObjs 	= new GameObject[5];
 		defenseObjs = new GameObject[5];
 		speedCost	= new int[5];
 		accelCost	= new int[5];
-		brakeCost	= new int[5];
+		tempCost	= new int[5];
 		boostCost	= new int[5];
-		weightCost	= new int[5];
+		healthCost	= new int[5];
 		luckCost	= new int[5];
 		attackCost	= new int[5];
 		defenseCost	= new int[5];
-		speedVal = accelVal = brakeVal = boostVal = weightVal = luckVal = attackVal = defenseVal = 0;
+		speedVal = accelVal = tempVal = boostVal = healthVal = luckVal = attackVal = defenseVal = 0;
 		speedCost[0] = 100;		speedCost[1] = 350;		speedCost[2] = 700;		speedCost[3] = 1150;		speedCost[4] = 1700;	
 		accelCost[0] = 100;		accelCost[1] = 350;		accelCost[2] = 700;		accelCost[3] = 1150;		accelCost[4] = 1700;		
-		brakeCost[0] = 100;		brakeCost[1] = 350;		brakeCost[2] = 700;		brakeCost[3] = 1150;		brakeCost[4] = 1700;
+		tempCost[0] = 100;		tempCost[1] = 350;		tempCost[2] = 700;		tempCost[3] = 1150;			tempCost[4] = 1700;
 		boostCost[0] = 100;		boostCost[1] = 350;		boostCost[2] = 700;		boostCost[3] = 1150;		boostCost[4] = 1700;
-		weightCost[0] = 100;	weightCost[1] = 350;	weightCost[2] = 700;	weightCost[3] = 1150;		weightCost[4] = 1700;
+		healthCost[0] = 100;	healthCost[1] = 350;	healthCost[2] = 700;	healthCost[3] = 1150;		healthCost[4] = 1700;
 		luckCost[0] = 100;		luckCost[1] = 350;		luckCost[2] = 700;		luckCost[3] = 1150;			luckCost[4] = 1700;
 		attackCost[0] = 100;	attackCost[1] = 350;	attackCost[2] = 700;	attackCost[3] = 1150;		attackCost[4] = 1700;
 		defenseCost[0] = 100;	defenseCost[1] = 350;	defenseCost[2] = 700;	defenseCost[3] = 1150;		defenseCost[4] = 1700;
@@ -67,23 +67,33 @@ public class GarageStatManager : MonoBehaviour {
 		{
 			speedObjs[i] 	= GameObject.Find("speed_" + (i + 1));
 			accelObjs[i] 	= GameObject.Find("accel_" + (i + 1));
-			brakeObjs[i] 	= GameObject.Find("brake_" + (i + 1));
+			tempObjs[i] 	= GameObject.Find("temp_" + (i + 1));
 			boostObjs[i] 	= GameObject.Find("boost_" + (i + 1));
-			weightObjs[i] 	= GameObject.Find("weight_" + (i + 1));
+			healthObjs[i] 	= GameObject.Find("health_" + (i + 1));
 			luckObjs[i] 	= GameObject.Find("luck_" + (i + 1));
 			attackObjs[i] 	= GameObject.Find("attack_" + (i + 1));
 			defenseObjs[i] 	= GameObject.Find("defense_" + (i + 1));
 		}
 	}
+	
+	public int GetSpeedVal()	{	return speedVal;	}
+	public int GetAccelVal()	{	return accelVal;	}
+	public int GetTempVal()		{	return tempVal;		}
+	public int GetBoostVal()	{	return boostVal;	}
+	public int GetHealthVal()	{	return healthVal;	}
+	public int GetLuckVal()		{	return luckVal;		}
+	public int GetAttackVal()	{	return attackVal;	}
+	public int GetDefenseVal()	{	return defenseVal;	}
+	
 	public bool CanUpgradeStat(string statName)
 	{
 		switch(statName)
 		{
 		case "Speed":	return (speedVal < 5);		break;
 		case "Accel":	return (accelVal < 5);		break;
-		case "Brake":	return (brakeVal < 5);		break;
+		case "Temp":	return (tempVal < 5);		break;
 		case "Boost":	return (boostVal < 5);		break;
-		case "Weight":	return (weightVal < 5);		break;
+		case "Health":	return (healthVal < 5);		break;
 		case "Luck":	return (luckVal < 5);		break;
 		case "Attack":	return (attackVal < 5);		break;
 		case "Defense":	return (defenseVal < 5);	break;
@@ -107,20 +117,20 @@ public class GarageStatManager : MonoBehaviour {
 			for(int i = 0; i < accelVal; i++)
 				accelObjs[i].renderer.material = filled;
 			break;
-		case "Brake":
-			brakeVal++;
-			for(int i = 0; i < brakeVal; i++)
-				brakeObjs[i].renderer.material = filled;
+		case "Temp":
+			tempVal++;
+			for(int i = 0; i < tempVal; i++)
+				tempObjs[i].renderer.material = filled;
 			break;
 		case "Boost":
 			boostVal++;
 			for(int i = 0; i < boostVal; i++)
 				boostObjs[i].renderer.material = filled;
 			break;
-		case "Weight":
-			weightVal++;
-			for(int i = 0; i < weightVal; i++)
-				weightObjs[i].renderer.material = filled;
+		case "Health":
+			healthVal++;
+			for(int i = 0; i < healthVal; i++)
+				healthObjs[i].renderer.material = filled;
 			break;
 		case "Luck":
 			luckVal++;
@@ -158,9 +168,9 @@ public class GarageStatManager : MonoBehaviour {
 			else
 				return 0;
 			break;
-		case "Brake":
-			if(brakeVal < 5)
-				return brakeCost[brakeVal];
+		case "Temp":
+			if(tempVal < 5)
+				return tempCost[tempVal];
 			else
 				return 0;
 			break;
@@ -170,9 +180,9 @@ public class GarageStatManager : MonoBehaviour {
 			else
 				return 0;
 			break;
-		case "Weight":
-			if(weightVal < 5)
-				return weightCost[weightVal];
+		case "Health":
+			if(healthVal < 5)
+				return healthCost[healthVal];
 			else
 				return 0;
 			break;
