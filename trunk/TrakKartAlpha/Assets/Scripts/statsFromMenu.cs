@@ -5,34 +5,34 @@ public class statsFromMenu : MonoBehaviour {
 	int 
 		speed,
 		accel,
-		brake,
+		temp,
 		boost,
-		weight,
+		health,
 		luck,
 		attack,
 		defense;
 	
 	void Start () 
 	{
-		speed = accel = brake = boost = weight = luck = attack = defense = 0;
+		speed = accel = temp = boost = health = luck = attack = defense = 0;
 	}
-	public void SetStats(int a_speed, int a_accel, int a_brake, int a_boost, int a_weight, int a_luck, int a_attack, int a_defense)
+	public void SetStats(int a_speed, int a_accel, int a_temp, int a_boost, int a_health, int a_luck, int a_attack, int a_defense)
 	{
 		speed= a_speed;
 		accel = a_accel;
-		brake = a_brake;
+		temp = a_temp;
 		boost = a_boost;
-		weight = a_weight;
+		health = a_health;
 		luck = a_luck;
 		attack = a_attack;
 		defense = a_defense;	
 	}
-	public int GetSpeed() 	{ return speed;		}
-	public int GetAccel() 	{ return accel;		}
-	public int GetBrake() 	{ return brake;		}
-	public int GetBoost() 	{ return boost;		}
-	public int GetWeight() 	{ return weight;	}
-	public int GetLuck() 	{ return luck;		}
-	public int GetAttack() 	{ return attack;	}
-	public int GetDefese() 	{ return defense;	}
+	public int GetSpeed() 	{ return speed    + 1;		}
+	public int GetAccel() 	{ return accel    + 1;		}
+	public int GetTemp() 	{ return temp     + 1;		}
+	public int GetBoost() 	{ return boost    + 1;		}
+	public int GetHealth() 	{ return health   + 1;		}
+	public int GetLuck() 	{ return luck	  + 1;		}
+	public int GetAttack() 	{ return attack   + 1;		}
+	public int GetDefense() { return defense  + 1;		}
 }

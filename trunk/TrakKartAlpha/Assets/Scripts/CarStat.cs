@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CarStat : MonoBehaviour {
 	
+	statsFromMenu menuStats;
 	public float m_maxVelocity ;
 	public float m_acceleration ;
 	public float m_boostVelocity ;
@@ -111,6 +112,19 @@ public class CarStat : MonoBehaviour {
 		m_defaultMaxVelocity = m_maxVelocity ;
 		m_defaultAcceleration = m_acceleration ;
 		m_defaultHandling = m_handling ;
+		
+		//if stats have been set in 
+		menuStats = GameObject.Find("MenuStats").GetComponent<statsFromMenu>();
+		if(menuStats != null)
+		{
+			m_maxVelocity 	= m_defaultMaxVelocity 	= menuStats.GetSpeed() + 10;
+			m_acceleration 	= m_defaultAcceleration = menuStats.GetAccel() + 10;
+			m_maxTemp 		= 100 + (menuStats.GetTemp() * 50);
+			m_maxHealth 	= 100 + (menuStats.GetHealth() * 50);
+			m_luck			= menuStats.GetLuck() * 10;
+			m_attack		= m_defaultMaxVelocity 	= menuStats.GetAttack() + 10;
+			m_defense	 	= menuStats.GetDefense() + 10;
+		}
 	}
 	
 	public void LoadStats( ) {

@@ -10,9 +10,9 @@ public class GarageUpgradeManager : MonoBehaviour {
 		upgradeMaxed,
 		speed,
 		accel,
-		brake,
+		temp,
 		boost,
-		weight,
+		health,
 		luck,
 		attack,
 		defense;
@@ -49,9 +49,9 @@ public class GarageUpgradeManager : MonoBehaviour {
 		{
 		case "Speed":		labelStat.renderer.material = speed;		break;
 		case "Accel":		labelStat.renderer.material = accel;		break;
-		case "Brake":		labelStat.renderer.material = brake;		break;
+		case "Temp":		labelStat.renderer.material = temp;			break;
 		case "Boost":		labelStat.renderer.material = boost;		break;
-		case "Weight":		labelStat.renderer.material = weight;		break;
+		case "Health":		labelStat.renderer.material = health;		break;
 		case "Luck":		labelStat.renderer.material = luck;			break;
 		case "Attack":		labelStat.renderer.material = attack;		break;
 		case "Defence":		labelStat.renderer.material = defense;		break;
