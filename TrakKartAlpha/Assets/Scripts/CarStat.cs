@@ -114,20 +114,34 @@ public class CarStat : MonoBehaviour {
 		m_defaultHandling = m_handling ;
 		
 		//if stats have been set in 
-		menuStats = GameObject.Find("MenuStats").GetComponent<statsFromMenu>();
-		if(menuStats != null)
+		if(gameObject.name == "Player")
 		{
-			m_maxVelocity 	= m_defaultMaxVelocity 	= menuStats.GetSpeed() + 10;
-			m_acceleration 	= m_defaultAcceleration = menuStats.GetAccel() + 10;
-			m_maxTemp 		= 100 + (menuStats.GetTemp() * 50);
-			m_maxHealth 	= 100 + (menuStats.GetHealth() * 50);
-			m_luck			= menuStats.GetLuck() * 10;
-			m_attack		= m_defaultMaxVelocity 	= menuStats.GetAttack() + 10;
-			m_defense	 	= menuStats.GetDefense() + 10;
+			menuStats = GameObject.Find("MenuStats").GetComponent<statsFromMenu>();
+			if(menuStats != null)
+			{
+				m_maxVelocity 	= m_defaultMaxVelocity 	= menuStats.GetSpeed() + 10;
+				m_acceleration 	= m_defaultAcceleration = menuStats.GetAccel() + 10;
+				m_maxTemp 		= 100 + (menuStats.GetTemp() * 500);
+				m_boostVelocity = 20 + menuStats.GetBoost() * 5;
+				m_maxHealth 	= 100 + (menuStats.GetHealth() * 50);
+				m_luck			= menuStats.GetLuck() * 10;
+				m_attack		= m_defaultMaxVelocity 	= menuStats.GetAttack() + 10;
+				m_defense	 	= menuStats.GetDefense() + 10;
+				
+				//create a gameobject to send info back to menu
+				GameObject	statsFromGame = new GameObject("statsFromGame");
+				MenuStatsFromGame stats =  statsFromGame.AddComponent<MenuStatsFromGame>();
+				stats.SetStats(
+					menuStats.GetSpeed(),
+					menuStats.GetAccel(),
+					menuStats.GetTemp(),
+					menuStats.GetBoost(),
+					menuStats.GetLuck(),
+					menuStats.GetHealth(),
+					menuStats.GetAttack(),
+					menuStats.GetDefense());
+				
+			}
 		}
-	}
-	
-	public void LoadStats( ) {
-		
 	}
 }

@@ -72,12 +72,25 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 			laps ++;
 			if(gameObject.name == "Player")
 			{
-					GameObject.Find ("lapDisplay").GetComponent<lapDisplay>().StartingLap(laps);
+				GameObject.Find ("lapDisplay").GetComponent<lapDisplay>().StartingLap(laps);
+				if(laps == 4)
+				{
+					//save stats for the menu
+					DontDestroyOnLoad(GameObject.Find("statsFromGame"));
+					Destroy(GameObject.Find("MenuStats"));
+					Application.LoadLevel(2);
+				}
 			}
-			if(laps == 4)
-			{
-				//This car finished
-			}
+		}
+	}
+	void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.Alpha1))
+		{
+			//save stats for the menu
+					DontDestroyOnLoad(GameObject.Find("statsFromGame"));
+					Destroy(GameObject.Find("MenuStats"));
+					Application.LoadLevel(2);
 		}
 	}
 	public float GetDistanceFromNextCheckpoint()

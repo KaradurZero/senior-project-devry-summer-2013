@@ -74,6 +74,19 @@ public class GarageStatManager : MonoBehaviour {
 			attackObjs[i] 	= GameObject.Find("attack_" + (i + 1));
 			defenseObjs[i] 	= GameObject.Find("defense_" + (i + 1));
 		}
+		MenuStatsFromGame gameStats = GameObject.Find("statsFromGame").GetComponent<MenuStatsFromGame>();
+		if(gameStats != null)
+		{
+			for(int i = 0;	 i < gameStats.GetSpeed() 	- 1;	i++)	if(CanUpgradeStat("Speed"))		UpgradeStat("Speed");
+			for(int i = 0;	 i < gameStats.GetAccel() 	- 1;	i++)	if(CanUpgradeStat("Accel"))		UpgradeStat("Accel");
+			for(int i = 0;	 i < gameStats.GetTemp() 	- 1;	i++)	if(CanUpgradeStat("Temp"))		UpgradeStat("Temp");
+			for(int i = 0;	 i < gameStats.GetBoost() 	- 1;	i++)	if(CanUpgradeStat("Boost"))		UpgradeStat("Boost");
+			for(int i = 0;	 i < gameStats.GetHealth() 	- 1;	i++)	if(CanUpgradeStat("Health"))	UpgradeStat("Health");
+			for(int i = 0;	 i < gameStats.GetLuck() 	- 1;	i++)	if(CanUpgradeStat("Luck"))		UpgradeStat("Luck");
+			for(int i = 0;	 i < gameStats.GetAttack() 	- 1;	i++)	if(CanUpgradeStat("Attack"))	UpgradeStat("Attack");
+			for(int i = 0;	 i < gameStats.GetDefense() - 1;	i++)	if(CanUpgradeStat("Defense"))	UpgradeStat("Defense");
+			Destroy(GameObject.Find("statsFromGame"));
+		}
 	}
 	
 	public int GetSpeedVal()	{	return speedVal;	}
