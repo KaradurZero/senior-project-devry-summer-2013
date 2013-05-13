@@ -8,23 +8,23 @@ public class FollowThisObject : MonoBehaviour {
 	float min_size = 10f ;
 	float max_size = 20f ;
 	float default_size = 10f ;
-	
+	Vector3 targetPos;
 	void Update()
 	{
 		transform.position = parentObject.transform.position;
 		transform.position += new Vector3(deltaX, deltaY, deltaZ);
-
-		//Camera.mainCamera.orthographicSize = 10f + (10f * (parentObject.GetComponent<CarStat>().GetCurrentSpeed() / parentObject.GetComponent<CarStat>().GetMaxVelocity())) ;
-
-		
-		//Debug.Log(parentObject.GetComponent<Vehicle>().isBoosted()) ;
+		targetPos = transform.position;
 		
 		if(!(parentObject.GetComponent<Vehicle>().isBoosted())) {
-			Camera.mainCamera.orthographicSize = default_size + (min_size * (parentObject.GetComponent<CarStat>().GetCurrentSpeed() / parentObject.GetComponent<CarStat>().GetMaxVelocity())) ;
+			targetPos = new Vector3(transform.position.x,
+				default_size + (min_size * (parentObject.GetComponent<CarStat>().GetCurrentSpeed() / 
+				parentObject.GetComponent<CarStat>().GetMaxVelocity())), transform.position.z) ;
 		}
 		else 
-			Camera.mainCamera.orthographicSize = default_size + (max_size * (parentObject.GetComponent<CarStat>().GetCurrentSpeed() / parentObject.GetComponent<CarStat>().GetMaxVelocity())) ;
+			targetPos = new Vector3(transform.position.x,
+				default_size + (max_size * (parentObject.GetComponent<CarStat>().GetCurrentSpeed() / 
+				parentObject.GetComponent<CarStat>().GetMaxVelocity())),transform.position.z) ;
+		transform.position = Vector3.Lerp(transform.position,targetPos,Time.deltaTime * 50);
 		
-		//lastSpeed = parentObject.GetComponent<CarStat>().GetCurrentSpeed() ;
 	}
 }
