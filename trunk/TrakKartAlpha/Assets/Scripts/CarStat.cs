@@ -125,7 +125,7 @@ public class CarStat : MonoBehaviour {
 				m_boostVelocity = 20 + menuStats.GetBoost() * 5;
 				m_maxHealth 	= 100 + (menuStats.GetHealth() * 50);
 				m_luck			= menuStats.GetLuck() * 10;
-				m_attack		= m_defaultMaxVelocity 	= menuStats.GetAttack() + 10;
+				m_attack		= menuStats.GetAttack() + 10;
 				m_defense	 	= menuStats.GetDefense() + 10;
 				
 				//create a gameobject to send info back to menu
