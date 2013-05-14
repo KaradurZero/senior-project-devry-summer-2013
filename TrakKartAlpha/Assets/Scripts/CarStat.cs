@@ -8,8 +8,8 @@ public class CarStat : MonoBehaviour {
 	public float m_acceleration ;
 	public float m_boostVelocity ;
 	
-	private float m_attack ;
-	private float m_defense ;
+	private int m_attack ;
+	private int m_defense ;
 	private float m_cooling ;
 	private float m_handling ;
 	private float m_luck ;
@@ -29,8 +29,8 @@ public class CarStat : MonoBehaviour {
 	
 	public float GetMaxVelocity( ) {return m_maxVelocity ;}
 	public float GetAccel( ) {return m_acceleration ;}
-	public float GetAttack( ) {return m_attack ;}
-	public float GetDefense( ) {return m_defense ;}
+	public int GetAttack( ) {return m_attack ;}
+	public int GetDefense( ) {return m_defense ;}
 	public float GetCooling( ) {return m_cooling ;}
 	public float GetHandling( ) {return m_handling;}
 	public float GetLuck( ) {return m_luck;}
@@ -47,18 +47,54 @@ public class CarStat : MonoBehaviour {
 	
 	public float FindAttackTempCost( ) {
 	//USE ATTACK VALUE FOR RAISING TEMPERATURE
-		return 20f ;
+		switch( m_attack ) {
+		case 1:
+			return 20f ;
+			break ;
+		case 2:
+			return 18f ;
+			break ;
+		case 3:
+			return 16f ;
+			break ;
+		case 4:
+			return 14f ;
+			break ;
+		case 5:
+			return 12f ;
+			break ;
+		default:
+			return 10f ;
+		}
 	}
 	
 	public float FindDefenseTempCost( ) {
 	//USE DEFENSE VALUE FOR RAISING TEMPERATURE
-		return 25f ;
+		switch( m_attack ) {
+		case 1:
+			return 25f ;
+			break ;
+		case 2:
+			return 23f ;
+			break ;
+		case 3:
+			return 21f ;
+			break ;
+		case 4:
+			return 19f ;
+			break ;
+		case 5:
+			return 17f ;
+			break ;
+		default:
+			return 15f ;
+		}
 	}
 	
 	public void SetMaxVelocity( float a_speed ) {m_maxVelocity = a_speed ;}
 	public void SetAccel( float a_acceleration ) {m_acceleration = a_acceleration ;}
-	public void SetAttack( float a_attack ) {m_attack = a_attack ;}
-	public void SetDefense( float a_defense ) {m_defense = a_defense ;}
+	public void SetAttack( int a_attack ) {m_attack = a_attack ;}
+	public void SetDefense( int a_defense ) {m_defense = a_defense ;}
 	public void SetCooling( float a_cooling ) {m_cooling = a_cooling ;}
 	public void SetHandling( float a_handling ) {m_handling = a_handling ;}
 	public void SetLuck( float a_luck ) {m_luck = a_luck ;}
@@ -97,8 +133,8 @@ public class CarStat : MonoBehaviour {
 		
 		m_currVelocity = 0f ;
 		
-		m_attack = 10f ;
-		m_defense = 10f ;
+		m_attack = 1 ;
+		m_defense = 1 ;
 		m_cooling = 20f ;
 		m_handling = 5f ;
 		m_luck = 5f ;
@@ -125,8 +161,8 @@ public class CarStat : MonoBehaviour {
 				m_boostVelocity = 20 + menuStats.GetBoost() * 5;
 				m_maxHealth 	= 100 + (menuStats.GetHealth() * 50);
 				m_luck			= menuStats.GetLuck() * 10;
-				m_attack		= menuStats.GetAttack() + 10;
-				m_defense	 	= menuStats.GetDefense() + 10;
+				m_attack		= menuStats.GetAttack() ;
+				m_defense	 	= menuStats.GetDefense() ;
 				
 				//create a gameobject to send info back to menu
 				GameObject	statsFromGame = new GameObject("statsFromGame");

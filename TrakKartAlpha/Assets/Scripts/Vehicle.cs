@@ -67,6 +67,8 @@ public class Vehicle : MonoBehaviour {
 	void Update () {
 		if(isAlive)
 		{
+			rigidbody.detectCollisions = true ;
+			
 			if( m_boosted && Time.time >= m_boost_time ) {
 				stat.ResetVelocity() ;
 				stat.ResetAcceleration() ;
@@ -89,7 +91,7 @@ public class Vehicle : MonoBehaviour {
 			
 			//rigidbody.velocity = transform.forward * stat.GetAccel() * Time.deltaTime ;
 			
-			if( !stat.GetTempPerSec() || stat.isOverheated() ){
+			if( (!stat.GetTempPerSec() && this.gameObject.GetComponentInChildren<GunShieldRotation>().isGunEnabled()) || stat.isOverheated() ){
 			stat.SetCurrTemp( stat.GetCurrTemp() - stat.GetCooling() * Time.deltaTime ) ;
 			}
 			
@@ -108,8 +110,8 @@ public class Vehicle : MonoBehaviour {
 			
 			//Debug.Log (stat.GetCurrentSpeed());
 		}
-		//else
-			//Debug.Log ( "DEAD" );
+		else
+			rigidbody.detectCollisions = false ;
 	}
 	
 	/*void OnTriggerEnter( Collider other ) {

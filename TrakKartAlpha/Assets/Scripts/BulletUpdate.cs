@@ -96,14 +96,20 @@ public class BulletUpdate : MonoBehaviour {
 			
 			if(other.gameObject.tag == "Shield"){
 				other.gameObject.transform.parent.parent.GetComponent<Vehicle>().RaiseTemp(false) ;
+				
+				if( other.gameObject.GetComponent<VehicleShieldController>().isDeflector() )
+					m_direction += 180f ;
+				else
+					destroyBullet() ;
 				//Debug.Log ("SHIELD BLOCK");
 			}
-		
-		if(health != null)
-		{
-			health.DealDamage(10);
-		}
-		destroyBullet();
+			else {
+					if(health != null)
+					{
+						health.DealDamage(10);
+					}
+						destroyBullet();
+			}
 		}
 	}
 	void OnCollisionEnter(Collision other)
