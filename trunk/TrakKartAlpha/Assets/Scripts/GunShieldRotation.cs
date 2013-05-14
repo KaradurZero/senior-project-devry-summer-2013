@@ -39,7 +39,7 @@ public class GunShieldRotation : MonoBehaviour {
 		this.renderer.enabled = false;
 		m_shield.collider.enabled = true;
 		m_shield.renderer.enabled = true;
-		this.gameObject.transform.parent.GetComponent<Vehicle>().RaiseTemperaturePerSecond(0) ;
+		//this.gameObject.transform.parent.GetComponent<Vehicle>().RaiseTemperaturePerSecond(0) ;
 	}
 	public void TurnOnGun()
 	{
