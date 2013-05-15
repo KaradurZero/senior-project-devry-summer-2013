@@ -75,6 +75,6 @@ public class VehicleShieldController : MonoBehaviour {
 	}
 	
 	public bool isDeflector() {
-		return m_shieldType == (int)shields.deflector;	
+		return m_isDeflecting ;	
 	}
 }

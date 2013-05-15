@@ -97,8 +97,9 @@ public class BulletUpdate : MonoBehaviour {
 			if(other.gameObject.tag == "Shield"){
 				other.gameObject.transform.parent.parent.GetComponent<Vehicle>().RaiseTemp(false) ;
 				
-				if( other.gameObject.GetComponent<VehicleShieldController>().isDeflector() )
-					m_direction += 180f ;
+				if( other.gameObject.GetComponent<VehicleShieldController>().isDeflector() ) {
+					m_direction = -m_direction ;
+				}
 				else
 					destroyBullet() ;
 				//Debug.Log ("SHIELD BLOCK");
@@ -116,10 +117,9 @@ public class BulletUpdate : MonoBehaviour {
 	{	
 		if(other.gameObject.renderer.enabled)
 		{
-		GameObject sparks = (GameObject) Instantiate(crash, other.contacts[0].point, Quaternion.identity);
-		Destroy(sparks,.15f);
-		destroyBullet();
-			
+			GameObject sparks = (GameObject) Instantiate(crash, other.contacts[0].point, Quaternion.identity);
+			Destroy(sparks,.15f);
+			destroyBullet();	
 		}
 	}
 	public void destroyBullet()
