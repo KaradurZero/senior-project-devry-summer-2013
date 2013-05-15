@@ -80,6 +80,10 @@ public class Vehicle : MonoBehaviour {
 			else
 				m_frozen = false ;
 			
+			//if(!m_boosted && m_slowed) {
+			//	SetDrag(m_slowDrag) ;
+			//}
+			
 			if(Vector3.Angle(lastFrameAngle, transform.forward) > 1f)
 			{
 				Object traks = Instantiate(tireTraksPrefab,transform.position + new Vector3(0f,-(transform.position.y),0f),transform.rotation);
@@ -114,29 +118,6 @@ public class Vehicle : MonoBehaviour {
 			rigidbody.detectCollisions = false ;
 	}
 	
-	/*void OnTriggerEnter( Collider other ) {
-		if( other.gameObject.tag == "Slow" && !m_boosted ){
-			stat.SetCurrentSpeed(stat.GetCurrentSpeed()/2f) ;
-			stat.SetMaxVelocity(stat.GetMaxVelocity()/2f) ;
-			stat.SetAccel(stat.GetAccel()/2f) ;
-		}
-		if( other.gameObject.tag == "Boost" ){
-			stat.SetMaxVelocity(stat.GetBoostSpeed()) ;
-			stat.SetAccel(stat.GetBoostSpeed()) ;
-		}
-	}
-	
-	void OnTriggerExit( Collider other ) {
-		if( other.gameObject.tag == "Slow" && !m_boosted ){
-			stat.ResetVelocity() ;
-			stat.ResetAcceleration() ;
-		}
-		if( other.gameObject.tag == "Boost" ){
-			m_boost_time = Time.time + 2f ;
-			m_boosted = true ;
-		}
-	}*/
-	
 	void OnCollisionEnter( Collision other ) {
 		if( other.gameObject.tag == "Oil Slick" ){
 			m_slipCoeff = 2f ;
@@ -152,7 +133,7 @@ public class Vehicle : MonoBehaviour {
 		if( other.gameObject.tag == "Slow" ){
 			SetDrag(m_slowDrag) ;
 			m_slowed = true ;
-			//Debug.Log ("Slow");
+			Debug.Log ("Slow");
 		}
 			
 	}
@@ -175,7 +156,6 @@ public class Vehicle : MonoBehaviour {
 	}
 	
 	public void BoostVehicle( float boostTime ) {
-		stat.SetCurrentSpeed(stat.GetMaxVelocity()) ;
 		stat.SetMaxVelocity(stat.GetBoostSpeed()) ;
 		stat.SetAccel(stat.GetBoostSpeed()) ;	
 		RaiseTemperaturePerSecond( 10f ) ;
