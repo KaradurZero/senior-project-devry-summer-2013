@@ -37,10 +37,10 @@
     <Reference Include="System.XML" />
 	<Reference Include="System.Core" />
 	<Reference Include="UnityEngine">
-	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>E:/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>E:/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -94,8 +94,6 @@
      <Compile Include="Assets\Scripts\itemDisplay.cs" />
      <Compile Include="Assets\Scripts\lapDisplay.cs" />
      <Compile Include="Assets\Scripts\minimapItem.cs" />
-     <Compile Include="Assets\Scripts\piggieBank.cs" />
-     <Compile Include="Assets\Scripts\rankDisplay.cs" />
      <Compile Include="Assets\Scripts\ranking.cs" />
      <Compile Include="Assets\Scripts\rankingCar.cs" />
      <Compile Include="Assets\Scripts\rotateToCursor.cs" />
