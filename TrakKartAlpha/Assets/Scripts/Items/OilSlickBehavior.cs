@@ -4,6 +4,7 @@ using System.Collections;
 public class OilSlickBehavior : MonoBehaviour {
 	
 	float m_lifetime;//how long this stays alive before being destroyed
+	GameObject m_ignoreTarget ;
 	
 	void Awake() {
 		m_lifetime = 5.0f;
@@ -27,7 +28,7 @@ public class OilSlickBehavior : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider c) {
-		if( c.tag == "Vehicle") {//if a vehicle
+		if( c.tag == "Vehicle" && c.gameObject != m_ignoreTarget ) {//if a vehicle
 			Debug.Log("vehicle over/in oil slick");
 //			if( c.gameObject.GetComponent</**/>()) {//if has movement script
 //				//set variable/function call for oil slick
@@ -35,4 +36,6 @@ public class OilSlickBehavior : MonoBehaviour {
 //			}
 		}
 	}
+	
+	public void setIgnoreTarget(GameObject a_launcher) { m_ignoreTarget = a_launcher;}
 }
