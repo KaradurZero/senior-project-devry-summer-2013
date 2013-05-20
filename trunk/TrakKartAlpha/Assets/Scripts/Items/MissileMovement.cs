@@ -19,7 +19,7 @@ public class MissileMovement : MonoBehaviour {
 		turnSpeed 				= 2.0f;
 		m_closeDistance 		= 10.0f;
 		m_hTriggerSpecific_01 	= "Vehicle";
-		m_lifeSpan 				= 10.0f;
+		m_lifeSpan 				= 3f;
 		m_damageThisDeals 		= 200;
 	}
 	
@@ -50,14 +50,16 @@ public class MissileMovement : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider c) {
-		if(c.transform.position != m_ignoreTarget.transform.position && c.tag == m_hTriggerSpecific_01) {
-			//TODO: get enemy script and lower health/energy from missile hit
-			c.GetComponent<driverHealth>().DealDamage(m_damageThisDeals);
-			hasHitEnemy();
-		}
-		
-		if( c.gameObject.tag == "Shield" ) {
-			c.gameObject.transform.parent.parent.GetComponent<Vehicle>().RaiseTemp(false) ;	
+		if( c.gameObject.renderer.enabled ) {
+			if(c.transform.position != m_ignoreTarget.transform.position && c.tag == m_hTriggerSpecific_01) {
+				//TODO: get enemy script and lower health/energy from missile hit
+				c.GetComponent<driverHealth>().DealDamage(m_damageThisDeals);
+				hasHitEnemy();
+			}
+			
+			if( c.gameObject.tag == "Shield" ) {
+				c.gameObject.transform.parent.parent.GetComponent<Vehicle>().RaiseTemp(false) ;	
+			}
 		}
 	}
 	
