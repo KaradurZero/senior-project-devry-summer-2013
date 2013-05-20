@@ -13,7 +13,7 @@ public class driverHealth : MonoBehaviour {
 	public void DealDamage(int damage)
 	{
 		health -= damage;
-		if(health < 0)
+		if(health <= 0)
 			Die();
 	}
 	void Die()

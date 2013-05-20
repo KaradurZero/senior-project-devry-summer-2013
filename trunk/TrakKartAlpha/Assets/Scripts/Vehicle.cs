@@ -42,6 +42,8 @@ public class Vehicle : MonoBehaviour {
 	public void Die()
 	{
 		renderer.enabled = false;
+		
+		rigidbody.detectCollisions = false ;
 		Renderer[] rend = GetComponentsInChildren<Renderer>();
 		foreach(Renderer r in rend)
 		{
@@ -52,11 +54,13 @@ public class Vehicle : MonoBehaviour {
 	public void Revive()
 	{
 		renderer.enabled = true;
-		Renderer[] rend = GetComponentsInChildren<Renderer>();
+		rigidbody.detectCollisions = true ;
+		gameObject.GetComponentInChildren<GunShieldRotation>().TurnOnGun() ;
+		/*Renderer[] rend = GetComponentsInChildren<Renderer>();
 		foreach(Renderer r in rend)
 		{
 			r.enabled = true;
-		}
+		}*/
 		isAlive = true;
 	}
 	public bool amAlive()
@@ -67,8 +71,10 @@ public class Vehicle : MonoBehaviour {
 	void Update () {
 		if(isAlive)
 		{
-			rigidbody.detectCollisions = true ;
-			
+			//QUICK FIX: There is a bug where vehicle respawns under world. This should keep it from sinking.
+			if( transform.position.y < -1f )
+				transform.position = new Vector3( transform.position.x, 1f, transform.position.z ) ;
+				
 			if( m_boosted && Time.time >= m_boost_time ) {
 				stat.ResetVelocity() ;
 				stat.ResetAcceleration() ;
@@ -79,6 +85,11 @@ public class Vehicle : MonoBehaviour {
 				m_freezeTime -= Time.deltaTime ;
 			else
 				m_frozen = false ;
+			
+			if( m_slipTime > 0 )
+				m_slipTime -= Time.deltaTime ;
+			else
+				m_slipCoeff = 1f ;
 			
 			//if(!m_boosted && m_slowed) {
 			//	SetDrag(m_slowDrag) ;
@@ -114,45 +125,48 @@ public class Vehicle : MonoBehaviour {
 			
 			//Debug.Log (stat.GetCurrentSpeed());
 		}
-		else
-			rigidbody.detectCollisions = false ;
+			
+	
 	}
 	
-	void OnCollisionEnter( Collision other ) {
+	void OnTriggerEnter( Collider other ) {
 		if( other.gameObject.tag == "Oil Slick" ){
 			m_slipCoeff = 2f ;
-			m_slipTime = Time.time + 3f ;
+			m_slipTime = 3f ;
 			Debug.Log ("Slick");
-		}
-		if( other.gameObject.tag == "Freeze" ) {
-			m_freezeTime = m_freezeDuration ;
-			m_frozen = true ;
-			//Destroy (other.gameObject);
-			Debug.Log ("freeze");
 		}
 		if( other.gameObject.tag == "Slow" ){
 			SetDrag(m_slowDrag) ;
 			m_slowed = true ;
 			Debug.Log ("Slow");
 		}
-			
 	}
 	
-	void OnCollisionStay( Collision other ){
-		if( other.gameObject.tag == "Slow" && !m_boosted ){
+	void OnTriggerStay( Collider other ) {
+		if( other.gameObject.tag == "Slow" ){
 			SetDrag(m_slowDrag) ;
 			m_slowed = true ;
+			Debug.Log ("Slow");
 		}
 		if( other.gameObject.tag == "Boost" ){
 			BoostVehicle(m_boostPadTime);
 		}
 	}
 	
-	void OnCollisionExit( Collision other ) {
+	void OnTriggerExit( Collider other ) {
 		if( other.gameObject.tag == "Slow" ){
 			m_slowed = false ;
-		}
+		}	
+	}
+	
+	void OnCollisionEnter( Collision other ) {
 		
+		if( other.gameObject.tag == "Freeze" ) {
+			m_freezeTime = m_freezeDuration ;
+			m_frozen = true ;
+			//Destroy (other.gameObject);
+			Debug.Log ("freeze");
+		}	
 	}
 	
 	public void BoostVehicle( float boostTime ) {
