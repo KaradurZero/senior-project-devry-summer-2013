@@ -40,6 +40,10 @@ public class RacersPositionController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(Input.GetKeyDown(KeyCode.Alpha5))
+			Time.timeScale = 0;
+		if(Input.GetKeyDown(KeyCode.Alpha6))
+			Time.timeScale = 1;
 		calculatePositionalValues();//oh gawd the O(n) calls
 		performInsertSort();
 		//Debug.Log("Player position: " + getPlayerRank());
