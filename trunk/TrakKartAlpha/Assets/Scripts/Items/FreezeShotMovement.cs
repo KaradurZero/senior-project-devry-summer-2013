@@ -10,8 +10,6 @@ public class FreezeShotMovement : MonoBehaviour {
 	float		m_bulletSpeed = 2f ;
 	Vector3		m_parentMomentum = Vector3.zero;//in case value does not get set properly
 	
-	GameObject m_ignoreTarget ;
-	
 	string		m_hTriggerSpecific_01;
 	string		m_hTriggerSpecific_02;
 	// Use this for initialization
@@ -39,14 +37,13 @@ public class FreezeShotMovement : MonoBehaviour {
 		this.transform.position += (m_moveTo * Time.deltaTime * m_bulletSpeed) + m_parentMomentum;
 	}
 	
-	void OnCollisionEnter(Collision c) {
+	void OnTriggerEnter(Collider c) {
 		//apply freeze effect to other vehicle
 		//TODO: get other vehicle game object then movement script and call freeze function.
 		//if( c.tag == m_hTriggerSpecific_01) {//if a vehicle
 		//c.GetComponent</*scriptName*/>().freezeMovement;//sudo code
-		if(c.gameObject.tag != m_hTriggerSpecific_01 && c.gameObject.transform.position != m_ignoreTarget.transform.position /*c.gameObject.tag != m_hTriggerSpecific_02*/) {
-			Debug.Log("freeze bullet collided with: " + c.gameObject.tag);
-			destroyBullet();
+		if(c.gameObject.tag == "Vehicle" /*c.gameObject.tag != m_hTriggerSpecific_02*/) {
+			c.gameObject.GetComponent<Vehicle>().Freeze() ;
 		}
 	}
 	
@@ -95,5 +92,7 @@ public class FreezeShotMovement : MonoBehaviour {
 		Destroy(this.gameObject);
 	}
 	
-	public void setIgnoreTarget(GameObject a_launcher) { m_ignoreTarget = a_launcher;}
+	public void setIgnoreTarget(GameObject a_launcher) {
+		Physics.IgnoreCollision(this.collider, a_launcher.collider) ;
+	}
 }

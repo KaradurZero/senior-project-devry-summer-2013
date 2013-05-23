@@ -83,6 +83,7 @@ public class Xbox360Controller : MonoBehaviour {
 			}
 		}
 		else {
+			myGunShieldRot.TurnOnGun() ;
 			player.SetDrag(0f) ;
 		}
 	}

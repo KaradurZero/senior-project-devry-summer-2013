@@ -49,8 +49,8 @@ public class Weapon : MonoBehaviour {
 	//		Physics.IgnoreCollision(projectile.collider, transform.root.collider);
 	//		Debug.Log(transform.root.transform.name);
 			//Physics.IgnoreCollision(transform.collider,projectile.collider);
-			projectile.GetComponent<BulletUpdate>().DoNotCollideWith(transform.parent.transform);
-			projectile.GetComponent<BulletUpdate>().DoNotCollideWith(this.transform);
+			projectile.GetComponent<BulletUpdate>().DoNotCollideWith(this.transform.parent.gameObject);
+			//projectile.GetComponent<BulletUpdate>().DoNotCollideWith(this.gameObject);
 			projectile.GetComponent<BulletUpdate>().speed 			= a_bulletSpeed1;
 			projectile.GetComponent<BulletUpdate>().direction 		= this.transform.transform.eulerAngles.y;
 			projectile.GetComponent<BulletUpdate>().lifespan 		= 

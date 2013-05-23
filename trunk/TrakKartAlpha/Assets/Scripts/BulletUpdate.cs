@@ -4,7 +4,7 @@ using System.Collections;
 public class BulletUpdate : MonoBehaviour {
 	public GameObject crash;
 	bool hasCollider;
-	Transform	parentTrans;
+	GameObject	parentTrans;
 	int 		bulletType;
 	float 		m_projectileSpeed;
 	float 		m_direction;//the euler angle based upon the Y axis
@@ -15,19 +15,13 @@ public class BulletUpdate : MonoBehaviour {
 		
 	// Use this for initialization
 	void Start () {
-		bulletSpeed = 2;
+		bulletSpeed = 2f;
 		hasCollider = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		updateBulletMovement();
-		if(hasCollider == false && parentTrans != null && Vector3.Distance(parentTrans.position,transform.position) > 1f)
-		{
-			hasCollider = true;
-			Collider collide = gameObject.AddComponent<SphereCollider>();
-			collide.isTrigger = true;
-		}
 		m_bulletLifespan -= Time.deltaTime;
 		if(m_bulletLifespan < 0.0f) {
 			destroyBullet();
@@ -81,10 +75,7 @@ public class BulletUpdate : MonoBehaviour {
 			m_parentMomentum = value;
 		}
 	}
-	public void DoNotCollideWith(Transform other)
-	{
-		parentTrans = other;
-	}
+	public void DoNotCollideWith(GameObject other){Physics.IgnoreCollision(other.collider,this.collider) ;}
 	void OnTriggerEnter(Collider other)
 	{
 		if(other.gameObject.renderer.enabled)
@@ -104,13 +95,15 @@ public class BulletUpdate : MonoBehaviour {
 					destroyBullet() ;
 				//Debug.Log ("SHIELD BLOCK");
 			}
-			else {
+			else if(other.gameObject.tag == "Vehicle"){
 					if(health != null)
 					{
 						health.DealDamage(10);
 					}
 						destroyBullet();
 			}
+			else
+				destroyBullet() ;
 		}
 	}
 	void OnCollisionEnter(Collision other)
