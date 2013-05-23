@@ -19,7 +19,7 @@ public class GameStateController : MonoBehaviour {
 			switch(m_mainGameState) {
 			case (int)gameStates.INGAMERUN:
 				//if game is running like normal
-				m_mainGameState = (int)gameStates.INGAMEPAUSE;//or change later to pop up in game menu
+				m_mainGameState = (int)gameStates.INGAMEMENU;//or change later to pop up in game menu
 				Time.timeScale = 0.0f;
 				break;
 			case (int)gameStates.INGAMEPAUSE:
@@ -31,6 +31,15 @@ public class GameStateController : MonoBehaviour {
 				//error on game switch. should print out error message/log message then close game
 				break;
 			}
+		}
+	}//end update
+	
+	public int gameState {
+		get {
+			return m_mainGameState;
+		}
+		set {
+			m_mainGameState = value;
 		}
 	}
 }
