@@ -47,7 +47,7 @@ public class KeyboardMouseController : MonoBehaviour {
 					else if( m_swapButtonDown ) {
 						m_swapButtonDown = false ;
 					}
-					
+				
 					myGunShieldRot.updateRotationToMouse();
 					
 					player.AddForce(moveDirection,  player.stat.GetAccel()) ;
@@ -76,6 +76,7 @@ public class KeyboardMouseController : MonoBehaviour {
 					}
 				}
 			else {
+				myGunShieldRot.TurnOnGun() ;
 				player.SetDrag(0f) ;
 			}
 		}

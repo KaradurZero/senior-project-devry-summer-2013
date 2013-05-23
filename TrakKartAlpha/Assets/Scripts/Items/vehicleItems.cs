@@ -166,7 +166,10 @@ public class vehicleItems : MonoBehaviour {
 						}
 					}
 				}
-				GameObject missile =(GameObject)Instantiate(m_homingMissle, transform.position, Quaternion.identity);
+				Vector3 front = transform.position + 
+					transform.forward * (this.transform.localScale.y * 1.5f);
+				GameObject missile =(GameObject)Instantiate(m_homingMissle, front, Quaternion.identity);
+				//missile.GetComponent<MissileMovement>().setIgnoreTarget(this.gameObject.transform.FindChild("vehicleShield").gameObject);
 				missile.GetComponent<MissileMovement>().setIgnoreTarget(this.gameObject);
 				missile.GetComponent<MissileMovement>().setTarget(targetEnemy);
 				missile.GetComponent<MissileMovement>().setRotation(this.transform.rotation);

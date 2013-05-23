@@ -130,11 +130,6 @@ public class Vehicle : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter( Collider other ) {
-		if( other.gameObject.tag == "Oil Slick" ){
-			m_slipCoeff = 2f ;
-			m_slipTime = 3f ;
-			Debug.Log ("Slick");
-		}
 		if( other.gameObject.tag == "Slow" ){
 			SetDrag(m_slowDrag) ;
 			m_slowed = true ;
@@ -160,13 +155,6 @@ public class Vehicle : MonoBehaviour {
 	}
 	
 	void OnCollisionEnter( Collision other ) {
-		
-		if( other.gameObject.tag == "Freeze" ) {
-			m_freezeTime = m_freezeDuration ;
-			m_frozen = true ;
-			//Destroy (other.gameObject);
-			Debug.Log ("freeze");
-		}	
 	}
 	
 	public void BoostVehicle( float boostTime ) {
@@ -211,5 +199,18 @@ public class Vehicle : MonoBehaviour {
 	public void FirePowerUp()
 	{
 		myPowerup.UseItem();
+	}
+	
+	public void Slick() {
+		m_slipCoeff = 2f ;
+		m_slipTime = 3f ;
+		Debug.Log ("Slick");
+	}
+	
+	public void Freeze() {
+		m_freezeTime = m_freezeDuration ;
+		m_frozen = true ;
+		//Destroy (other.gameObject);
+		Debug.Log ("freeze");
 	}
 }

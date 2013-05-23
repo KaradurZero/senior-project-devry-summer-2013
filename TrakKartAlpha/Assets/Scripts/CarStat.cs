@@ -19,7 +19,7 @@ public class CarStat : MonoBehaviour {
 	private bool m_tempPerSec ;
 	private bool m_overheated ;
 	
-	private float m_currVelocity ;
+	public float m_currVelocity ;
 	
 	private float m_maxHealth ;
 	

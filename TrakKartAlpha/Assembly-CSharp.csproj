@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\DecreaseTenStat.cs" />
      <Compile Include="Assets\Scripts\DecreaseThisStat.cs" />
      <Compile Include="Assets\Scripts\FollowThisObject.cs" />
+     <Compile Include="Assets\Scripts\GameStateController.cs" />
      <Compile Include="Assets\Scripts\GamepadController.cs" />
      <Compile Include="Assets\Scripts\GarageInputMouseKeyboard.cs" />
      <Compile Include="Assets\Scripts\GarageSelectionManager.cs" />

@@ -4,7 +4,7 @@ using System.Collections;
 public class MissileMovement : MonoBehaviour {
 	
 	GameObject m_targetEnemy;
-	GameObject m_ignoreTarget;
+	//GameObject m_ignoreTarget;
 	float m_maxMovementSpeed;
 	float m_lifeSpan;
 	float turnSpeed;//value between 0.0f and 1.0f if not using Time.deltaTime to lower value
@@ -51,7 +51,7 @@ public class MissileMovement : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider c) {
 		if( c.gameObject.renderer.enabled ) {
-			if(c.transform.position != m_ignoreTarget.transform.position && c.tag == m_hTriggerSpecific_01) {
+			if(/*c.transform.position != m_ignoreTarget.transform.position &&*/ c.tag == m_hTriggerSpecific_01) {
 				//TODO: get enemy script and lower health/energy from missile hit
 				c.GetComponent<driverHealth>().DealDamage(m_damageThisDeals);
 				hasHitEnemy();
@@ -68,6 +68,9 @@ public class MissileMovement : MonoBehaviour {
 	}
 	
 	public void setTarget(GameObject a_enemy) { m_targetEnemy = a_enemy;}
-	public void setIgnoreTarget(GameObject a_launcher) { m_ignoreTarget = a_launcher;}
+	public void setIgnoreTarget(GameObject a_launcher) { 
+		//m_ignoreTarget = a_launcher;
+		Physics.IgnoreCollision(this.collider,a_launcher.collider) ;
+	}
 	public void setRotation(Quaternion a_rotation) {this.transform.rotation = a_rotation;}
 }

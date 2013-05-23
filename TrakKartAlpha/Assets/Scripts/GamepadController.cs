@@ -82,6 +82,7 @@ public class GamepadController : MonoBehaviour {
 			}
 		}
 		else {
+			myGunShieldRot.TurnOnGun() ;
 			player.SetDrag(0f) ;
 		}
 	}
