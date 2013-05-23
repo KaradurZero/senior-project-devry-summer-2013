@@ -1,0 +1,30 @@
+background music
+
+button hover
+button click
+upgrade stat
+select stat
+shooting bullet
+shooting a homing missle
+droppiong oil slick
+shield size increase
+breaking the power up box
+breaking the piggie bank
+boost pad hit
+hitting a wall
+hitting a player
+shield regular
+shield deflect
+skid
+switching between gun and turret
+
+
+shooting freeze block
+theif
+gold increasing
+checkpoint hit
+finish lap
+finish game
+poit gate (1-5)
+explosion
+countdown (3, 2, 1, GO!)
