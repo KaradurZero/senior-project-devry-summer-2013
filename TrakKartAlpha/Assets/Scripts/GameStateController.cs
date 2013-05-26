@@ -27,6 +27,10 @@ public class GameStateController : MonoBehaviour {
 				m_mainGameState = (int)gameStates.INGAMERUN;
 				Time.timeScale = 1.0f;
 				break;
+			case (int)gameStates.INGAMEMENU:
+				m_mainGameState = (int)gameStates.INGAMERUN;
+				Time.timeScale = 1.0f;
+				break;
 			default:
 				//error on game switch. should print out error message/log message then close game
 				break;
@@ -40,6 +44,38 @@ public class GameStateController : MonoBehaviour {
 		}
 		set {
 			m_mainGameState = value;
+		}
+	}
+	
+	public void setGameState(int a_gameStatesEnum) {
+		switch(a_gameStatesEnum) {
+		case (int)gameStates.MAINMENU:
+			m_mainGameState = (int)gameStates.MAINMENU;
+			Time.timeScale = 0.0f;//set time to pause. or change if you want things updating in background
+			break;
+		case (int)gameStates.INGAMERUN:
+			m_mainGameState = (int)gameStates.INGAMERUN;
+			Time.timeScale = 1.0f;//set time to normal speed
+			break;
+		case (int)gameStates.INGAMEMENU:
+			m_mainGameState = (int)gameStates.INGAMEMENU;
+			Time.timeScale = 0.0f;
+			break;
+		case (int)gameStates.INGAMEPAUSE:
+			m_mainGameState = (int)gameStates.INGAMEPAUSE;
+			Time.timeScale = 0.0f;
+			break;
+		case (int)gameStates.RACEOVER:
+			m_mainGameState = (int)gameStates.RACEOVER;
+			Time.timeScale = 1.0f;
+			break;
+		case (int)gameStates.RACESTART:
+			m_mainGameState = (int)gameStates.RACESTART;
+			Time.timeScale = 1.0f;
+			break;
+		default:
+			Debug.Log("error in GameStateController.cs: a_gameStatesEnum value is out of range with value: " + a_gameStatesEnum.ToString());
+			break;
 		}
 	}
 }
