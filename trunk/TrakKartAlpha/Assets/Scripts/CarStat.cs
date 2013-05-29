@@ -137,7 +137,7 @@ public class CarStat : MonoBehaviour {
 		m_defense = 1 ;
 		m_cooling = 20f ;
 		m_handling = 5f ;
-		m_luck = 5f ;
+		m_luck = 1f ;
 		
 		m_maxTemp = 100f ;
 		m_currTemp = 0f ;
@@ -149,6 +149,11 @@ public class CarStat : MonoBehaviour {
 		m_defaultAcceleration = m_acceleration ;
 		m_defaultHandling = m_handling ;
 		
+		//create a gameobject to send info back to menu
+		GameObject	statsFromGame = new GameObject("statsFromGame");
+		MenuStatsFromGame stats =  statsFromGame.AddComponent<MenuStatsFromGame>();
+		stats.SetStats(1,1,1,1,1,1,1,1);	//default values
+		stats.SetGold(0);
 		//if stats have been set in 
 		if(gameObject.name == "Player")
 		{
@@ -164,9 +169,6 @@ public class CarStat : MonoBehaviour {
 				m_attack		= menuStats.GetAttack() ;
 				m_defense	 	= menuStats.GetDefense() ;
 				
-				//create a gameobject to send info back to menu
-				GameObject	statsFromGame = new GameObject("statsFromGame");
-				MenuStatsFromGame stats =  statsFromGame.AddComponent<MenuStatsFromGame>();
 				stats.SetStats(
 					menuStats.GetSpeed(),
 					menuStats.GetAccel(),
