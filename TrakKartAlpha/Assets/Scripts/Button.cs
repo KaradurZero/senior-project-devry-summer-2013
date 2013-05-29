@@ -3,16 +3,8 @@ using System.Collections;
 
 public class Button : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-	
+	public AudioClip mouseOverSound;
+	public AudioClip mouseDownSound;
 	void OnMouseEnter()
 	{
 		transform.localScale += new Vector3 (0.3f,0.3f,0.3f);
