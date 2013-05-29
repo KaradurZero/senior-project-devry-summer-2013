@@ -138,7 +138,7 @@ public class vehicleItems : MonoBehaviour {
 	/// call that uses the m_item that is set within this script
 	/// </summary>
 	public void UseItem() {
-		Debug.Log(m_item);
+		//Debug.Log(m_item);
 		bool didSteal = false;
 			switch(m_item) {
 			case (int)items.oilSlick://use oil slick item
@@ -152,7 +152,7 @@ public class vehicleItems : MonoBehaviour {
 				//droppedItem.transform.position -= this.transform.parent.transform.forward * 2;
 				break;
 			case (int)items.homingMissle://use homing missle item
-				Debug.Log("used homingMissle");
+				//Debug.Log("used homingMissle");
 				float distance = Mathf.Infinity;
 				Vector3 position = transform.position;
 				GameObject targetEnemy = null;
@@ -175,7 +175,7 @@ public class vehicleItems : MonoBehaviour {
 				missile.GetComponent<MissileMovement>().setRotation(this.transform.rotation);
 				break;
 			case (int)items.freezeShot://use freeze shot item
-				Debug.Log("used freezeShot");
+				//Debug.Log("used freezeShot");
 				//instantiate freeze bullet and fire in direction that gun is facing.
 				//this will rely upon vehicle having the gun working correctly and pointing in a direction
 				//logic behind relying upon gun is so that only one script is needed for aiming directional projectiles.
@@ -189,17 +189,17 @@ public class vehicleItems : MonoBehaviour {
 				freezeShot.GetComponent<FreezeShotMovement>().parentMomentum	= Vector3.zero;//or can give it the momentum of the parent as well.
 				break;
 			case (int)items.enlargeShield://use  enlarge shield item
-				Debug.Log("used enlargeShield");
+//				Debug.Log("used enlargeShield");
 				//get script inside parent/child shield object and call enlarge shield function
 				this.transform.FindChild(m_hWeapon).FindChild(m_hShield).GetComponent<VehicleShieldController>().enlargeShield();
 				break;
 			case (int)items.deflectorShield://use deflector shield item
-				Debug.Log("used deflectorShield");
+//				Debug.Log("used deflectorShield");
 				//get script inside shield object and call deflector shield function
 				this.transform.FindChild(m_hWeapon).FindChild(m_hShield).GetComponent<VehicleShieldController>().setDeflecting();
 				break;
 			case (int)items.itemSteal://use item steal item
-				Debug.Log("used itemSteal");
+//				Debug.Log("used itemSteal");
 				//todo: get nearest vehicle and get their item number. even if zero.
 				distance = Mathf.Infinity;
 				position = transform.position;
@@ -221,10 +221,10 @@ public class vehicleItems : MonoBehaviour {
 				if(targetEnemy) {
 					m_item = targetEnemy.GetComponent<vehicleItems>().item;
 					targetEnemy.GetComponent<vehicleItems>().item = 0;
-					Debug.Log("item stolen: " + m_item);
+//					Debug.Log("item stolen: " + m_item);
 				}
 				else {
-					Debug.Log("no item stolen");
+//					Debug.Log("no item stolen");
 				}
 				break;
 			default:
