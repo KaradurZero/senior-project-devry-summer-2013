@@ -18,7 +18,10 @@ public class GoldGUIDisplay : MonoBehaviour {
 	{
 		targetGoldAmount += goldAdded;
 	}
-	
+	public int GetGoldAmount()
+	{
+		return targetGoldAmount;
+	}
 	void Update () {
 		if(targetGoldAmount > currentGoldAmount)
 		{
