@@ -40,4 +40,5 @@ public class MenuStatsFromGame : MonoBehaviour {
 	public int GetLuck() 	{ return luck;		}
 	public int GetAttack() 	{ return attack;	}
 	public int GetDefense() { return defense;	}
+	public int GetGold() 	{ return gold;		}
 }

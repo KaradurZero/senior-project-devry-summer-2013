@@ -86,6 +86,8 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 					
 					//save stats for the menu
 					DontDestroyOnLoad(GameObject.Find("statsFromGame"));
+					GameObject.Find("statsFromGame").GetComponent<MenuStatsFromGame>().SetGold(
+						GameObject.Find("GoldText").GetComponent<GoldGUIDisplay>().GetGoldAmount());
 					Destroy(GameObject.Find("MenuStats"));
 					//Application.LoadLevel(2);
 				}
@@ -104,11 +106,16 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 						GetComponent<GamepadController>().enabled = false ;
 					else
 						GetComponent<Xbox360Controller>().enabled = false ;
-			
+		}
+		
+		if(Input.GetKeyDown(KeyCode.Alpha6))
+		{
 			//save stats for the menu
 					DontDestroyOnLoad(GameObject.Find("statsFromGame"));
+					GameObject.Find("statsFromGame").GetComponent<MenuStatsFromGame>().SetGold(
+						GameObject.Find("GoldText").GetComponent<GoldGUIDisplay>().GetGoldAmount());
 					Destroy(GameObject.Find("MenuStats"));
-					//Application.LoadLevel(2);
+					Application.LoadLevel(2);
 		}
 		
 		if( !gameObject.GetComponent<Vehicle>().amAlive() )

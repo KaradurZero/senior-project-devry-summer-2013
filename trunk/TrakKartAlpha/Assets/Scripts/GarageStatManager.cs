@@ -85,6 +85,9 @@ public class GarageStatManager : MonoBehaviour {
 			for(int i = 0;	 i < gameStats.GetLuck() 	- 1;	i++)	if(CanUpgradeStat("Luck"))		UpgradeStat("Luck");
 			for(int i = 0;	 i < gameStats.GetAttack() 	- 1;	i++)	if(CanUpgradeStat("Attack"))	UpgradeStat("Attack");
 			for(int i = 0;	 i < gameStats.GetDefense() - 1;	i++)	if(CanUpgradeStat("Defense"))	UpgradeStat("Defense");
+			int initGold = int.Parse(GameObject.Find("Text_Gold").GetComponent<TextMesh>().text);
+			initGold += gameStats.GetGold();
+			GameObject.Find("Text_Gold").GetComponent<TextMesh>().text = initGold.ToString();
 			Destroy(GameObject.Find("statsFromGame"));
 		}
 	}

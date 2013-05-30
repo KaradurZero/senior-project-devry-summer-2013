@@ -56,11 +56,13 @@ public class Vehicle : MonoBehaviour {
 		renderer.enabled = true;
 		rigidbody.detectCollisions = true ;
 		gameObject.GetComponentInChildren<GunShieldRotation>().TurnOnGun() ;
-		/*Renderer[] rend = GetComponentsInChildren<Renderer>();
+		
+		Renderer[] rend = GetComponentsInChildren<Renderer>();
 		foreach(Renderer r in rend)
 		{
-			r.enabled = true;
-		}*/
+			if(r.gameObject.name == "checkpointNav")
+				r.enabled = true;
+		}
 		isAlive = true;
 	}
 	public bool amAlive()
