@@ -75,4 +75,6 @@ public class driverHealth : MonoBehaviour {
 			}
 		}
 	}
+	
+	public int GetHealth() {return health;}
 }

@@ -4,37 +4,45 @@ using System.Collections;
 public class PlayerUI : MonoBehaviour {
 	
 	public GameObject player ;
-	public float barDisplay; //current progress
-	public Vector2 pos;
-	public Vector2 size;
-	GUISkin skin ;
+	public float tempDisplay, healthDisplay; //current progress
+	public Vector2 tempPos, healthPos;
+	public Vector2 tempSize, healthSize;
 	public Texture2D emptyTex;
 	public Texture2D fullTex;
 
 	// Use this for initialization
 	void Start () {
-		pos = new Vector2(10,Screen.height/2 - (Screen.height/30));
-		size = new Vector2(pos.x + 150,pos.y + 30);
+		tempPos = new Vector2(10, Screen.height- 35);
+		healthPos = new Vector2(10, Screen.height- 80);
+		tempSize = new Vector2(160,30);
+		healthSize = new Vector2(160, 30 ) ;
 		
 		//Debug.Log (Screen.currentResolution.height/2);
 	}
 	
 	 void OnGUI() {
 		//draw the background:
-		GUI.BeginGroup(new Rect(pos.x, pos.y, size.x, size.y));
-		GUI.Box(new Rect(pos.x, pos.y, size.x, size.y), emptyTex);
-		 
-		//draw the filled-in part:
-		GUI.BeginGroup(new Rect(pos.x, pos.y, size.x * Mathf.Clamp01(barDisplay), size.y));
+		GUI.DrawTexture(new Rect(tempPos.x, tempPos.y, tempSize.x, tempSize.y), emptyTex, ScaleMode.StretchToFill);		
 		
-		GUI.Box(new Rect(0, 0, size.x, size.y), fullTex);
+		//draw the filled-in part:
+		GUI.BeginGroup(new Rect(tempPos.x, tempPos.y, tempSize.x * Mathf.Clamp01(tempDisplay), tempSize.y));
+		GUI.DrawTexture(new Rect(0, 0, tempSize.x * Mathf.Clamp01(tempDisplay), tempSize.y), fullTex, ScaleMode.StretchToFill);		
 		GUI.EndGroup();
+		
+		//GUI.BeginGroup(new Rect(healthPos.x, healthPos.y, healthSize.x, healthSize.y));
+		GUI.DrawTexture(new Rect(healthPos.x, healthPos.y, healthSize.x, healthSize.y), fullTex, ScaleMode.StretchToFill);
+			
+		GUI.BeginGroup(new Rect(healthPos.x, healthPos.y, healthSize.x * Mathf.Clamp01(healthDisplay), healthSize.y));
+		GUI.DrawTexture(new Rect(0, 0, healthSize.x * Mathf.Clamp01(healthDisplay), healthSize.y), emptyTex, ScaleMode.StretchToFill);
+		
 		GUI.EndGroup();
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		barDisplay = player.GetComponent<CarStat>().GetCurrTemp()*0.01f;
+		tempDisplay = (player.GetComponent<CarStat>().GetCurrTemp()/player.GetComponent<CarStat>().GetMaxTemp());
+		healthDisplay = (player.GetComponent<driverHealth>().GetHealth()/player.GetComponent<CarStat>().GetMaxHealth());
 		//Debug.Log (Screen.currentResolution.height/2);
 	}
 }

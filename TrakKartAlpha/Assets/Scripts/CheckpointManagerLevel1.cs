@@ -75,10 +75,19 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 				GameObject.Find ("lapDisplay").GetComponent<lapDisplay>().StartingLap(laps);
 				if(laps == 4)
 				{
+					GetComponent<AIDriver>().enabled = true ;
+					
+					if( GetComponent<KeyboardMouseController>().enabled )
+						GetComponent<KeyboardMouseController>().enabled = false ;
+					else if( GetComponent<GamepadController>().enabled )
+						GetComponent<GamepadController>().enabled = false ;
+					else
+						GetComponent<Xbox360Controller>().enabled = false ;
+					
 					//save stats for the menu
 					DontDestroyOnLoad(GameObject.Find("statsFromGame"));
 					Destroy(GameObject.Find("MenuStats"));
-					Application.LoadLevel(2);
+					//Application.LoadLevel(2);
 				}
 			}
 		}
@@ -87,10 +96,19 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 	{
 		if(Input.GetKeyDown(KeyCode.Alpha1))
 		{
+			GetComponent<AIDriver>().enabled = true ;
+					
+					if( GetComponent<KeyboardMouseController>().enabled )
+						GetComponent<KeyboardMouseController>().enabled = false ;
+					else if( GetComponent<GamepadController>().enabled )
+						GetComponent<GamepadController>().enabled = false ;
+					else
+						GetComponent<Xbox360Controller>().enabled = false ;
+			
 			//save stats for the menu
 					DontDestroyOnLoad(GameObject.Find("statsFromGame"));
 					Destroy(GameObject.Find("MenuStats"));
-					Application.LoadLevel(2);
+					//Application.LoadLevel(2);
 		}
 		
 		if( !gameObject.GetComponent<Vehicle>().amAlive() )

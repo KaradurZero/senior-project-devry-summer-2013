@@ -8,7 +8,7 @@ public class Vehicle : MonoBehaviour {
 	
 	private bool m_boosted ;
 	private float m_boost_time ;
-	private float m_boostPadTime = 1.5f ;
+	private float m_boostPadTime = 2f ;
 	
 	public Object tireTraksPrefab;
 	//turn effect
@@ -152,9 +152,6 @@ public class Vehicle : MonoBehaviour {
 		if( other.gameObject.tag == "Slow" ){
 			m_slowed = false ;
 		}	
-	}
-	
-	void OnCollisionEnter( Collision other ) {
 	}
 	
 	public void BoostVehicle( float boostTime ) {
