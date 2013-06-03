@@ -76,7 +76,7 @@ public class AIState : MonoBehaviour {
 	Transform FindClosestDriver()
 	{
 		//compare all drivers distance
-		float closestDistance = 999.9f;
+		float closestDistance = 50f;
 		Transform closestTrans = transform;
 		foreach(GameObject go in otherDrivers)
 		{

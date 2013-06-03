@@ -7,7 +7,7 @@ public class KeyboardMouseController : MonoBehaviour {
 	public Weapon myWeapon ;
 	public GunShieldRotation myGunShieldRot;
 	public vehicleItems myPowerup;
-	private float m_maxDrag = 0.5f ;
+	private float m_maxDrag = 1.5f ;
 	private bool m_swapButtonDown ;
 
 	// Use this for initialization
@@ -75,12 +75,10 @@ public class KeyboardMouseController : MonoBehaviour {
 						}
 					}
 				}
-			else {
-				myGunShieldRot.TurnOnGun() ;
+			else 
 				player.SetDrag(0f) ;
-			}
 		}
-		
-		//Debug.Log(player.stat.GetCurrTemp()) ;
+		else
+			myGunShieldRot.TurnOnGun() ;
 	}
 }
