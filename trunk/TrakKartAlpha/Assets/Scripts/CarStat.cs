@@ -163,11 +163,12 @@ public class CarStat : MonoBehaviour {
 				m_maxVelocity 	= m_defaultMaxVelocity 	= menuStats.GetSpeed() + 10;
 				m_acceleration 	= m_defaultAcceleration = menuStats.GetAccel() + 10;
 				m_maxTemp 		= 100 + (menuStats.GetTemp() * 20);
-				m_boostVelocity = 20 + menuStats.GetBoost() * 5;
+				m_boostVelocity = m_maxVelocity + (20 + menuStats.GetBoost() * 5);
 				m_maxHealth 	= 100 + (menuStats.GetHealth() * 50);
 				m_luck			= menuStats.GetLuck() * 10;
 				m_attack		= menuStats.GetAttack() ;
 				m_defense	 	= menuStats.GetDefense() ;
+				m_cooling 		= m_maxTemp * .2f ;
 				
 				stats.SetStats(
 					menuStats.GetSpeed(),

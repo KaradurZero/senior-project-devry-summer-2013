@@ -41,6 +41,8 @@ public class Vehicle : MonoBehaviour {
 		
 	public void Die()
 	{
+		gameObject.GetComponentInChildren<GunShieldRotation>().TurnOnGun() ;
+	
 		renderer.enabled = false;
 		
 		rigidbody.detectCollisions = false ;
@@ -55,7 +57,6 @@ public class Vehicle : MonoBehaviour {
 	{
 		renderer.enabled = true;
 		rigidbody.detectCollisions = true ;
-		gameObject.GetComponentInChildren<GunShieldRotation>().TurnOnGun() ;
 		
 		Renderer[] rend = GetComponentsInChildren<Renderer>();
 		foreach(Renderer r in rend)
