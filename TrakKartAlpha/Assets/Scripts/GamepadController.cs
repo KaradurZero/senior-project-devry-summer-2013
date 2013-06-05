@@ -25,6 +25,7 @@ public class GamepadController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 			if(!player.isFrozen()) {
+			if( !player.stat.isOverheated() ) {
 				float analogHorMovement = Input.GetAxis("HorizontalJ");
 				float analogVertMovement = Input.GetAxis("VerticalJ");
 				float weaponHoriz = Input.GetAxis("Weapon_Horizontal");
@@ -34,7 +35,7 @@ public class GamepadController : MonoBehaviour {
 				
 				player.SetDrag(Mathf.Lerp(m_maxDrag, 0, analogMoveDirection.magnitude)) ;
 			
-				if( !player.stat.isOverheated() ) {
+				
 					if (analogMoveDirection != Vector3.zero){
 						float MoveRotate = player.stat.GetHandling() * Time.deltaTime;
 						Quaternion newRotation = Quaternion.LookRotation(analogMoveDirection);
@@ -80,6 +81,8 @@ public class GamepadController : MonoBehaviour {
 						player.FirePowerUp() ;
 				}
 			}
+			else
+				player.SetDrag(m_maxDrag) ;
 		}
 		else {
 			myGunShieldRot.TurnOnGun() ;

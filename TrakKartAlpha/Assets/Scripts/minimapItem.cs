@@ -11,7 +11,7 @@ public class minimapItem : MonoBehaviour {
 	}
 	void Update () {
 	
-		transform.position = actualObject.transform.position + new Vector3(0f,1000f,0f);
+		transform.position = actualObject.transform.position + new Vector3(0f,999f,0f);
 		transform.rotation = actualObject.transform.rotation;
 	}
 }

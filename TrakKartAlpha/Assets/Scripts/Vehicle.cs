@@ -41,12 +41,14 @@ public class Vehicle : MonoBehaviour {
 		
 	public void Die()
 	{
-		gameObject.GetComponentInChildren<GunShieldRotation>().TurnOnGun() ;
-	
 		renderer.enabled = false;
 		
 		rigidbody.detectCollisions = false ;
 		Renderer[] rend = GetComponentsInChildren<Renderer>();
+		foreach(Renderer r in rend)
+		{
+			r.enabled = false;
+		}
 		foreach(Renderer r in rend)
 		{
 			r.enabled = false;
@@ -65,6 +67,8 @@ public class Vehicle : MonoBehaviour {
 				r.enabled = true;
 		}
 		isAlive = true;
+		stat.SetCurrTemp(0) ;
+		gameObject.GetComponentInChildren<GunShieldRotation>().TurnOnGun() ;
 	}
 	public bool amAlive()
 	{
@@ -75,7 +79,7 @@ public class Vehicle : MonoBehaviour {
 		if(isAlive)
 		{
 			//QUICK FIX: There is a bug where vehicle respawns under world. This should keep it from sinking.
-			if( transform.position.y < -1f )
+			if( transform.position.y < 1f || transform.position.y > 1f )
 				transform.position = new Vector3( transform.position.x, 1f, transform.position.z ) ;
 				
 			if( m_boosted && Time.time >= m_boost_time ) {
@@ -186,7 +190,6 @@ public class Vehicle : MonoBehaviour {
 	public void SetDrag( float intensity ) {
 		if( (m_slowed && intensity == m_slowDrag) || (!m_slowed && intensity <= m_slowDrag) || m_boosted)
 			rigidbody.drag = intensity / m_slipCoeff ;
-		//Debug.Log (rigidbody.drag);
 	}
 	
 	public void AddForce( Vector3 direction, float intensity ) {
@@ -204,13 +207,10 @@ public class Vehicle : MonoBehaviour {
 	public void Slick() {
 		m_slipCoeff = 2f ;
 		m_slipTime = 3f ;
-		Debug.Log ("Slick");
 	}
 	
 	public void Freeze() {
 		m_freezeTime = m_freezeDuration ;
 		m_frozen = true ;
-		//Destroy (other.gameObject);
-		Debug.Log ("freeze");
 	}
 }

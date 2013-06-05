@@ -25,6 +25,7 @@ public class Xbox360Controller : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 			if(!player.isFrozen()) {
+			if( !player.stat.isOverheated() ) {
 				float analogHorMovement = Input.GetAxis("HorizontalJ");
 				float analogVertMovement = Input.GetAxis("VerticalJ");
 				float weapon360_H = Input.GetAxis("Weapon360_H");
@@ -34,7 +35,7 @@ public class Xbox360Controller : MonoBehaviour {
 				
 				player.SetDrag(Mathf.Lerp(m_maxDrag, 0, analogMoveDirection.magnitude)) ;
 			
-				if( !player.stat.isOverheated() ) {
+				
 					if (analogMoveDirection != Vector3.zero){
 						float MoveRotate = player.stat.GetHandling() * Time.deltaTime;
 						Quaternion newRotation = Quaternion.LookRotation(analogMoveDirection);
@@ -81,6 +82,8 @@ public class Xbox360Controller : MonoBehaviour {
 						player.FirePowerUp() ;
 				}
 			}
+			else
+				player.SetDrag(m_maxDrag) ;
 		}
 		else {
 			myGunShieldRot.TurnOnGun() ;

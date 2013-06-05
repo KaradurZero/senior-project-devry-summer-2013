@@ -121,8 +121,7 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 		if( !gameObject.GetComponent<Vehicle>().amAlive() )
 		{
 			gameObject.transform.position = new Vector3(checkpoints[focus-1].transform.position.x, 
-				checkpoints[focus-1].transform.position.y + 1f, 
-				checkpoints[focus-1].transform.position.z );
+				1f, checkpoints[focus-1].transform.position.z );
 		}
 	}
 	public float GetDistanceFromNextCheckpoint()
