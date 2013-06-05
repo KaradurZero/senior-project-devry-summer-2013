@@ -26,13 +26,14 @@ public class KeyboardMouseController : MonoBehaviour {
 	void Update () {
 		if( player.amAlive() ) {
 			if(!player.isFrozen()) {
+				if( !player.stat.isOverheated() ) {
 				float horMovement = Input.GetAxis("Horizontal");
 				float vertMovement = Input.GetAxis("Vertical");
 				Vector3 moveDirection= new Vector3 (horMovement, 0, vertMovement);
 				
 				player.SetDrag(Mathf.Lerp(m_maxDrag, 0, moveDirection.magnitude)) ;
 				
-				if( !player.stat.isOverheated() ) {
+				
 					if (moveDirection != Vector3.zero){
 						float MoveRotate = player.stat.GetHandling() * Time.deltaTime;
 						Quaternion newRotation = Quaternion.LookRotation(moveDirection);
@@ -74,6 +75,8 @@ public class KeyboardMouseController : MonoBehaviour {
 						player.TurnOffTempPerSecond( ) ;
 						}
 					}
+				else
+					player.SetDrag(m_maxDrag) ;
 				}
 			else 
 				player.SetDrag(0f) ;

@@ -17,7 +17,7 @@ public class AIDriver: MonoBehaviour {
 	
 	void Start () {
 		isAlive = true;
-		m_maxDrag = .5f ;
+		m_maxDrag = 1.5f ;
 		myCheckpoints = gameObject.GetComponent<CheckpointManagerLevel1>();
 		myStats = gameObject.GetComponent<CarStat>();
 		if(myCheckpoints != null)
@@ -68,7 +68,7 @@ public class AIDriver: MonoBehaviour {
 					Vector3 moveDirection= new Vector3 (horMovement, 0, vertMovement);
 					player.SetDrag(Mathf.Lerp(m_maxDrag, 0, moveDirection.magnitude)) ;
 					
-					if( !player.stat.isOverheated() ) {
+					
 						if(Vector3.Distance(transform.position, myTargetPos) <= Random.Range(1f,5f))
 						{
 							if(myCheckpoints != null)
@@ -76,18 +76,19 @@ public class AIDriver: MonoBehaviour {
 								myTargetPos = myCheckpoints.GetCurrCheckpointPos();
 							}
 						}
-						else 
+					if( !player.stat.isOverheated() ) {
 						{
 							if (moveDirection != Vector3.zero){
 								Quaternion newRotation = Quaternion.LookRotation(moveDirection);
 								transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, MoveRotate);
 								player.AddForce(moveDirection, player.stat.GetCurrentSpeed());	
 							}
-							rigidbody.drag = 0.5f ;
 						}
 						//transform.position = new Vector3(transform.position.x, 1.0f, transform.position.z);
 						player.AddForce(moveDirection,  player.stat.GetAccel()) ;
 					}
+					else
+						player.SetDrag (1.5f);
 				}
 				else
 					player.SetDrag(0) ;
