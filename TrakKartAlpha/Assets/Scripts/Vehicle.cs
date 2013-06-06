@@ -49,10 +49,6 @@ public class Vehicle : MonoBehaviour {
 		{
 			r.enabled = false;
 		}
-		foreach(Renderer r in rend)
-		{
-			r.enabled = false;
-		}
 		isAlive = false;
 	}
 	public void Revive()
@@ -205,7 +201,7 @@ public class Vehicle : MonoBehaviour {
 	}
 	
 	public void Slick() {
-		m_slipCoeff = 2f ;
+		m_slipCoeff = 3f ;
 		m_slipTime = 3f ;
 	}
 	

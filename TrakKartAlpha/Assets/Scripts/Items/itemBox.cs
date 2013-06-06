@@ -93,14 +93,14 @@ public class itemBox : MonoBehaviour {
 		if(m_isTangible) {
 			if( c.tag == m_hTriggerSpecific_01) {//if a vehicle
 				if( c.gameObject.GetComponent<vehicleItems>()) {//if has script
-					if( c.gameObject.GetComponent<vehicleItems>().item == 0) {//if has no item
-						c.gameObject.GetComponent<vehicleItems>().item = Random.Range( 1, 7);//give item
+					if( c.gameObject.GetComponent<vehicleItems>().m_item == 0) {//if has no item
+						c.gameObject.GetComponent<vehicleItems>().m_item = Random.Range( 1, 7 );//give item
 					if(GetComponent<AIState>() != null)
 						GetComponent<AIState>().RecievePowerUp();
 					}
 					if(c.name == "Player")
 					{
-						GameObject.Find("powerupDisplay").GetComponent<PowerUpDisplay>().DisplayPowerup(c.GetComponent<vehicleItems>().item);
+						GameObject.Find("powerupDisplay").GetComponent<PowerUpDisplay>().DisplayPowerup(c.GetComponent<vehicleItems>().m_item);
 					}
 					//c.gameObject.GetComponent<vehicleItems>().item = 3;//debugging
 					itemPickedUp();
