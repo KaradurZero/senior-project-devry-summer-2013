@@ -1,0 +1,18 @@
+Name: David Fairweather
+
+Project Role:
+Programmer
+
+Bio:
+I was born in Shell Beach, California. I enrolled at DeVry University and moved to Fremont in the Summer of 2010 after I earned 
+an Associates of Science in General Studies at Cuesta Community College. Long before I studied programming, I have been playing games since I was 4 years old. 
+Playing games has been a big passion of mine, but after using a free trial of RPG Maker when I was 20 years old, I realize that making 
+a game of my own is even more rewarding than playing and beating any game. However, because Cuesta College had little to no academic
+support for Computer Science at the time, I was unable to learn anything about programming from that school. It wasn't until early 2010 that I
+was able to find a school that can give me the help I need to become a skilled programmer. Once I graduate from DeVry University, I am determined to 
+use these skills to become part of the game industry and have a successful career as a programmer.
+
+Contact Info:
+Linkdin: www.linkedin.com/pub/david-fairweather/72/864/b44/
+Portfolio: www.shmelnick.wix.com/david-fairweather
+email: davidfairweather91@gmail.com
