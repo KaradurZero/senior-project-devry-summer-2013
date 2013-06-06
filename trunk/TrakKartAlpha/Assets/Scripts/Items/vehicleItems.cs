@@ -198,10 +198,13 @@ public class vehicleItems : MonoBehaviour {
 				//get script inside shield object and call deflector shield function
 				this.transform.FindChild(m_hWeapon).FindChild(m_hShield).GetComponent<VehicleShieldController>().setDeflecting();
 				break;
-			case (int)items.itemSteal://use item steal item
+			case (int)items.itemSteal:
+				item = Random.Range(1, 6);
+			break;
+			//use item steal item
 //				Debug.Log("used itemSteal");
 				//todo: get nearest vehicle and get their item number. even if zero.
-				distance = Mathf.Infinity;
+/*				distance = Mathf.Infinity;
 				position = transform.position;
 				targetEnemy = null;
 				foreach (GameObject go in m_otherVehicles) {
@@ -218,7 +221,7 @@ public class vehicleItems : MonoBehaviour {
 						}
 					}
 				}
-				if(targetEnemy) {
+*/				if(targetEnemy) {
 					m_item = targetEnemy.GetComponent<vehicleItems>().item;
 					targetEnemy.GetComponent<vehicleItems>().item = 0;
 //					Debug.Log("item stolen: " + m_item);
@@ -234,12 +237,12 @@ public class vehicleItems : MonoBehaviour {
 			//Debug.Log("Item Used");
 		if(gameObject.name == "Player")
 			GameObject.Find("powerupDisplay").GetComponent<PowerUpDisplay>().DisplayPowerup(m_item);
-		if(!didSteal)
-		{
-			m_item = 0;
-			if(gameObject.name == "Player")
-				GameObject.Find("powerupDisplay").GetComponent<PowerUpDisplay>().DisplayPowerup(0);
-		}
+	//	if(!didSteal)
+	//	{
+	//		m_item = 0;
+	//		if(gameObject.name == "Player")
+	//			GameObject.Find("powerupDisplay").GetComponent<PowerUpDisplay>().DisplayPowerup(0);
+	//	}
 	}
 	
 	public int item {

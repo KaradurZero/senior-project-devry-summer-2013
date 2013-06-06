@@ -34,9 +34,9 @@ public class CarStat : MonoBehaviour {
 	public float GetCooling( ) {return m_cooling ;}
 	public float GetHandling( ) {return m_handling;}
 	public float GetLuck( ) {return m_luck;}
+	public float GetMaxTemp( ) {return m_maxTemp;}
+	public float GetCurrTemp( ) {return m_currTemp;}
 	
-	public float GetMaxTemp( ) {return m_maxTemp ;}
-	public float GetCurrTemp( ) {return m_currTemp ;}
 	public bool GetTempPerSec( ) {return m_tempPerSec ;}
 	public bool isOverheated( ) {return m_overheated ;}
 	

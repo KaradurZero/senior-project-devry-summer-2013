@@ -104,7 +104,7 @@ public class Vehicle : MonoBehaviour {
 			
 			if(Vector3.Angle(lastFrameAngle, transform.forward) > 1f)
 			{
-				Object traks = Instantiate(tireTraksPrefab,transform.position + new Vector3(0f,-(transform.position.y),0f),transform.rotation);
+				Object traks = Instantiate(tireTraksPrefab,transform.position + new Vector3(0f,-.5f,0f),transform.rotation);
 				Destroy (traks, 5);
 			}
 				
