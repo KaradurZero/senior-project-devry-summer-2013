@@ -9,6 +9,7 @@ public class AIState : MonoBehaviour {
 	public float timeUntilRevengeShot;
 	float updateStateTime;
 	float PowerupUseStallTime;
+	float tempPercentage, initialTemp, currentTemp;
 	
 	//periodicals
 	float currentStateTime, deltaStateTime;
@@ -25,7 +26,8 @@ public class AIState : MonoBehaviour {
 	GunShieldRotation myGunShieldRot;
 	Transform enemyTrans;
 	vehicleItems myPowerup;
-	Vehicle myVehicle;	
+	Vehicle myVehicle;
+	CarStat myCarStat;
 	//competition - set in inspector
 	public GameObject[] otherDrivers;
 	
@@ -55,6 +57,10 @@ public class AIState : MonoBehaviour {
 			myPowerup = transform.GetComponent<vehicleItems>();
 		if(transform.GetComponent<Vehicle>())
 			myVehicle = transform.GetComponentInChildren<Vehicle>();
+		if(transform.GetComponent<CarStat>())
+			myCarStat = transform.GetComponentInChildren<CarStat>();
+		
+		initialTemp = myCarStat.GetMaxTemp;
 		
 		StallTime(3f);		
 	}
@@ -143,6 +149,8 @@ public class AIState : MonoBehaviour {
 				myGunShieldRot.TurnOnShield();
 			}
 			//attack
+			currentTemp = myCarStat.GetCurrTemp;
+			tempPercentage = currentTemp / initialTemp;
 			else if(Vector3.Distance(transform.position, enemyTrans.position) < 20)
 			{
 				firstFrameShield = true;
