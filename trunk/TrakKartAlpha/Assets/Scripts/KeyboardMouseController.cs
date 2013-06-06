@@ -59,7 +59,7 @@ public class KeyboardMouseController : MonoBehaviour {
 						player.RaiseTemp( true ) ;
 						}
 					
-					if(Input.GetKey(KeyCode.Space)) {
+					if(Input.GetKeyDown(KeyCode.Space)) {
 						if( player.myPowerup.item != 0 )
 							myPowerup.UseItem() ;
 						}

@@ -45,7 +45,7 @@ public class AIState : MonoBehaviour {
 		myGunShieldRot 		= null;
 		IAmBeingShotAt 		= false;
 		isAlive				= true;
-		PowerupUseStallTime = Random.Range(1f,5f);
+		PowerupUseStallTime = Random.Range(5f,10f);
 		currentStateTime 	= currPowerupTime = Time.time;
 		enemyTrans			= FindClosestDriver();
 		
@@ -60,7 +60,7 @@ public class AIState : MonoBehaviour {
 		if(transform.GetComponent<CarStat>())
 			myCarStat = transform.GetComponentInChildren<CarStat>();
 		
-		initialTemp = myCarStat.GetMaxTemp;
+		initialTemp = myCarStat.GetMaxTemp();
 		
 		StallTime(3f);		
 	}
@@ -82,7 +82,7 @@ public class AIState : MonoBehaviour {
 	Transform FindClosestDriver()
 	{
 		//compare all drivers distance
-		float closestDistance = 50f;
+		float closestDistance = 999f;
 		Transform closestTrans = transform;
 		foreach(GameObject go in otherDrivers)
 		{
@@ -148,9 +148,6 @@ public class AIState : MonoBehaviour {
 				myState = AI_STATE.SHIELD;
 				myGunShieldRot.TurnOnShield();
 			}
-			//attack
-			currentTemp = myCarStat.GetCurrTemp;
-			tempPercentage = currentTemp / initialTemp;
 			else if(Vector3.Distance(transform.position, enemyTrans.position) < 20)
 			{
 				firstFrameShield = true;
@@ -164,6 +161,10 @@ public class AIState : MonoBehaviour {
 			//nothing
 			else
 				myState = AI_STATE.NONE;
+			//attack
+			currentTemp = myCarStat.GetCurrTemp();
+			tempPercentage = currentTemp / initialTemp;
+			
 	}
 	
 	void Update () 
@@ -201,8 +202,11 @@ public class AIState : MonoBehaviour {
 			case AI_STATE.SHOOT:
 				if(myWeapon.CanShoot())
 				{
-					myWeapon.fireBullet();
-					this.gameObject.GetComponent<Vehicle>().RaiseTemp(true) ;
+					if( this.gameObject.GetComponent<CarStat>().GetCurrTemp() + this.gameObject.GetComponent<CarStat>().FindAttackTempCost() < this.gameObject.GetComponent<CarStat>().GetMaxTemp() )
+					{
+						myWeapon.fireBullet();
+						this.gameObject.GetComponent<Vehicle>().RaiseTemp(true) ;
+					}
 				}
 				break;
 			case AI_STATE.SHIELD:
@@ -218,7 +222,7 @@ public class AIState : MonoBehaviour {
 				break;
 			}
 		}
-		else
-			myGunShieldRot.TurnOnGun();
+		//else
+			//myGunShieldRot.TurnOnGun();
 	}
 }

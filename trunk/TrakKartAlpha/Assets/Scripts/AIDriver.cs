@@ -88,7 +88,7 @@ public class AIDriver: MonoBehaviour {
 						player.AddForce(moveDirection,  player.stat.GetAccel()) ;
 					}
 					else
-						player.SetDrag (1.5f);
+						player.SetDrag (m_maxDrag);
 				}
 				else
 					player.SetDrag(0) ;
