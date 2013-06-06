@@ -23,8 +23,8 @@ public class GameMenu : MonoBehaviour {
 			//instantiate new m_pauseMenu in front of camera
 			m_isTangible = true;
 			Vector3 a_pos = Camera.mainCamera.transform.position;
-			a_pos.y -= 3.1f;//positions may need to be fudged a bit depending upon screen size and overall scaling
-			a_pos.z -= 0.5f;
+			a_pos.y -= 2.8f;//positions may need to be fudged a bit depending upon screen size and overall scaling
+			a_pos.z += 0.0f;
 			//position set, now instantiate menu at that position.
 			m_instantiatedMenu = (GameObject)Instantiate(m_pauseMenu, a_pos, Quaternion.identity);
 			//TODO set render to true and move object into position under camera for better performance
@@ -53,14 +53,18 @@ public class GameMenu : MonoBehaviour {
 				//testing for grabbing gamestatecontroller and setting the gamestate
 				m_mainStateController.setGameState( (int)GameStateController.gameStates.INGAMERUN);
 				break;
-			case "Button-02":
+			case "Main Menu":
+				//close scene and return to main menu scene
 				break;
-			case "Button-03":
+			case "Help":
+				//open up help menu for controls
 				break;
-			case "Button-04":
+			case "Garage":
+				//change scene to the garage screen
 				break;
-			//extra prototypes shown for expanding menu system.
-			case "Button-05":
+			case "Resume":
+				//returns the game state to running. ie unpausing
+				m_mainStateController.setGameState( (int)GameStateController.gameStates.INGAMERUN);
 				break;
 			case "Arrow-up":
 				break;
