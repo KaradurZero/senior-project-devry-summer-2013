@@ -23,7 +23,7 @@ public class GameMenu : MonoBehaviour {
 			//instantiate new m_pauseMenu in front of camera
 			m_isTangible = true;
 			Vector3 a_pos = Camera.mainCamera.transform.position;
-			a_pos.y -= 3.5f;//positions may need to be fudged a bit depending upon screen size and overall scaling
+			a_pos.y -= 3.1f;//positions may need to be fudged a bit depending upon screen size and overall scaling
 			a_pos.z -= 0.5f;
 			//position set, now instantiate menu at that position.
 			m_instantiatedMenu = (GameObject)Instantiate(m_pauseMenu, a_pos, Quaternion.identity);
