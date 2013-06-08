@@ -5,9 +5,9 @@ public class FollowThisObject : MonoBehaviour {
 	public GameObject parentObject;
 	private GameObject[] vehicleList ;
 	public float deltaX, deltaY, deltaZ;
-	float min_size = 20f ;
-	float max_size = 30f ;
-	float default_size = 10f ;
+	float min_size = 5f ;
+	float max_size = 10f ;
+	float default_size = 15f ;
 	public float switchTime = 5f ;
 	int i = 0 ;
 	Vector3 targetPos;

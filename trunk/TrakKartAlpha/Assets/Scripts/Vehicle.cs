@@ -9,6 +9,8 @@ public class Vehicle : MonoBehaviour {
 	private bool m_boosted ;
 	private float m_boost_time ;
 	private float m_boostPadTime = 2f ;
+	private float m_spinAngle = 0f ;
+	private float m_lastSpeed = 0f ;
 	
 	public Object tireTraksPrefab;
 	//turn effect
@@ -22,6 +24,9 @@ public class Vehicle : MonoBehaviour {
 	private float m_freezeTime ;
 	private float m_freezeDuration = 3f;
 	
+	private bool m_invulnerable ;
+	private float m_invulnerableDuration ;
+	
 	private bool m_slowed ;
 	private float m_slowDrag = 2f;
 	
@@ -34,6 +39,8 @@ public class Vehicle : MonoBehaviour {
 		m_slipTime = 0f ;
 		m_slipCoeff = 1f ;
 		m_freezeTime = 0f ;
+		m_invulnerable = false ;
+		m_invulnerableDuration = 3f ;
 		
 		myPowerup = transform.GetComponent<vehicleItems>();
 	}
@@ -42,7 +49,7 @@ public class Vehicle : MonoBehaviour {
 	public void Die()
 	{
 		renderer.enabled = false;
-		
+
 		rigidbody.detectCollisions = false ;
 		Renderer[] rend = GetComponentsInChildren<Renderer>();
 		foreach(Renderer r in rend)
@@ -54,7 +61,8 @@ public class Vehicle : MonoBehaviour {
 	public void Revive()
 	{
 		renderer.enabled = true;
-		rigidbody.detectCollisions = true ;
+		//rigidbody.detectCollisions = true ;
+		m_invulnerable = true ;
 		
 		Renderer[] rend = GetComponentsInChildren<Renderer>();
 		foreach(Renderer r in rend)
@@ -84,15 +92,65 @@ public class Vehicle : MonoBehaviour {
 				m_boosted = false ;
 			}
 			
+			if( m_invulnerable ) {
+				rigidbody.detectCollisions = false ;
+				if( m_invulnerableDuration > 0 )
+					m_invulnerableDuration -= Time.deltaTime ;
+				else {
+					m_invulnerable = false ;
+					m_invulnerableDuration = 3f ;
+					rigidbody.detectCollisions = true ;
+				}
+			}
+			
 			if( m_frozen && m_freezeTime > 0 )
 				m_freezeTime -= Time.deltaTime ;
 			else
 				m_frozen = false ;
 			
-			if( m_slipTime > 0 )
+			if( m_slipTime > 0 ) {
 				m_slipTime -= Time.deltaTime ;
-			else
+				
+				if( m_spinAngle < 360f ) {
+					transform.RotateAround(Vector3.up, stat.GetHandling() * Time.deltaTime);
+					m_spinAngle += (stat.GetHandling()) ;
+					
+					if( this.gameObject.name == "Player" ) {
+						if( this.GetComponent<KeyboardMouseController>() != null && this.GetComponent<KeyboardMouseController>().enabled )
+							this.GetComponent<KeyboardMouseController>().enabled = false ;
+						else if( this.GetComponent<GamepadController>() != null && this.GetComponent<GamepadController>().enabled )
+							this.GetComponent<GamepadController>().enabled = false ;
+						else if( this.GetComponent<Xbox360Controller>() != null && this.GetComponent<Xbox360Controller>().enabled )
+							this.GetComponent<Xbox360Controller>().enabled = false ;
+						//else
+							//this.GetComponent<AIDriver>().enabled = false ;
+					}
+					else {
+						this.GetComponent<AIDriver>().enabled = false ;
+					}
+				}
+				else {
+					if( this.gameObject.name == "Player" ) {
+						if( this.GetComponent<KeyboardMouseController>() != null && !this.GetComponent<KeyboardMouseController>().enabled )
+							this.GetComponent<KeyboardMouseController>().enabled = true ;
+						//else if( this.GetComponent<GamepadController>() != null && !this.GetComponent<GamepadController>().enabled ) {
+						//	this.GetComponent<GamepadController>().enabled = true ;
+						//}
+						//else if( this.GetComponent<Xbox360Controller>() != null && !this.GetComponent<Xbox360Controller>().enabled ) {
+						//	this.GetComponent<Xbox360Controller>().enabled = true ;
+						else
+							this.GetComponent<AIDriver>().enabled = true ;
+					}	
+					else {
+						this.GetComponent<AIDriver>().enabled = true ;
+					}
+				}
+			}
+			else {
 				m_slipCoeff = 1f ;
+				m_spinAngle = 0f ;
+				
+				}
 			
 			//if(!m_boosted && m_slowed) {
 			//	SetDrag(m_slowDrag) ;
@@ -100,6 +158,7 @@ public class Vehicle : MonoBehaviour {
 			
 			if(Vector3.Angle(lastFrameAngle, transform.forward) > 1f)
 			{
+				SetDrag(1.5f) ;
 				Object traks = Instantiate(tireTraksPrefab,transform.position + new Vector3(0f,-.5f,0f),transform.rotation);
 				Destroy (traks, 5);
 			}
@@ -109,8 +168,22 @@ public class Vehicle : MonoBehaviour {
 			
 			//rigidbody.velocity = transform.forward * stat.GetAccel() * Time.deltaTime ;
 			
-			if( (!stat.GetTempPerSec() && this.gameObject.GetComponentInChildren<GunShieldRotation>().isGunEnabled()) || stat.isOverheated() ){
-			stat.SetCurrTemp( stat.GetCurrTemp() - stat.GetCooling() * Time.deltaTime ) ;
+			if( (!stat.GetTempPerSec() && this.gameObject.GetComponentInChildren<GunShieldRotation>().isGunEnabled()) || stat.isOverheated() )
+				stat.SetCurrTemp( stat.GetCurrTemp() - stat.GetCooling() * Time.deltaTime ) ;
+		
+			
+			if( stat.isOverheated() || isFrozen() ) {
+				if( stat.GetTempPerSec() ) {
+					rigidbody.detectCollisions = false ;
+					stat.TempPerSecOff() ;
+				}
+				else
+					rigidbody.detectCollisions = true ;
+					
+				gameObject.GetComponentInChildren<GunShieldRotation>().TurnOnGun() ;
+				
+				if( isFrozen() )
+					stat.SetCurrTemp(0f) ;
 			}
 			
 			if( rigidbody.velocity.sqrMagnitude > (stat.GetMaxVelocity()*stat.GetMaxVelocity()) )
@@ -123,15 +196,15 @@ public class Vehicle : MonoBehaviour {
 			else
 				stat.SetCurrentSpeed(0);
 			
+			m_lastSpeed = stat.GetCurrentSpeed() ;
+			
 			if(transform.position.y > 1f)
 				transform.position = new Vector3( transform.position.x, 0.5f, transform.position.z ) ;
-			
-			//Debug.Log (stat.GetCurrentSpeed());
 		}
-			
-	
+		else
+			rigidbody.velocity = new Vector3(0,0,0);
 	}
-	
+			
 	void OnTriggerEnter( Collider other ) {
 		if( other.gameObject.tag == "Slow" ){
 			SetDrag(m_slowDrag) ;
@@ -147,7 +220,7 @@ public class Vehicle : MonoBehaviour {
 			Debug.Log ("Slow");
 		}
 		if( other.gameObject.tag == "Boost" ){
-			BoostVehicle(m_boostPadTime);
+			BoostVehicle(m_boostPadTime, true);
 		}
 	}
 	
@@ -157,10 +230,12 @@ public class Vehicle : MonoBehaviour {
 		}	
 	}
 	
-	public void BoostVehicle( float boostTime ) {
+	public void BoostVehicle( float boostTime, bool boostPad ) {
 		stat.SetMaxVelocity(stat.GetBoostSpeed()) ;
-		stat.SetAccel(stat.GetBoostSpeed()) ;	
-		RaiseTemperaturePerSecond( 10f ) ;
+		stat.SetAccel(stat.GetBoostSpeed()) ;
+		if( !boostPad )
+			RaiseTemperaturePerSecond( 10f ) ;
+		
 		m_boosted = true ;
 		m_boost_time = Time.time + boostTime ;
 	}
@@ -202,7 +277,7 @@ public class Vehicle : MonoBehaviour {
 	
 	public void Slick() {
 		m_slipCoeff = 3f ;
-		m_slipTime = 3f ;
+		m_slipTime = 4f ;
 	}
 	
 	public void Freeze() {

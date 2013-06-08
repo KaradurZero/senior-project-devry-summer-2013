@@ -118,10 +118,9 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 					Application.LoadLevel(2);
 		}
 		
-		if( !gameObject.GetComponent<Vehicle>().amAlive() )
+		if( this.GetComponent<driverHealth>().ReadyToRespawn() )
 		{
-			gameObject.transform.position = new Vector3(checkpoints[focus-1].transform.position.x, 
-				1f, checkpoints[focus-1].transform.position.z );
+			ReturnToLastCheckpoint() ;	
 		}
 	}
 	public float GetDistanceFromNextCheckpoint()
@@ -134,5 +133,11 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 			return Mathf.Abs(Vector3.Distance(transform.position, checkpoints[16].transform.position));
 		else
 			return Mathf.Abs(Vector3.Distance(transform.position, checkpoints[focus-1].transform.position));
+	}
+	
+	public void ReturnToLastCheckpoint( )
+	{
+		gameObject.transform.position = new Vector3(checkpoints[focus-1].transform.position.x, 
+				1f, checkpoints[focus-1].transform.position.z );
 	}
 }
