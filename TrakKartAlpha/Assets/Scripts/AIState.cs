@@ -45,7 +45,7 @@ public class AIState : MonoBehaviour {
 		myGunShieldRot 		= null;
 		IAmBeingShotAt 		= false;
 		isAlive				= true;
-		PowerupUseStallTime = Random.Range(5f,10f);
+		PowerupUseStallTime = Random.Range(1f,2f);
 		currentStateTime 	= currPowerupTime = Time.time;
 		enemyTrans			= FindClosestDriver();
 		

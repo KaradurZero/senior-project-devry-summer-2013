@@ -6,6 +6,7 @@ public class driverHealth : MonoBehaviour {
 	int initHealth;
 	public int health;
 	public Object explosion;
+	bool respawning ;
 	//respawn
 	bool hasDied;
 	float respawnTime, currRespawnTime;
@@ -55,6 +56,7 @@ public class driverHealth : MonoBehaviour {
 		hasDied = false;
 		respawnTime = 5f;
 		currRespawnTime = Time.time;
+		respawning = false ;
 	}
 	
 	void Update()
@@ -67,14 +69,28 @@ public class driverHealth : MonoBehaviour {
 		
 		if(hasDied)
 		{
-			if(Time.time - currRespawnTime > respawnTime)
+			if(respawnTime > 0)
+				respawnTime -= Time.deltaTime ;
+			else
 			{
+				respawning = true ;
 				hasDied = false;
 				Revive();
 				ReplenishHealthFull();
+				respawnTime = 5f ;
 			}
 		}
+		else
+			respawning = false ;
 	}
 	
 	public int GetHealth() {return health;}
+	
+	public int GetRespawnTime() {
+		return (int)respawnTime ;	
+	}
+	
+	public bool ReadyToRespawn( ) {
+		return respawning ;
+	}
 }

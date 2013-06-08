@@ -74,7 +74,7 @@ public class KeyboardMouseController : MonoBehaviour {
 							}
 								
 						if( Input.GetKey(KeyCode.Mouse1) ) {
-							player.BoostVehicle( 0.05f ) ;
+							player.BoostVehicle( 0.05f, false ) ;
 							}
 						else{
 							player.TurnOffTempPerSecond( ) ;
@@ -86,8 +86,6 @@ public class KeyboardMouseController : MonoBehaviour {
 				else 
 					player.SetDrag(0f) ;
 			}
-			else
-				myGunShieldRot.TurnOnGun() ;
 		}//end check if game is ingamerun state
 	}
 }
