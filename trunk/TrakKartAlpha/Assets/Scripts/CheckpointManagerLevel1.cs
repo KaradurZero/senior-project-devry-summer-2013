@@ -75,7 +75,9 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 				GameObject.Find ("lapDisplay").GetComponent<lapDisplay>().StartingLap(laps);
 				if(laps == 4)
 				{
-					GetComponent<AIDriver>().enabled = true ;
+					this.gameObject.AddComponent<AIDriver>() ;
+					this.gameObject.GetComponent<AIDriver>().enabled = true ;
+					this.GetComponent<AIDriver>().player = this.gameObject.GetComponent<Vehicle>() ;
 					
 					if( GetComponent<KeyboardMouseController>().enabled )
 						GetComponent<KeyboardMouseController>().enabled = false ;
@@ -98,7 +100,10 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 	{
 		if(Input.GetKeyDown(KeyCode.Alpha1))
 		{
-			GetComponent<AIDriver>().enabled = true ;
+			if( this.name == "Player" ) {
+				this.gameObject.AddComponent<AIDriver>() ;
+				this.gameObject.GetComponent<AIDriver>().enabled = true ;
+				this.GetComponent<AIDriver>().player = this.gameObject.GetComponent<Vehicle>() ;
 					
 					if( GetComponent<KeyboardMouseController>().enabled )
 						GetComponent<KeyboardMouseController>().enabled = false ;
@@ -106,6 +111,7 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 						GetComponent<GamepadController>().enabled = false ;
 					else
 						GetComponent<Xbox360Controller>().enabled = false ;
+			}
 		}
 		
 		if(Input.GetKeyDown(KeyCode.Alpha6))

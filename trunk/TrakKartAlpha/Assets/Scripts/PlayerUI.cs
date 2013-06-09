@@ -44,6 +44,7 @@ public class PlayerUI : MonoBehaviour {
 		
 		GUI.EndGroup();
 		
+		//respawn timer
 		if( !this.GetComponent<Vehicle>().amAlive() )
 			GUI.TextField(new Rect(deathTextPos.x, deathTextPos.y, deathTextSize.x, deathTextSize.y), "Respawning in: " + (this.GetComponent<driverHealth>().GetRespawnTime()+1), style ) ;
 		
