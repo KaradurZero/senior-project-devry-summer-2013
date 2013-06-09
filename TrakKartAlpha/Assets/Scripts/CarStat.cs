@@ -1,6 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
+//********************************CAR STATS*********************************//
+//Sets the statistics of all vehicles, both player and AI, based on skill points//
+
 public class CarStat : MonoBehaviour {
 	
 	statsFromMenu menuStats;
@@ -27,6 +30,7 @@ public class CarStat : MonoBehaviour {
 	private float m_defaultAcceleration ;
 	private float m_defaultHandling ;
 	
+	//return values for other scripts to use
 	public float GetMaxVelocity( ) {return m_maxVelocity ;}
 	public float GetAccel( ) {return m_acceleration ;}
 	public int GetAttack( ) {return m_attack ;}
@@ -45,6 +49,7 @@ public class CarStat : MonoBehaviour {
 	
 	public float GetMaxHealth( ) {return m_maxHealth ;}
 	
+	//raises temperature based on attack skill
 	public float FindAttackTempCost( ) {
 	//USE ATTACK VALUE FOR RAISING TEMPERATURE
 		switch( m_attack ) {
@@ -68,6 +73,7 @@ public class CarStat : MonoBehaviour {
 		}
 	}
 	
+	//raises temperature based on defense skill
 	public float FindDefenseTempCost( ) {
 	//USE DEFENSE VALUE FOR RAISING TEMPERATURE
 		switch( m_attack ) {
@@ -91,6 +97,7 @@ public class CarStat : MonoBehaviour {
 		}
 	}
 	
+	//Set value functions for other scripts to use
 	public void SetMaxVelocity( float a_speed ) {m_maxVelocity = a_speed ;}
 	public void SetAccel( float a_acceleration ) {m_acceleration = a_acceleration ;}
 	public void SetAttack( int a_attack ) {m_attack = a_attack ;}
@@ -100,6 +107,8 @@ public class CarStat : MonoBehaviour {
 	public void SetLuck( float a_luck ) {m_luck = a_luck ;}
 	
 	public void SetMaxTemp( float a_maxTemp ) {m_maxTemp = a_maxTemp ;}
+	
+	//controls whether vehicle is overheated or not
 	public void SetCurrTemp( float a_currTemp ) {
 		m_currTemp = a_currTemp ;
 		
@@ -114,6 +123,8 @@ public class CarStat : MonoBehaviour {
 		}
 	
 	}
+	
+	//turns auto-temp raising on/off
 	public void TempPerSecOn( ) {m_tempPerSec = true ;}
 	public void TempPerSecOff( ) {m_tempPerSec = false ;}
 	
@@ -123,20 +134,17 @@ public class CarStat : MonoBehaviour {
 	
 	public void ResetVelocity( ) {m_maxVelocity = m_defaultMaxVelocity;}
 	public void ResetAcceleration( ) {m_acceleration = m_defaultAcceleration;}
-	public void ResetHandling( ) {m_handling = m_defaultHandling;}
 
 	// Use this for initialization
 	void Start () {
-		//m_maxVelocity = 200f ;
-		//m_boostVelocity = 400f ;
-		//m_acceleration = 100f ;
 		
+		//set manually for testing purposes
 		m_currVelocity = 0f ;
 		
 		m_attack = 1 ;
 		m_defense = 1 ;
-		m_cooling = 20f ;
-		m_handling = 5f ;
+		m_cooling = 20f ; //cooling stat has been gutten from the game, but used for normal temperature cooling rate
+		m_handling = 5f ; //handling stat has been gutted from the game, but used for normal vehicle rotation
 		m_luck = 1f ;
 		
 		m_maxTemp = 100f ;
@@ -163,12 +171,12 @@ public class CarStat : MonoBehaviour {
 				m_maxVelocity 	= m_defaultMaxVelocity 	= menuStats.GetSpeed() + 10;
 				m_acceleration 	= m_defaultAcceleration = menuStats.GetAccel() + 10;
 				m_maxTemp 		= 100 + (menuStats.GetTemp() * 20);
-				m_boostVelocity = m_maxVelocity + (3 + menuStats.GetBoost() * 5);
+				m_boostVelocity = m_maxVelocity + (menuStats.GetBoost() * 5);
 				m_maxHealth 	= 100 + (menuStats.GetHealth() * 50);
 				m_luck			= menuStats.GetLuck() * 10;
 				m_attack		= menuStats.GetAttack() ;
 				m_defense	 	= menuStats.GetDefense() ;
-				m_cooling 		= m_maxTemp * .2f ;
+				m_cooling 		= m_maxTemp * .2f ; //temperature always cool down based on max temp per second
 				
 				stats.SetStats(
 					menuStats.GetSpeed(),

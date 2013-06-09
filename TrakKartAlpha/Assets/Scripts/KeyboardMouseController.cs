@@ -29,23 +29,34 @@ public class KeyboardMouseController : MonoBehaviour {
 	void Update () {
 		//check first if game state is set to ingamerun
 		if(m_mainStateController.gameState == (int)GameStateController.gameStates.INGAMERUN) {
+			
+			//if player is alive
 			if( player.amAlive() ) {
+				
+				//lock controls when player is frozen/overheated
 				if(!player.isFrozen()) {
 					if( !player.stat.isOverheated() ) {
-					float horMovement = Input.GetAxis("Horizontal");
-					float vertMovement = Input.GetAxis("Vertical");
-					Vector3 moveDirection= new Vector3 (horMovement, 0, vertMovement);
+						
+						//input poll
+						float horMovement = Input.GetAxis("Horizontal");
+						float vertMovement = Input.GetAxis("Vertical");
+						Vector3 moveDirection= new Vector3 (horMovement, 0, vertMovement);
+						
+						//set Drag
+						player.SetDrag(Mathf.Lerp(m_maxDrag, 0, moveDirection.magnitude)) ;
 					
-					player.SetDrag(Mathf.Lerp(m_maxDrag, 0, moveDirection.magnitude)) ;
-					
-					
+						//Rotate vehicle based on direction
 						if (moveDirection != Vector3.zero){
 							float MoveRotate = player.stat.GetHandling() * Time.deltaTime;
 							Quaternion newRotation = Quaternion.LookRotation(moveDirection);
 							transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, MoveRotate);
+							
+							//force is added for smoother turning
 							player.AddForce(moveDirection, player.stat.GetCurrentSpeed());	
 						}
 						
+						//************************Player Input************************************************//
+						//swap gun/shield
 						if(Input.GetKeyDown(KeyCode.Mouse2) && !m_swapButtonDown) { 
 						m_swapButtonDown = true ;
 						myGunShieldRot.swapGunShield() ;	
@@ -54,25 +65,30 @@ public class KeyboardMouseController : MonoBehaviour {
 							m_swapButtonDown = false ;
 						}
 					
+						//mouse rotation
 						myGunShieldRot.updateRotationToMouse();
 						
+						//move vehicle
 						player.AddForce(moveDirection,  player.stat.GetAccel()) ;
-						//player.weapon.Shoot(aimDirection) ;
 						
+						//fire weapon
 						if(Input.GetKey(KeyCode.Mouse0) && myGunShieldRot.isGunEnabled() && myWeapon.CanShoot()) {
 							myWeapon.fireBullet() ;
 							player.RaiseTemp( true ) ;
 							}
 						
+						//use powerup
 						if(Input.GetKeyDown(KeyCode.Space)) {
 							if( player.myPowerup.item != 0 )
 								myPowerup.UseItem() ;
 							}
 						
+						//brakes
 						if( Input.GetKey(KeyCode.Q) ) {
 							player.SetDrag( 2f ) ;
 							}
-								
+							
+						//boost
 						if( Input.GetKey(KeyCode.Mouse1) ) {
 							player.BoostVehicle( 0.05f, false ) ;
 							}
@@ -81,10 +97,10 @@ public class KeyboardMouseController : MonoBehaviour {
 							}
 						}
 					else
-						player.SetDrag(m_maxDrag) ;
+						player.SetDrag(m_maxDrag) ; //vehicle is slowing down when there is no input or vehicle is overheated
 					}
 				else 
-					player.SetDrag(0f) ;
+					player.SetDrag(0f) ; //vehicle is slipping about when vehicle is frozen
 			}
 		}//end check if game is ingamerun state
 	}
