@@ -28,7 +28,7 @@ public class Vehicle : MonoBehaviour {
 	private float m_invulnerableDuration = 2f ;
 	
 	private bool m_slowed ;
-	private float m_slowDrag = 2f;
+	private float m_slowDrag = 5f;
 	
 	Color transparency ;
 	

@@ -85,7 +85,7 @@ public class KeyboardMouseController : MonoBehaviour {
 						
 						//brakes
 						if( Input.GetKey(KeyCode.Q) ) {
-							player.SetDrag( 2f ) ;
+							player.SetDrag( 3f ) ;
 							}
 							
 						//boost
