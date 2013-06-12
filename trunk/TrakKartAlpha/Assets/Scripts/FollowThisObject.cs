@@ -28,7 +28,7 @@ public class FollowThisObject : MonoBehaviour {
 		targetPos = transform.position;
 		
 		//if AIDriver is not enabled or doesn't exist, always follow player
-		if( !parentObject.GetComponent<AIDriver>().enabled ) {
+		if( parentObject.GetComponent<AIDriver>() == null ) {
 			
 			//camera zooms based on player's speed
 			if(!(parentObject.GetComponent<Vehicle>().isBoosted())) {

@@ -72,7 +72,7 @@ public class Xbox360Controller : MonoBehaviour {
 						
 						//brake
 						if( Input.GetKey(KeyCode.Joystick1Button4) /*|| Input.GetKey(KeyCode.Joystick2Button4)*/) {
-							player.SetDrag( 2f ) ;
+							player.SetDrag( 3f ) ;
 							Debug.Log ("BRAKE");
 						}
 						
