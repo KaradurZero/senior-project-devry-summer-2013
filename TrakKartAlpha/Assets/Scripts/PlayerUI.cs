@@ -4,9 +4,9 @@ using System.Collections;
 public class PlayerUI : MonoBehaviour {
 	
 	public GameObject player ;
-	public float tempDisplay, healthDisplay; //current progress
-	public Vector2 tempPos, healthPos, deathTextPos;
-	public Vector2 tempSize, healthSize, deathTextSize;
+	float tempDisplay, healthDisplay; //current progress
+	Vector2 tempPos, healthPos, deathTextPos;
+	Vector2 tempSize, healthSize, deathTextSize;
 	public Texture2D emptyTex;
 	public Texture2D fullTex;
 	
