@@ -7,7 +7,7 @@ public class Xbox360Controller : MonoBehaviour {
 	public Weapon myWeapon ;
 	public GunShieldRotation myGunShieldRot;
 	public vehicleItems myPowerup;
-	private float m_maxDrag = 0.5f ;
+	private float m_maxDrag = 1.5f ;
 	private bool m_swapButtonDown ;
 
 	// Use this for initialization
@@ -18,6 +18,8 @@ public class Xbox360Controller : MonoBehaviour {
 			myGunShieldRot = transform.GetComponentInChildren<GunShieldRotation>();
 		if(transform.GetComponent<vehicleItems>())
 			myPowerup = transform.GetComponent<vehicleItems>();
+		
+		player = this.gameObject.GetComponent<Vehicle>() ;
 		
 		m_swapButtonDown = false ;
 	}

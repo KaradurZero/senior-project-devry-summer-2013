@@ -21,15 +21,17 @@ public class KeyboardMouseController : MonoBehaviour {
 		if(transform.GetComponent<vehicleItems>())
 			myPowerup = transform.GetComponent<vehicleItems>();
 		
+		player = this.gameObject.GetComponent<Vehicle>() ;
+		
 		m_swapButtonDown = false ;
 		m_mainStateController = GameObject.Find("GameStateController").GetComponent<GameStateController>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		Destroy (this.GetComponent<GamepadController>());
 		//check first if game state is set to ingamerun
 		if(m_mainStateController.gameState == (int)GameStateController.gameStates.INGAMERUN) {
-			
 			//if player is alive
 			if( player.amAlive() ) {
 				
