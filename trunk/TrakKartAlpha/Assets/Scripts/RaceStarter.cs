@@ -14,6 +14,8 @@ public class RaceStarter : MonoBehaviour {
 		vehicleList = GameObject.FindGameObjectsWithTag("Vehicle");
 		foreach (GameObject racer in vehicleList) {
 			if( racer.name == "Player" ) {
+				racer.GetComponent<ControlSafety>().enabled = false ;
+				
 				if( racer.GetComponent<KeyboardMouseController>() != null )
 					racer.GetComponent<KeyboardMouseController>().enabled = false ;
 				else if( racer.GetComponent<GamepadController>() != null )
@@ -64,6 +66,8 @@ public class RaceStarter : MonoBehaviour {
 		if( timer < 1 ) {
 			foreach (GameObject racer in vehicleList) {
 				if( racer.name == "Player" ) {
+					racer.GetComponent<ControlSafety>().enabled = true ;
+					
 					if( racer.GetComponent<KeyboardMouseController>() != null )
 						racer.GetComponent<KeyboardMouseController>().enabled = true ;
 					else if( racer.GetComponent<GamepadController>() != null )

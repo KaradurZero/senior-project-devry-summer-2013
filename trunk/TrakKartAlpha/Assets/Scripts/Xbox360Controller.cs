@@ -96,7 +96,7 @@ public class Xbox360Controller : MonoBehaviour {
 						}
 					
 						//use powerup
-						if(Input.GetKey(KeyCode.Joystick1Button0)) {
+						if(Input.GetKeyDown(KeyCode.Joystick1Button0)) {
 						if( player.myPowerup.item != 0 )
 							player.FirePowerUp() ;
 					}

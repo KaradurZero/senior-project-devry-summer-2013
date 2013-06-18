@@ -94,7 +94,7 @@ public class GamepadController : MonoBehaviour {
 						}
 					
 						//use powerup
-						if( Input.GetKey(KeyCode.Joystick1Button1)) {
+						if( Input.GetKeyDown(KeyCode.Joystick1Button1)) {
 						if( player.myPowerup.item != 0 )
 							player.FirePowerUp() ;
 					}
