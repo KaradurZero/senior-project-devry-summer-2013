@@ -85,6 +85,7 @@ public class Vehicle : MonoBehaviour {
 	void Update () {
 		if(isAlive)
 		{
+			Debug.Log (transparency.b);
 			//QUICK FIX: There is a bug where vehicle respawns under world. This should keep it from sinking.
 			if( transform.position.y < 1f || transform.position.y > 1f )
 				transform.position = new Vector3( transform.position.x, 1f, transform.position.z ) ;
@@ -112,10 +113,18 @@ public class Vehicle : MonoBehaviour {
 			}
 			
 			//throttle code for when vehicle is frozen
-			if( m_frozen && m_freezeTime > 0 )
+			if( m_frozen && m_freezeTime > 0 ) {
 				m_freezeTime -= Time.deltaTime ;
-			else
+				
+				transparency.b = 255f ;
+				renderer.material.color = transparency ;
+				
+			}
+			else {
 				m_frozen = false ;
+				transparency.b = 1f ;
+				renderer.material.color = transparency ;
+			}
 			
 			//throttle code for when vehicle is slipping on oil
 			if( m_slipTime > 0 ) {
@@ -146,11 +155,12 @@ public class Vehicle : MonoBehaviour {
 					if( this.gameObject.name == "Player" ) {
 						if( this.GetComponent<KeyboardMouseController>() != null )
 							this.GetComponent<KeyboardMouseController>().enabled = true ;
-						//else if( this.GetComponent<GamepadController>() != null ) {
-						//	this.GetComponent<GamepadController>().enabled = true ;
-						//}
-						//else if( this.GetComponent<Xbox360Controller>() != null ) {
-						//	this.GetComponent<Xbox360Controller>().enabled = true ;
+						else if( this.GetComponent<GamepadController>() != null ) {
+							this.GetComponent<GamepadController>().enabled = true ;
+						}
+						else if( this.GetComponent<Xbox360Controller>() != null ) {
+							this.GetComponent<Xbox360Controller>().enabled = true ;
+						}
 						else
 							this.GetComponent<AIDriver>().enabled = true ;
 					}	
@@ -192,8 +202,17 @@ public class Vehicle : MonoBehaviour {
 			if( stat.isOverheated() || isFrozen() ) {
 				gameObject.GetComponentInChildren<GunShieldRotation>().TurnOnGun() ;
 				
-				if( isFrozen() )
+				if( isFrozen() ) {
 					stat.SetCurrTemp(0f) ;
+				}
+				else if( stat.isOverheated() ) {
+					transparency.r = 255f ;
+					renderer.material.color = transparency ;
+				}
+			}
+			else {
+				transparency.r = 1f ;
+				renderer.material.color = transparency ;
 			}
 			
 			//vehicle will not move faster than the maximum velocity
