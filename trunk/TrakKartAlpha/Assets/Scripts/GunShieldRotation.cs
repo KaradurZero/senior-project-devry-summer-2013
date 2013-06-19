@@ -52,6 +52,10 @@ public class GunShieldRotation : MonoBehaviour {
 	}
 	public void swapGunShield() {//swaps gun out for shield and vice versa
 		
+		if( this.isUsingGun )
+			TurnOnShield();
+		else
+			TurnOnGun() ;
 		audio.PlayOneShot(switchGunShield);
 		
 		isUsingGun = !isUsingGun;//makes it the oposite. only works with boolean value
