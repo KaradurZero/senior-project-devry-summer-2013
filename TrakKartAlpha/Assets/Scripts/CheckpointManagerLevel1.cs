@@ -107,7 +107,7 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 	}
 	void Update()
 	{
-		/*if(Input.GetKeyDown(KeyCode.Alpha1))
+		if(Input.GetKeyDown(KeyCode.Alpha1))
 		{
 			if( this.name == "Player" ) {
 				audio.PlayOneShot(finishedRace);
@@ -126,7 +126,7 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 					
 					GameObject.Instantiate(EndGame);
 			}
-		}*/
+		}
 		
 		
 		if( this.GetComponent<driverHealth>().ReadyToRespawn() )
