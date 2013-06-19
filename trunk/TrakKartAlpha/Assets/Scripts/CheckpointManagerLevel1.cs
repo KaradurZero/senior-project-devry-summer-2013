@@ -79,18 +79,18 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 				if(laps == 4)
 				{
 					audio.PlayOneShot(finishedRace);
-					this.gameObject.GetComponent<ControlSafety>().enabled = false ;
+					Destroy(this.gameObject.GetComponent<ControlSafety>());//.enabled = false ;
 					this.gameObject.GetComponent<PlayerUI>().enabled = false ;
 					this.gameObject.AddComponent<AIDriver>() ;
 					this.gameObject.GetComponent<AIDriver>().enabled = true ;
-					this.GetComponent<AIDriver>().player = this.gameObject.GetComponent<Vehicle>() ;
+					this.gameObject.GetComponent<AIDriver>().player = this.gameObject.GetComponent<Vehicle>() ;
 					
-					if( GetComponent<KeyboardMouseController>().enabled )
-						GetComponent<KeyboardMouseController>().enabled = false ;
-					else if( GetComponent<GamepadController>().enabled )
-						GetComponent<GamepadController>().enabled = false ;
-					else
-						GetComponent<Xbox360Controller>().enabled = false ;
+				if( this.gameObject.GetComponent<KeyboardMouseController>() != null )
+					this.gameObject.GetComponent<KeyboardMouseController>().enabled = false ;
+				else if( this.gameObject.GetComponent<GamepadController>() != null )
+					this.gameObject.GetComponent<GamepadController>().enabled = false ;
+				else
+					this.gameObject.GetComponent<Xbox360Controller>().enabled = false ;
 					
 					GameObject.Instantiate(EndGame);
 					//save stats for the menu
@@ -111,18 +111,18 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 		{
 			if( this.name == "Player" ) {
 				audio.PlayOneShot(finishedRace);
-					this.gameObject.GetComponent<ControlSafety>().enabled = false ;
+					Destroy(this.gameObject.GetComponent<ControlSafety>());//.enabled = false ;
 					this.gameObject.GetComponent<PlayerUI>().enabled = false ;
 					this.gameObject.AddComponent<AIDriver>() ;
 					this.gameObject.GetComponent<AIDriver>().enabled = true ;
-					this.GetComponent<AIDriver>().player = this.gameObject.GetComponent<Vehicle>() ;
+					this.gameObject.GetComponent<AIDriver>().player = this.gameObject.GetComponent<Vehicle>() ;
 					
-					if( GetComponent<KeyboardMouseController>().enabled )
-						GetComponent<KeyboardMouseController>().enabled = false ;
-					else if( GetComponent<GamepadController>().enabled )
-						GetComponent<GamepadController>().enabled = false ;
-					else
-						GetComponent<Xbox360Controller>().enabled = false ;
+				if( this.gameObject.GetComponent<KeyboardMouseController>() != null )
+					this.gameObject.GetComponent<KeyboardMouseController>().enabled = false ;
+				else if( this.gameObject.GetComponent<GamepadController>() != null )
+					this.gameObject.GetComponent<GamepadController>().enabled = false ;
+				else
+					this.gameObject.GetComponent<Xbox360Controller>().enabled = false ;
 					
 					GameObject.Instantiate(EndGame);
 			}
