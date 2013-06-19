@@ -3,6 +3,9 @@ using System.Collections;
 
 public class GarageStatManager : MonoBehaviour {
 	
+	public AudioClip upgrade;
+	public AudioClip nope;
+	
 	public Material
 		unfilled,
 		filled;
@@ -121,6 +124,9 @@ public class GarageStatManager : MonoBehaviour {
 	}
 	public void UpgradeStat(string statName)
 	{
+		//play the upgrade sound
+		audio.PlayOneShot(upgrade);
+		
 		switch(statName)
 		{
 		case "Speed":

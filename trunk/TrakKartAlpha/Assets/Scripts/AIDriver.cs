@@ -73,7 +73,9 @@ public class AIDriver: MonoBehaviour {
 						{
 							if(myCheckpoints != null)
 							{
-								myTargetPos = myCheckpoints.GetCurrCheckpointPos();
+								float variation = Random.Range(-5f, 5f);
+								myTargetPos = myCheckpoints.GetCurrCheckpointPos() + 
+								(myCheckpoints.GetCheckpoint().transform.right * variation);
 							}
 						}
 					if( !player.stat.isOverheated() ) {
@@ -84,7 +86,6 @@ public class AIDriver: MonoBehaviour {
 								player.AddForce(moveDirection, player.stat.GetCurrentSpeed());	
 							}
 						}
-						//transform.position = new Vector3(transform.position.x, 1.0f, transform.position.z);
 						player.AddForce(moveDirection,  player.stat.GetAccel()) ;
 					}
 					else

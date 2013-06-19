@@ -5,29 +5,30 @@ using System.Collections.Generic;
 public class AIState : MonoBehaviour {
 	
 	//think times
-	float timeShotAt;
-	public float timeUntilRevengeShot;
-	float updateStateTime;
-	float PowerupUseStallTime;
-	float tempPercentage, initialTemp, currentTemp;
+	public float 	timeUntilRevengeShot;
+	
+	float 			timeShotAt;
+	float 			updateStateTime;
+	float 			PowerupUseStallTime;
 	
 	//periodicals
-	float currentStateTime, deltaStateTime;
-	float waitTime, currWaitTime;
-	float currPowerupTime;
+	float 			currentStateTime, 		deltaStateTime;
+	float 			waitTime, 				currWaitTime;
+	float 			currPowerupTime;
 	
 	//triggers
-	bool IAmBeingShotAt;
-	bool firstFrameShield;
-	bool isAlive;
+	bool 			IAmBeingShotAt;
+	bool 			firstFrameShield;
+	bool 			isAlive;
 	
 	//possessions
-	Weapon myWeapon;
+	Weapon 			myWeapon;
 	GunShieldRotation myGunShieldRot;
-	Transform enemyTrans;
-	vehicleItems myPowerup;
-	Vehicle myVehicle;
-	CarStat myCarStat;
+	Transform 		enemyTrans;
+	vehicleItems 	myPowerup;
+	Vehicle 		myVehicle;
+	CarStat 		myCarStat;
+	
 	//competition - set in inspector
 	public GameObject[] otherDrivers;
 	
@@ -36,6 +37,7 @@ public class AIState : MonoBehaviour {
 		SHOOT,
 		SHIELD,
 		NONE};
+	
 	AI_STATE myState;
 	
 	void Start () {
@@ -45,10 +47,12 @@ public class AIState : MonoBehaviour {
 		myGunShieldRot 		= null;
 		IAmBeingShotAt 		= false;
 		isAlive				= true;
-		PowerupUseStallTime = Random.Range(1f,2f);
+		PowerupUseStallTime = Random.Range(3f,8f);
 		currentStateTime 	= currPowerupTime = Time.time;
 		enemyTrans			= FindClosestDriver();
 		
+		
+		//check to see if a component exists before setting
 		if(transform.GetComponentInChildren<Weapon>())
 			myWeapon = transform.GetComponentInChildren<Weapon>();
 		if(transform.GetComponentInChildren<GunShieldRotation>())
@@ -60,7 +64,6 @@ public class AIState : MonoBehaviour {
 		if(transform.GetComponent<CarStat>())
 			myCarStat = transform.GetComponentInChildren<CarStat>();
 		
-		initialTemp = myCarStat.GetMaxTemp();
 		
 		StallTime(3f);		
 	}
@@ -137,6 +140,10 @@ public class AIState : MonoBehaviour {
 	}
 	void StateChange()
 	{
+			//attack
+			float tempPercentage = myCarStat.GetCurrTemp() / myCarStat.GetMaxTemp();
+		
+			//Debug.Log( gameObject.name + "'s IT: " + myCarStat.GetMaxTemp() + " CT : " + myCarStat.GetCurrTemp());
 			//defend
 			if(IAmBeingShotAt)
 			{
@@ -148,10 +155,10 @@ public class AIState : MonoBehaviour {
 				myState = AI_STATE.SHIELD;
 				myGunShieldRot.TurnOnShield();
 			}
-			else if(Vector3.Distance(transform.position, enemyTrans.position) < 20)
+			else if(tempPercentage < 80) // if(Vector3.Distance(transform.position, enemyTrans.position) < 20)
 			{
 				firstFrameShield = true;
-				enemyTrans = FindClosestDriver();//.GetComponent<waypointManager>().GetFutureWaypointTransform(1);
+				enemyTrans = FindClosestDriver();
 				myState = AI_STATE.SHOOT;
 				myGunShieldRot.TurnOnGun();
 				if(enemyTrans.GetComponent<AIState>())
@@ -159,11 +166,9 @@ public class AIState : MonoBehaviour {
 				
 			}
 			//nothing
-			else
-				myState = AI_STATE.NONE;
-			//attack
-			currentTemp = myCarStat.GetCurrTemp();
-			tempPercentage = currentTemp / initialTemp;
+			//else
+			//	myState = AI_STATE.NONE;
+		
 			
 	}
 	
@@ -171,12 +176,12 @@ public class AIState : MonoBehaviour {
 	{
 		if(isAlive)
 		{
-			if( !GetComponent<Vehicle>().isFrozen() ) {
+			if( !GetComponent<Vehicle>().isFrozen() ) 
+			{
 				//do nothing if waitTime is set to anything
 				if(waitTime > 0)
-				{
 					myState = AI_STATE.NONE;
-				}
+				
 				//update state
 				if(Time.time - currentStateTime > updateStateTime)
 				{
@@ -196,6 +201,7 @@ public class AIState : MonoBehaviour {
 			myState = AI_STATE.NONE;
 		}
 		
+		//am I frozen or overheated?
 		if( !GetComponent<Vehicle>().isFrozen() && !this.gameObject.GetComponent<CarStat>().isOverheated()) {
 			switch(myState)
 			{
@@ -222,7 +228,5 @@ public class AIState : MonoBehaviour {
 				break;
 			}
 		}
-		//else
-			//myGunShieldRot.TurnOnGun();
 	}
 }

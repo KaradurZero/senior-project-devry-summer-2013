@@ -3,6 +3,7 @@ using System.Collections;
 
 public class GunShieldRotation : MonoBehaviour {
 	
+	public AudioClip switchGunShield;
 	private Transform 	gunAndShield;
 	public bool 		isUsingGun;
 	public GameObject	m_shield;
@@ -50,6 +51,9 @@ public class GunShieldRotation : MonoBehaviour {
 		
 	}
 	public void swapGunShield() {//swaps gun out for shield and vice versa
+		
+		audio.PlayOneShot(switchGunShield);
+		
 		isUsingGun = !isUsingGun;//makes it the oposite. only works with boolean value
 		this.renderer.enabled 		= isUsingGun;
 		m_shield.renderer.enabled 	= !isUsingGun;

@@ -31,6 +31,10 @@ public class driverHealth : MonoBehaviour {
 			transform.GetComponent<vehicleItems>().Die();
 		GameObject splosion = (GameObject) Instantiate(explosion, transform.position,Quaternion.identity);
 		splosion.transform.LookAt(Camera.main.transform.position);
+		if(transform.name == "Player")
+			splosion.GetComponent<BreakBox>().isPlayer = true;
+		else
+			splosion.GetComponent<BreakBox>().isPlayer = false;
 	}
 	void Revive()
 	{

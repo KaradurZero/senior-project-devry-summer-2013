@@ -3,6 +3,11 @@ using System.Collections;
 
 public class vehicleItems : MonoBehaviour {
 	
+	public AudioClip missle;
+	public AudioClip freeze;
+	public AudioClip oil;
+	public AudioClip shieldUp;
+	
 	public int m_item;//NOTE: remove public when not debugging
 	int SmallWidth;// = Screen.width/5;
 	int SmallHeight;// = Screen.height/10;
@@ -57,6 +62,10 @@ public class vehicleItems : MonoBehaviour {
 				//droppedItem.transform.position -= this.transform.parent.transform.forward * 2;
 				break;
 			case (int)items.homingMissle://use homing missle item
+			
+				//play sound effect
+				audio.PlayOneShot(missle);
+				
 				Debug.Log("used homingMissle");
 				float distance = Mathf.Infinity;
 				Vector3 position = transform.position;
@@ -81,6 +90,9 @@ public class vehicleItems : MonoBehaviour {
 				m_item = 0 ;
 				break;
 			case (int)items.freezeShot://use freeze shot item
+			
+			
+				audio.PlayOneShot(freeze);
 				Debug.Log("used freezeShot");
 				//instantiate freeze bullet and fire in direction that gun is facing.
 				//this will rely upon vehicle having the gun working correctly and pointing in a direction
@@ -96,12 +108,18 @@ public class vehicleItems : MonoBehaviour {
 				m_item = 0 ;
 				break;
 			case (int)items.enlargeShield://use  enlarge shield item
+			
+				audio.PlayOneShot(shieldUp);
+				
 				Debug.Log("used enlargeShield");
 				//get script inside parent/child shield object and call enlarge shield function
 				this.transform.FindChild(m_hWeapon).FindChild(m_hShield).GetComponent<VehicleShieldController>().enlargeShield();
 				m_item = 0 ;
 				break;
 			case (int)items.deflectorShield://use deflector shield item
+			
+				audio.PlayOneShot(shieldUp);
+				
 				Debug.Log("used deflectorShield");
 				//get script inside shield object and call deflector shield function
 				this.transform.FindChild(m_hWeapon).FindChild(m_hShield).GetComponent<VehicleShieldController>().setDeflecting();

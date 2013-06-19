@@ -22,6 +22,7 @@ public class itemBox : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(m_isTangible) {
+			transform.RotateAround(Vector3.up,.1f);
 			//do something here? may leave to collision box update
 		}
 		else {
@@ -94,13 +95,9 @@ public class itemBox : MonoBehaviour {
 			if( c.tag == m_hTriggerSpecific_01) {//if a vehicle
 				if( c.gameObject.GetComponent<vehicleItems>()) {//if has script
 					if( c.gameObject.GetComponent<vehicleItems>().m_item == 0) {//if has no item
-						c.gameObject.GetComponent<vehicleItems>().m_item = Random.Range( 1, 7 );//give item
+						c.gameObject.GetComponent<vehicleItems>().m_item = 3;//Random.Range( 1, 7 );//give item
 					if(GetComponent<AIState>() != null)
 						GetComponent<AIState>().RecievePowerUp();
-					}
-					if(c.name == "Player")
-					{
-						GameObject.Find("powerupDisplay").GetComponent<PowerUpDisplay>().DisplayPowerup(c.GetComponent<vehicleItems>().m_item);
 					}
 					//c.gameObject.GetComponent<vehicleItems>().item = 3;//debugging
 					itemPickedUp();
@@ -108,6 +105,12 @@ public class itemBox : MonoBehaviour {
 					GameObject sparks = (GameObject) Instantiate(crash, c.transform.position, Quaternion.identity);
 					sparks.transform.LookAt(transform.position + new Vector3(0f,1f,0f));
 					Destroy(sparks,2f);
+					sparks.GetComponent<BreakBox>().isPlayer = false;
+					if(c.name == "Player")
+					{
+						sparks.GetComponent<BreakBox>().isPlayer = true;
+						GameObject.Find("powerupDisplay").GetComponent<PowerUpDisplay>().DisplayPowerup(c.GetComponent<vehicleItems>().m_item);
+					}
 				}
 			}
 		}

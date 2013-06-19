@@ -7,6 +7,7 @@ public class piggieBank : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider c) {
 		if( c.gameObject.name == "Player") {
+		
 			Destroy(transform.gameObject);
 			GameObject sparks = (GameObject) Instantiate(crash, c.transform.position, Quaternion.identity);
 			sparks.transform.LookAt(transform.position + new Vector3(0f,1f,0f));
