@@ -57,10 +57,6 @@ public class GunShieldRotation : MonoBehaviour {
 		else
 			TurnOnGun() ;
 		audio.PlayOneShot(switchGunShield);
-		
-		isUsingGun = !isUsingGun;//makes it the oposite. only works with boolean value
-		this.renderer.enabled 		= isUsingGun;
-		m_shield.renderer.enabled 	= !isUsingGun;
 	}
 	
 	public bool isGunEnabled() {return isUsingGun ;}
