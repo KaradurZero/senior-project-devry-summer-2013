@@ -3,7 +3,8 @@ using System.Collections;
 
 public class CheckpointManagerLevel1 : MonoBehaviour {
 	public GameObject[] checkpoints;
-	public AudioClip finishedCheckpoint, finishedLap, finishedRace ;
+	public GameObject EndGame;
+	public AudioClip finishedCheckpoint, finishedLap, finishedRace;
 	int focus;
 	int laps;
 	void Awake()
@@ -60,7 +61,7 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 			focus++;
 			if(gameObject.name == "Player")
 			{
-				audio.PlayOneShot(finishedCheckpoint) ;
+				audio.PlayOneShot(finishedCheckpoint);
 				checkpoints[focus-1].renderer.material.color = Color.white;
 				checkpoints[focus].renderer.material.color = Color.blue;
 				
@@ -77,10 +78,9 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 				GameObject.Find ("lapDisplay").GetComponent<lapDisplay>().StartingLap(laps);
 				if(laps == 4)
 				{
-					audio.PlayOneShot(finishedRace) ;
+					audio.PlayOneShot(finishedRace);
 					this.gameObject.GetComponent<ControlSafety>().enabled = false ;
 					this.gameObject.GetComponent<PlayerUI>().enabled = false ;
-					
 					this.gameObject.AddComponent<AIDriver>() ;
 					this.gameObject.GetComponent<AIDriver>().enabled = true ;
 					this.GetComponent<AIDriver>().player = this.gameObject.GetComponent<Vehicle>() ;
@@ -92,30 +92,30 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 					else
 						GetComponent<Xbox360Controller>().enabled = false ;
 					
+					GameObject.Instantiate(EndGame);
 					//save stats for the menu
-					DontDestroyOnLoad(GameObject.Find("statsFromGame"));
-					GameObject.Find("statsFromGame").GetComponent<MenuStatsFromGame>().SetGold(
-						GameObject.Find("GoldText").GetComponent<GoldGUIDisplay>().GetGoldAmount());
-					Destroy(GameObject.Find("MenuStats"));
+			//		DontDestroyOnLoad(GameObject.Find("statsFromGame"));
+			//		GameObject.Find("statsFromGame").GetComponent<MenuStatsFromGame>().SetGold(
+			//			GameObject.Find("GoldText").GetComponent<GoldGUIDisplay>().GetGoldAmount());
+			//		Destroy(GameObject.Find("MenuStats"));
 					//Application.LoadLevel(2);
 				}
 			}
 			else
-				audio.PlayOneShot(finishedLap) ;
+				audio.PlayOneShot(finishedLap);
 		}
 	}
 	void Update()
 	{
-		if(Input.GetKeyDown(KeyCode.Alpha1))
+		/*if(Input.GetKeyDown(KeyCode.Alpha1))
 		{
 			if( this.name == "Player" ) {
 				audio.PlayOneShot(finishedRace);
-				this.gameObject.GetComponent<ControlSafety>().enabled = false ;
-				this.gameObject.GetComponent<PlayerUI>().enabled = false ;
-				
-				this.gameObject.AddComponent<AIDriver>() ;
-				this.gameObject.GetComponent<AIDriver>().enabled = true ;
-				this.GetComponent<AIDriver>().player = this.gameObject.GetComponent<Vehicle>() ;
+					this.gameObject.GetComponent<ControlSafety>().enabled = false ;
+					this.gameObject.GetComponent<PlayerUI>().enabled = false ;
+					this.gameObject.AddComponent<AIDriver>() ;
+					this.gameObject.GetComponent<AIDriver>().enabled = true ;
+					this.GetComponent<AIDriver>().player = this.gameObject.GetComponent<Vehicle>() ;
 					
 					if( GetComponent<KeyboardMouseController>().enabled )
 						GetComponent<KeyboardMouseController>().enabled = false ;
@@ -123,18 +123,11 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 						GetComponent<GamepadController>().enabled = false ;
 					else
 						GetComponent<Xbox360Controller>().enabled = false ;
+					
+					GameObject.Instantiate(EndGame);
 			}
-		}
+		}*/
 		
-		if(Input.GetKeyDown(KeyCode.Alpha6))
-		{
-			//save stats for the menu
-					DontDestroyOnLoad(GameObject.Find("statsFromGame"));
-					GameObject.Find("statsFromGame").GetComponent<MenuStatsFromGame>().SetGold(
-						GameObject.Find("GoldText").GetComponent<GoldGUIDisplay>().GetGoldAmount());
-					Destroy(GameObject.Find("MenuStats"));
-					Application.LoadLevel(2);
-		}
 		
 		if( this.GetComponent<driverHealth>().ReadyToRespawn() )
 		{
