@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CheckpointManagerLevel1 : MonoBehaviour {
 	public GameObject[] checkpoints;
+	public AudioClip finishedCheckpoint, finishedLap, finishedRace ;
 	int focus;
 	int laps;
 	void Awake()
@@ -59,6 +60,7 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 			focus++;
 			if(gameObject.name == "Player")
 			{
+				audio.PlayOneShot(finishedCheckpoint) ;
 				checkpoints[focus-1].renderer.material.color = Color.white;
 				checkpoints[focus].renderer.material.color = Color.blue;
 				
@@ -75,6 +77,7 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 				GameObject.Find ("lapDisplay").GetComponent<lapDisplay>().StartingLap(laps);
 				if(laps == 4)
 				{
+					audio.PlayOneShot(finishedRace) ;
 					this.gameObject.GetComponent<ControlSafety>().enabled = false ;
 					this.gameObject.GetComponent<PlayerUI>().enabled = false ;
 					
@@ -97,6 +100,8 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 					//Application.LoadLevel(2);
 				}
 			}
+			else
+				audio.PlayOneShot(finishedLap) ;
 		}
 	}
 	void Update()
@@ -104,6 +109,7 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.Alpha1))
 		{
 			if( this.name == "Player" ) {
+				audio.PlayOneShot(finishedRace);
 				this.gameObject.GetComponent<ControlSafety>().enabled = false ;
 				this.gameObject.GetComponent<PlayerUI>().enabled = false ;
 				
