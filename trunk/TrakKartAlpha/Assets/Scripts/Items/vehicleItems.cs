@@ -81,7 +81,7 @@ public class vehicleItems : MonoBehaviour {
 					}
 				}
 				Vector3 front = transform.position + 
-					transform.forward * (this.transform.localScale.y * 1.5f);
+					transform.forward * (this.transform.localScale.y * 2.5f);
 				GameObject missile =(GameObject)Instantiate(m_homingMissle, front, Quaternion.identity);
 				//missile.GetComponent<MissileMovement>().setIgnoreTarget(this.gameObject.transform.FindChild("vehicleShield").gameObject);
 				missile.GetComponent<MissileMovement>().setIgnoreTarget(this.gameObject);

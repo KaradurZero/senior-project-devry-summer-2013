@@ -262,7 +262,7 @@ public class Vehicle : MonoBehaviour {
 	
 	//while vehicle is within an object's collider
 	void OnTriggerStay( Collider other ) {
-		if( other.gameObject.tag == "Slow" ){
+		if( other.gameObject.tag == "Slow" && !isBoosted() ){
 			SetDrag(m_slowDrag) ;
 			m_slowed = true ;
 			Debug.Log ("Slow");
@@ -347,7 +347,7 @@ public class Vehicle : MonoBehaviour {
 	
 	//sets slip coefficient and duration when vehicle hits an oil slick
 	public void Slick() {
-		m_slipCoeff = 3f ;
+		m_slipCoeff = 2f ;
 		m_slipTime = 4f ;
 	}
 	
