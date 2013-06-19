@@ -54,13 +54,13 @@ public class GameMenu : MonoBehaviour {
 				m_mainStateController.setGameState( (int)GameStateController.gameStates.INGAMERUN);
 				break;
 			case "Main Menu":
-				//close scene and return to main menu scene
+				Application.LoadLevel(0);
 				break;
 			case "Help":
-				//open up help menu for controls
+				Application.LoadLevel(1);
 				break;
 			case "Garage":
-				//change scene to the garage screen
+				Application.LoadLevel(2);
 				break;
 			case "Resume":
 				//returns the game state to running. ie unpausing

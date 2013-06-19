@@ -7,6 +7,7 @@ public class Button : MonoBehaviour {
 	public AudioClip mouseDownSound;
 	void OnMouseEnter()
 	{
+		audio.PlayOneShot(mouseOverSound);
 		transform.localScale += new Vector3 (0.3f,0.3f,0.3f);
 	}
 	
@@ -15,11 +16,8 @@ public class Button : MonoBehaviour {
 		transform.localScale -= new Vector3 (0.3f,0.3f,0.3f);
 	}
 	
-	void OnMouseOver()
+	void OnMouseDown()
 	{
-		if(Input.GetMouseButton(0))
-		{
-			transform.Rotate(Vector3.up, 1f);
-		}
+		audio.PlayOneShot(mouseDownSound);
 	}
 }

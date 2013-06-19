@@ -3,8 +3,13 @@ using System.Collections;
 
 public class Vehicle : MonoBehaviour {
 	
+	public AudioClip hitWall, hitCar;
+	public AudioClip boost;
+	
 	public CarStat stat ;
 	public vehicleItems myPowerup;
+	public GameObject FreezeGUI;
+	public GameObject IceBlock;
 	
 	private bool m_boosted ;
 	private float m_boost_time ;
@@ -12,6 +17,7 @@ public class Vehicle : MonoBehaviour {
 	private float m_spinAngle = 0f ;
 	
 	public Object tireTraksPrefab;
+	
 	//turn effect
 	Vector3 lastFrameAngle;
 	bool isAlive;
@@ -187,6 +193,9 @@ public class Vehicle : MonoBehaviour {
 				SetDrag(1f) ;
 				Object traks = Instantiate(tireTraksPrefab,transform.position + new Vector3(0f,-.5f,0f),transform.rotation);
 				Destroy (traks, 5);
+				
+				//play sound effect for skidding
+		//		audio.PlayOneShot(skid);
 			}
 				
 			lastFrameAngle = transform.forward;
@@ -242,6 +251,13 @@ public class Vehicle : MonoBehaviour {
 			m_slowed = true ;
 			Debug.Log ("Slow");
 		}
+		if( other.gameObject.tag == "Boost" ){
+			audio.PlayOneShot(boost);
+		}
+		
+		if( other.gameObject.tag == "Wall"){
+			audio.PlayOneShot(hitWall);
+		}
 	}
 	
 	//while vehicle is within an object's collider
@@ -263,6 +279,11 @@ public class Vehicle : MonoBehaviour {
 		}	
 	}
 	
+	void OnCollisionEnter(Collision collision) {
+		if( collision.collider.transform.gameObject.tag == "Vehicle"){
+			audio.PlayOneShot(hitCar);
+		}
+	}
 	//*************************Vehicle Behaviors**************************//
 	
 	
@@ -330,8 +351,17 @@ public class Vehicle : MonoBehaviour {
 		m_slipTime = 4f ;
 	}
 	
-	//sets the freeze duration when vehicle is frozen
+	//sets the freeze duration when vehicle is frozen and creates freeze visuals
 	public void Freeze() {
+		GameObject ice = (GameObject) Instantiate(IceBlock,transform.position,Quaternion.identity) as GameObject;
+		ice.GetComponent<FollowIceBlock>().gameObjectToFollow = gameObject.transform;
+		if(gameObject.name == "Player")
+		{
+			GameObject freeze = (GameObject) Instantiate(FreezeGUI) as GameObject;
+			ice.GetComponent<BreakBox>().isPlayer = true;
+		}
+		else
+			ice.GetComponent<BreakBox>().isPlayer = false;
 		m_freezeTime = m_freezeDuration ;
 		m_frozen = true ;
 	}

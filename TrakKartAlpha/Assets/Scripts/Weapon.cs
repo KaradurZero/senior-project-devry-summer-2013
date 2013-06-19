@@ -2,6 +2,9 @@ using UnityEngine;
 using System.Collections;
 
 public class Weapon : MonoBehaviour {
+
+	public AudioClip turret;
+	
 	public float m_coolDownTime;
 	public GameObject m_bullet;
 	public float a_bulletSpeed1;
@@ -30,35 +33,27 @@ public class Weapon : MonoBehaviour {
 		}
 		else
 			m_canShoot = true;
-/*		if(Input.GetMouseButtonDown(0)) {
-			if(transform.GetComponent<GunShieldRotation>().isUsingGun) {
-				fireBullet();
-			}
-		}
-	*/
-//		if(m_bullet) {
-//			Debug.Log( m_bullet.transform.rotation.ToString());
-//		}
 	}
 	
 	public void fireBullet() {
 		if(m_canShoot)
 		{
+		
+			audio.PlayOneShot(turret);
+			
 			m_coolDownTime = 0.5f ;
-			GameObject projectile = (GameObject) Instantiate(m_bullet, transform.position + (transform.forward * 1.5f), Quaternion.identity);
-	//		Physics.IgnoreCollision(projectile.collider, transform.root.collider);
-	//		Debug.Log(transform.root.transform.name);
-			//Physics.IgnoreCollision(transform.collider,projectile.collider);
+			GameObject projectile = (GameObject) Instantiate(m_bullet, transform.position + (transform.forward * 1.5f),new Quaternion(
+				90f, m_bullet.transform.rotation.y, m_bullet.transform.rotation.z, m_bullet.transform.rotation.w));
+
 			projectile.GetComponent<BulletUpdate>().DoNotCollideWith(this.transform.parent.gameObject);
-			//projectile.GetComponent<BulletUpdate>().DoNotCollideWith(this.gameObject);
 			projectile.GetComponent<BulletUpdate>().speed 			= a_bulletSpeed1;
 			projectile.GetComponent<BulletUpdate>().direction 		= this.transform.transform.eulerAngles.y;
 			projectile.GetComponent<BulletUpdate>().lifespan 		= 
 			Random.Range(a_bullet1LifespanMin, a_bullet1LifespanMax);
-		//	projectile.GetComponent<BulletUpdate>().parentMomentum	=
-		//		transform.parent.GetComponent<basicMovementTesting>().m_currentVelocity;
-		/** basicMovementTesting is just the movement script. grab the current velocity of the parent
-		 * by looking into that script and getting the value stored there (must be public)*/
+			if(transform.root.name == "Player")
+				projectile.GetComponent<BulletUpdate>().isPlayers = true;
+			else
+				projectile.GetComponent<BulletUpdate>().isPlayers = false;
 		}
 	}
 	

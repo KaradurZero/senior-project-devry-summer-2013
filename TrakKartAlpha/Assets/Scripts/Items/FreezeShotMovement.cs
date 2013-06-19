@@ -16,7 +16,7 @@ public class FreezeShotMovement : MonoBehaviour {
 	void Start () {
 		m_hTriggerSpecific_01 = "Vehicle";
 		m_hTriggerSpecific_02 = "Wall";
-		m_bulletLifespan = 0.5f ;
+		m_bulletLifespan = 3f ;
 	}
 	
 	// Update is called once per frame

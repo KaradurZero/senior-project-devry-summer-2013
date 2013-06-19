@@ -10,6 +10,8 @@ public class CarStat : MonoBehaviour {
 	public float m_maxVelocity ;
 	public float m_acceleration ;
 	public float m_boostVelocity ;
+	public GameObject m_overheatedGUI;
+	public GameObject m_engineFlames;
 	
 	private int m_attack ;
 	private int m_defense ;
@@ -116,6 +118,18 @@ public class CarStat : MonoBehaviour {
 			m_currTemp = m_maxTemp ;
 			m_tempPerSec = false ;
 			m_overheated = true ;
+			GameObject flames = (GameObject) Instantiate(m_engineFlames,transform.position, m_engineFlames.transform.rotation) as GameObject;
+			flames.GetComponent<FollowSmoke>().gameObjectToFollow = gameObject.transform;
+			Destroy (flames, 5f);
+			if(name == "Player")
+			{
+				GameObject gui = (GameObject) Instantiate(m_overheatedGUI) as GameObject;
+				gui.GetComponent<DissolveImageGUI>().lifeTime = 5f;
+				Destroy(gui, 5f);
+				flames.GetComponent<BreakBox>().isPlayer = true;
+			}
+			else
+				flames.GetComponent<BreakBox>().isPlayer = false;
 		}
 		if( m_currTemp <= 0 ) {
 			m_currTemp = 0 ;
@@ -163,13 +177,13 @@ public class CarStat : MonoBehaviour {
 		stats.SetStats(1,1,1,1,1,1,1,1);	//default values
 		stats.SetGold(0);
 		//if stats have been set in 
-		if(gameObject.name == "Player")
-		{
+//		if(gameObject.name == "Player")
+//		{
 			menuStats = GameObject.Find("MenuStats").GetComponent<statsFromMenu>();
 			if(menuStats != null)
 			{
-				m_maxVelocity 	= m_defaultMaxVelocity 	= menuStats.GetSpeed() + 10;
-				m_acceleration 	= m_defaultAcceleration = menuStats.GetAccel() + 10;
+				m_maxVelocity 	= m_defaultMaxVelocity 	= menuStats.GetSpeed() + 20;
+				m_acceleration 	= m_defaultAcceleration = menuStats.GetAccel() + 20;
 				m_maxTemp 		= 100 + (menuStats.GetTemp() * 20);
 				m_boostVelocity = m_maxVelocity + (menuStats.GetBoost() * 5);
 				m_maxHealth 	= 100 + (menuStats.GetHealth() * 50);
@@ -189,6 +203,6 @@ public class CarStat : MonoBehaviour {
 					menuStats.GetDefense());
 				
 			}
-		}
+//		}
 	}
 }

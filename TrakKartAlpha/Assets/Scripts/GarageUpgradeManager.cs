@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 public class GarageUpgradeManager : MonoBehaviour {
+	public AudioClip nope;
+	public bool upgradeOk;
 	GarageStatManager garageStats;
 	bool isActive;
 	public Material
@@ -35,10 +37,12 @@ public class GarageUpgradeManager : MonoBehaviour {
 		cost = GameObject.Find("Text_Cost").GetComponent<TextMesh>();
 		goldCount = GameObject.Find("Text_Gold").GetComponent<TextMesh>();
 		stat = "Speed";
+		upgradeOk = true;
 
 	}
 	public void DisplayStatInfo(string statName)
 	{
+		upgradeOk = true;
 		stat = statName;
 		isActive = true;
 		costLabel.renderer.enabled 	= true;
@@ -64,10 +68,12 @@ public class GarageUpgradeManager : MonoBehaviour {
 		if (int.Parse(cost.text) > int.Parse(goldCount.text))
 		{
 			buyButton.renderer.material = upgradeTooMuch;
+			upgradeOk = false;
 		}
 		if (!garageStats.CanUpgradeStat(statName))
 		{
 			buyButton.renderer.material = upgradeMaxed;
+			upgradeOk = false;
 		}
 	}
 	public void RequestUpgradeButton()
@@ -76,19 +82,24 @@ public class GarageUpgradeManager : MonoBehaviour {
 		{
 			Upgrade();
 		} 
+		else
+			audio.PlayOneShot(nope);
 	}
 	public void Upgrade()
 	{
+		upgradeOk = true;
 		garageStats.UpgradeStat(stat);
 		goldCount.text = (int.Parse(goldCount.text) - int.Parse(cost.text)).ToString();
 		cost.text = (garageStats.GetStatCost(stat)).ToString();
 		if(int.Parse(cost.text) > int.Parse(goldCount.text))
 		{
 			buyButton.renderer.material = upgradeTooMuch;
+			upgradeOk = false;
 		}
 		if (!garageStats.CanUpgradeStat(stat))
 		{
 			buyButton.renderer.material = upgradeMaxed;
+			upgradeOk = false;
 		}
 	}
 	public bool IsActive()

@@ -2,7 +2,9 @@ using UnityEngine;
 using System.Collections;
 
 public class BulletUpdate : MonoBehaviour {
+	public AudioClip hitShieldDeflect;
 	public GameObject crash;
+	public bool isPlayers;
 	bool hasCollider;
 	GameObject	parentTrans;
 	int 		bulletType;
@@ -15,7 +17,7 @@ public class BulletUpdate : MonoBehaviour {
 		
 	// Use this for initialization
 	void Start () {
-		bulletSpeed = 2f;
+		bulletSpeed = 3f;
 		hasCollider = false;
 	}
 	
@@ -31,6 +33,7 @@ public class BulletUpdate : MonoBehaviour {
 	void updateBulletMovement() {
 		//will update by moving the bullet forward by it's speed * deltaTime
 		this.transform.rotation = Quaternion.AngleAxis( m_direction, Vector3.up);
+		//transform.rotation = new Quaternion(90f,transform.rotation.y, transform.rotation.z, transform.rotation.w);
 		m_moveTo = this.transform.forward * m_projectileSpeed;
 		
 		this.transform.position += (m_moveTo * Time.deltaTime * bulletSpeed) + m_parentMomentum;
@@ -78,9 +81,12 @@ public class BulletUpdate : MonoBehaviour {
 	public void DoNotCollideWith(GameObject other){Physics.IgnoreCollision(other.collider,this.collider) ;}
 	void OnTriggerEnter(Collider other)
 	{
+		if(other.transform.root.name == "Player")
+			isPlayers = true;
 		if(other.gameObject.renderer.enabled)
 		{
 		GameObject sparks = (GameObject) Instantiate(crash, other.transform.position, Quaternion.identity);
+			sparks.GetComponent<Sparks>().isPlayers = isPlayers;
 		sparks.transform.LookAt(transform.position);
 		Destroy(sparks,.15f);
 		driverHealth health = other.collider.gameObject.GetComponent<driverHealth>();
@@ -89,6 +95,7 @@ public class BulletUpdate : MonoBehaviour {
 				other.gameObject.transform.parent.parent.GetComponent<Vehicle>().RaiseTemp(false) ;
 				
 				if( other.gameObject.GetComponent<VehicleShieldController>().isDeflector() ) {
+					audio.PlayOneShot(hitShieldDeflect);
 					m_direction = -m_direction ;
 				}
 				else
@@ -96,11 +103,9 @@ public class BulletUpdate : MonoBehaviour {
 				//Debug.Log ("SHIELD BLOCK");
 			}
 			else if(other.gameObject.tag == "Vehicle"){
-					if(health != null)
-					{
-						health.DealDamage(10);
-					}
-						destroyBullet();
+				if(health != null)
+					health.DealDamage(10);
+				destroyBullet();
 			}
 			else
 				destroyBullet() ;
