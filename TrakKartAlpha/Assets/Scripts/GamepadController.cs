@@ -26,7 +26,7 @@ public class GamepadController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if( Input.GetJoystickNames()[0] != "Controller (Gamepad for Xbox 360)" ) {
+		//if( Input.GetJoystickNames()[0] != "Controller (Gamepad for Xbox 360)" ) {
 			//is player alive?
 			if( player.amAlive() ) {
 				//lock controls when player is frozen/overheated
@@ -108,6 +108,6 @@ public class GamepadController : MonoBehaviour {
 					player.SetDrag(0f) ; //vehicle slips aroung when frozen
 				}
 			}
-		}
+		//}
 	}
 }

@@ -76,6 +76,7 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 				if(laps == 4)
 				{
 					this.gameObject.GetComponent<ControlSafety>().enabled = false ;
+					this.gameObject.GetComponent<PlayerUI>().enabled = false ;
 					
 					this.gameObject.AddComponent<AIDriver>() ;
 					this.gameObject.GetComponent<AIDriver>().enabled = true ;
@@ -104,6 +105,7 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 		{
 			if( this.name == "Player" ) {
 				this.gameObject.GetComponent<ControlSafety>().enabled = false ;
+				this.gameObject.GetComponent<PlayerUI>().enabled = false ;
 				
 				this.gameObject.AddComponent<AIDriver>() ;
 				this.gameObject.GetComponent<AIDriver>().enabled = true ;

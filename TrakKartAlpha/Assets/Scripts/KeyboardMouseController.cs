@@ -43,9 +43,6 @@ public class KeyboardMouseController : MonoBehaviour {
 						float horMovement = Input.GetAxis("Horizontal");
 						float vertMovement = Input.GetAxis("Vertical");
 						Vector3 moveDirection= new Vector3 (horMovement, 0, vertMovement);
-						
-						//set Drag
-						player.SetDrag(Mathf.Lerp(m_maxDrag, 0, moveDirection.magnitude)) ;
 					
 						//Rotate vehicle based on direction
 						if (moveDirection != Vector3.zero){
@@ -56,6 +53,9 @@ public class KeyboardMouseController : MonoBehaviour {
 							//force is added for smoother turning
 							player.AddForce(moveDirection, player.stat.GetCurrentSpeed());	
 						}
+						
+						//set Drag
+						player.SetDrag(Mathf.Lerp(m_maxDrag, 0, moveDirection.magnitude)) ;
 						
 						//************************Player Input************************************************//
 						//swap gun/shield
