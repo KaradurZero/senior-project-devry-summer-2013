@@ -21,7 +21,7 @@ public class RaceStarter : MonoBehaviour {
 				else if( racer.GetComponent<GamepadController>() != null )
 					racer.GetComponent<GamepadController>().enabled = false ;
 				//else if( racer.GetComponent<Xbox360Controller>() != null )
-				//	racer.GetComponent<Xbox360Controller>().enabled = false ;	
+					//racer.GetComponent<Xbox360Controller>().enabled = false ;	
 			}
 			else {
 				racer.GetComponent<AIDriver>().enabled = false ;
@@ -61,7 +61,7 @@ public class RaceStarter : MonoBehaviour {
 			timer -= Time.deltaTime ;
 		}
 		else
-			this.gameObject.GetComponent<RaceStarter>().enabled = false ;
+			Destroy(this.gameObject.GetComponent<RaceStarter>());
 		
 		if( timer < 1 ) {
 			foreach (GameObject racer in vehicleList) {
@@ -73,7 +73,7 @@ public class RaceStarter : MonoBehaviour {
 					else if( racer.GetComponent<GamepadController>() != null )
 						racer.GetComponent<GamepadController>().enabled = true ;
 					//else if( racer.GetComponent<Xbox360Controller>() != null )
-					//	racer.GetComponent<Xbox360Controller>().enabled = true ;	
+						//racer.GetComponent<Xbox360Controller>().enabled = true ;	
 				}
 				else {
 					racer.GetComponent<AIDriver>().enabled = true ;

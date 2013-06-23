@@ -13,17 +13,18 @@ public class GameStateController : MonoBehaviour {
 		//m_mainGameState = (int)gameStates.MAINMENU;
 		m_mainGameState = (int)gameStates.INGAMERUN;
 		m_interactiveCloth = GameObject.Find("InteractiveCloth");
+		Time.timeScale = 1.0f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		//Debug.Log("delta time value: " + Time.deltaTime);
 		//Debug.Log("time.time value: " + Time.time);
-		if(Input.GetKeyDown(KeyCode.Escape)) {
+		if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7)) {
 			switch(m_mainGameState) {
 			case (int)gameStates.INGAMERUN:
 				//if game is running like normal
-				m_mainGameState = (int)gameStates.INGAMEMENU;//or change later to pop up in game menu
+				m_mainGameState = (int)gameStates.INGAMEPAUSE;//or change later to pop up in game menu
 				m_interactiveCloth.GetComponent<InteractiveCloth>().enabled = false;
 				Time.timeScale = 0.0f;
 				break;

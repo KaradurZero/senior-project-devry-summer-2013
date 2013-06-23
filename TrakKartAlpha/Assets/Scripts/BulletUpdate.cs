@@ -109,6 +109,11 @@ public class BulletUpdate : MonoBehaviour {
 			}
 			else
 				destroyBullet() ;
+			
+			if( other.gameObject.name == "Missile test obj" ) {
+				destroyBullet ();
+				Destroy (other.gameObject);	
+			}
 		}
 	}
 	void OnCollisionEnter(Collision other)

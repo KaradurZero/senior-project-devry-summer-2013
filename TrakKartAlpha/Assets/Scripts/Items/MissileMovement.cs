@@ -54,17 +54,17 @@ public class MissileMovement : MonoBehaviour {
 			if(/*c.transform.position != m_ignoreTarget.transform.position &&*/ c.tag == m_hTriggerSpecific_01) {
 				//TODO: get enemy script and lower health/energy from missile hit
 				c.GetComponent<driverHealth>().DealDamage(m_damageThisDeals);
-				hasHitEnemy();
+				Destroy(this.gameObject);
 			}
 			
 			if( c.gameObject.tag == "Shield" ) {
 				c.gameObject.transform.parent.parent.GetComponent<Vehicle>().RaiseTemp(false) ;	
 			}
+
+			if( c.gameObject.name == "bullet" ) {
+				Destroy(this.gameObject);	
+			}
 		}
-	}
-	
-	void hasHitEnemy() {
-		Destroy(this.gameObject);
 	}
 	
 	public void setTarget(GameObject a_enemy) { m_targetEnemy = a_enemy;}

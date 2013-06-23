@@ -165,7 +165,7 @@ public class Vehicle : MonoBehaviour {
 							this.GetComponent<GamepadController>().enabled = true ;
 						}
 						//else if( this.GetComponent<Xbox360Controller>() != null ) {
-						//	this.GetComponent<Xbox360Controller>().enabled = true ;
+							//this.GetComponent<Xbox360Controller>().enabled = true ;
 						//}
 						else
 							this.GetComponent<AIDriver>().enabled = true ;

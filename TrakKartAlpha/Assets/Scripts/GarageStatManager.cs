@@ -37,6 +37,8 @@ public class GarageStatManager : MonoBehaviour {
 		attackCost,
 		defenseCost;
 	
+	MenuStatsFromGame gameStats ;
+	
 	void Start () 
 	{
 		speedObjs 	= new GameObject[5];
@@ -77,7 +79,10 @@ public class GarageStatManager : MonoBehaviour {
 			attackObjs[i] 	= GameObject.Find("attack_" + (i + 1));
 			defenseObjs[i] 	= GameObject.Find("defense_" + (i + 1));
 		}
-		MenuStatsFromGame gameStats = GameObject.Find("statsFromGame").GetComponent<MenuStatsFromGame>();
+		
+		if( GameObject.Find("statsFromGame") )
+			gameStats = GameObject.Find("statsFromGame").GetComponent<MenuStatsFromGame>();
+		
 		if(gameStats != null)
 		{
 			for(int i = 0;	 i < gameStats.GetSpeed() 	- 1;	i++)	if(CanUpgradeStat("Speed"))		UpgradeStat("Speed");
