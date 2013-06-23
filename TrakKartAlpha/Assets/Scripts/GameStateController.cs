@@ -19,7 +19,7 @@ public class GameStateController : MonoBehaviour {
 	void Update () {
 		//Debug.Log("delta time value: " + Time.deltaTime);
 		//Debug.Log("time.time value: " + Time.time);
-		if(Input.GetKeyDown(KeyCode.Escape)) {
+		if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7)) {
 			switch(m_mainGameState) {
 			case (int)gameStates.INGAMERUN:
 				//if game is running like normal

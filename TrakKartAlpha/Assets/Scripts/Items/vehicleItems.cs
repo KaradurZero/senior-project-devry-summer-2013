@@ -53,7 +53,7 @@ public class vehicleItems : MonoBehaviour {
 			switch(m_item) {
 			case (int)items.oilSlick://use oil slick item
 				GameObject droppedItem = (GameObject) Instantiate(m_oilSlickObj, 
-					(transform.position - transform.forward * (transform.localScale.y * 2.5f)
+					(transform.position - transform.forward * (transform.localScale.y * 1.5f)
 					/*vehicle size from front to back assuming car is moving forward by y*/),
 					Quaternion.identity);
 				droppedItem.GetComponent<OilSlickBehavior>().setIgnoreTarget(this.gameObject) ;
@@ -81,7 +81,7 @@ public class vehicleItems : MonoBehaviour {
 					}
 				}
 				Vector3 front = transform.position + 
-					transform.forward * (this.transform.localScale.y * 2.5f);
+					transform.forward * (this.transform.localScale.y * 1.5f);
 				GameObject missile =(GameObject)Instantiate(m_homingMissle, front, Quaternion.identity);
 				//missile.GetComponent<MissileMovement>().setIgnoreTarget(this.gameObject.transform.FindChild("vehicleShield").gameObject);
 				missile.GetComponent<MissileMovement>().setIgnoreTarget(this.gameObject);
@@ -98,7 +98,7 @@ public class vehicleItems : MonoBehaviour {
 				//this will rely upon vehicle having the gun working correctly and pointing in a direction
 				//logic behind relying upon gun is so that only one script is needed for aiming directional projectiles.
 				Vector3 frontOfGun = transform.FindChild(m_hWeapon).transform.position + 
-					transform.FindChild(m_hWeapon).transform.forward * (this.transform.localScale.y * 2.5f);
+					transform.FindChild(m_hWeapon).transform.forward * (this.transform.localScale.y * 1.5f);
 				GameObject freezeShot = (GameObject)Instantiate(m_freezeShot, frontOfGun, Quaternion.identity);
 				freezeShot.GetComponent<FreezeShotMovement>().setIgnoreTarget(this.gameObject);
 				freezeShot.GetComponent<FreezeShotMovement>().lifespan 			= freezeLifespan;
