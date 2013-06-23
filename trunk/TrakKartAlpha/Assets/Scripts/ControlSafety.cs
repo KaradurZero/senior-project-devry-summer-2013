@@ -19,28 +19,26 @@ public class ControlSafety : MonoBehaviour {
 			
 			Debug.Log(Input.GetJoystickNames()[0]) ;
 			
-			if( Input.GetJoystickNames()[0] == "Controller (Gamepad for Xbox 360)" ) {
+			/*if( Input.GetJoystickNames()[0] == "Controller (Gamepad for Xbox 360)" ) {
 					if( this.gameObject.GetComponent<Xbox360Controller>() == null ) {
 					Debug.Log ("CONTROLLER");
 					Destroy (this.GetComponent<KeyboardMouseController>()) ;
 					Destroy (this.GetComponent<GamepadController>()) ;
-					this.gameObject.AddComponent<Xbox360Controller>() ;
-				}
-			}
-			else {
+					//this.gameObject.AddComponent<Xbox360Controller>() ;
+				}*/
+			//}
+			//else {
 					if(this.gameObject.GetComponent<GamepadController>() == null) {
-					Debug.Log ("XBOX");
 					Destroy (this.GetComponent<KeyboardMouseController>()) ;
-					Destroy (this.GetComponent<Xbox360Controller>()) ;
+					//Destroy (this.GetComponent<Xbox360Controller>()) ;
 					this.gameObject.AddComponent<GamepadController>() ;
 				}
-			}
+			//}
 		}
 		else {
 			if(this.gameObject.GetComponent<KeyboardMouseController>() == null) {
-				Debug.Log ("KEYBOARD");
 				Destroy (this.gameObject.GetComponent<GamepadController>()) ;
-				Destroy (this.gameObject.GetComponent<Xbox360Controller>()) ;
+				//Destroy (this.gameObject.GetComponent<Xbox360Controller>()) ;
 				this.gameObject.AddComponent<KeyboardMouseController>() ;
 			}
 		}
