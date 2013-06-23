@@ -15,7 +15,7 @@ public class MissileMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//if movement speed is increased then turnspeed will need to be increased
-		m_maxMovementSpeed 		= 50.0f;
+		m_maxMovementSpeed 		= 30.0f;
 		turnSpeed 				= 2.0f;
 		m_closeDistance 		= 10.0f;
 		m_hTriggerSpecific_01 	= "Vehicle";

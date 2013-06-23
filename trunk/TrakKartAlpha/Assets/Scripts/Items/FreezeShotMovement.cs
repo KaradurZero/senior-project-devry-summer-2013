@@ -7,7 +7,7 @@ public class FreezeShotMovement : MonoBehaviour {
 	Quaternion 	m_direction;//the euler angle based upon the Y axis
 	Vector3 	m_moveTo = Vector3.zero;//in case value does not get set properly
 	float 		m_bulletLifespan;
-	float		m_bulletSpeed = 2f ;
+	float		m_bulletSpeed = 3f ;
 	Vector3		m_parentMomentum = Vector3.zero;//in case value does not get set properly
 	
 	string		m_hTriggerSpecific_01;
@@ -16,7 +16,7 @@ public class FreezeShotMovement : MonoBehaviour {
 	void Start () {
 		m_hTriggerSpecific_01 = "Vehicle";
 		m_hTriggerSpecific_02 = "Wall";
-		m_bulletLifespan = 3f ;
+		m_bulletLifespan = 1f ;
 	}
 	
 	// Update is called once per frame
