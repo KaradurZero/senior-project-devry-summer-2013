@@ -53,7 +53,7 @@ public class vehicleItems : MonoBehaviour {
 			switch(m_item) {
 			case (int)items.oilSlick://use oil slick item
 				GameObject droppedItem = (GameObject) Instantiate(m_oilSlickObj, 
-					(transform.position - transform.forward * (transform.localScale.y * 2.5f)
+					(transform.position - transform.forward * (transform.localScale.y * 1.5f)
 					/*vehicle size from front to back assuming car is moving forward by y*/),
 					Quaternion.identity);
 				droppedItem.GetComponent<OilSlickBehavior>().setIgnoreTarget(this.gameObject) ;
