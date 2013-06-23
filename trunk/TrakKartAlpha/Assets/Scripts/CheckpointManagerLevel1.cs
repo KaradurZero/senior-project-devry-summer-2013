@@ -89,8 +89,8 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 					this.gameObject.GetComponent<KeyboardMouseController>().enabled = false ;
 				else if( this.gameObject.GetComponent<GamepadController>() != null )
 					this.gameObject.GetComponent<GamepadController>().enabled = false ;
-				else
-					this.gameObject.GetComponent<Xbox360Controller>().enabled = false ;
+				//else
+					//this.gameObject.GetComponent<Xbox360Controller>().enabled = false ;
 					
 					GameObject.Instantiate(EndGame);
 					//save stats for the menu
@@ -121,8 +121,8 @@ public class CheckpointManagerLevel1 : MonoBehaviour {
 					this.gameObject.GetComponent<KeyboardMouseController>().enabled = false ;
 				else if( this.gameObject.GetComponent<GamepadController>() != null )
 					this.gameObject.GetComponent<GamepadController>().enabled = false ;
-				else
-					this.gameObject.GetComponent<Xbox360Controller>().enabled = false ;
+				//else
+					//this.gameObject.GetComponent<Xbox360Controller>().enabled = false ;
 					
 					GameObject.Instantiate(EndGame);
 			}

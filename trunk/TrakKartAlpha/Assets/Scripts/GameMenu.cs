@@ -18,7 +18,8 @@ public class GameMenu : MonoBehaviour {
 	void Update () {
 		//check every frame the gameStateController's state. if it is ingamepause/ingamemenu
 		//and isTangible is false then the switch has happened
-		if(m_mainStateController.gameState == (int)GameStateController.gameStates.INGAMEMENU
+		if((m_mainStateController.gameState == (int)GameStateController.gameStates.INGAMEMENU || 
+			m_mainStateController.gameState == (int)GameStateController.gameStates.INGAMEPAUSE)
 			&& m_isTangible == false) {
 			//instantiate new m_pauseMenu in front of camera
 			m_isTangible = true;
@@ -30,6 +31,7 @@ public class GameMenu : MonoBehaviour {
 			//TODO set render to true and move object into position under camera for better performance
 		}
 		else if(m_mainStateController.gameState != (int)GameStateController.gameStates.INGAMEMENU
+			&& m_mainStateController.gameState != (int)GameStateController.gameStates.INGAMEPAUSE
 			&& m_isTangible == true) {
 			//menu needs to be deleted and removed from the screen
 			m_isTangible = false;
@@ -54,12 +56,18 @@ public class GameMenu : MonoBehaviour {
 				m_mainStateController.setGameState( (int)GameStateController.gameStates.INGAMERUN);
 				break;
 			case "Main Menu":
+				DontDestroyOnLoad(GameObject.Find("statsFromGame"));
+				Destroy(GameObject.Find("MenuStats"));
 				Application.LoadLevel(0);
 				break;
 			case "Help":
+				DontDestroyOnLoad(GameObject.Find("statsFromGame"));
+				Destroy(GameObject.Find("MenuStats"));
 				Application.LoadLevel(1);
 				break;
 			case "Garage":
+				DontDestroyOnLoad(GameObject.Find("statsFromGame"));
+				Destroy(GameObject.Find("MenuStats"));
 				Application.LoadLevel(2);
 				break;
 			case "Resume":
