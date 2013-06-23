@@ -147,8 +147,8 @@ public class Vehicle : MonoBehaviour {
 							this.GetComponent<KeyboardMouseController>().enabled = false ;
 						else if( this.GetComponent<GamepadController>() != null )
 							this.GetComponent<GamepadController>().enabled = false ;
-						else if( this.GetComponent<Xbox360Controller>() != null )
-							this.GetComponent<Xbox360Controller>().enabled = false ;
+						//else if( this.GetComponent<Xbox360Controller>() != null )
+							//this.GetComponent<Xbox360Controller>().enabled = false ;
 						else
 							this.GetComponent<AIDriver>().enabled = false ;
 					}
@@ -164,9 +164,9 @@ public class Vehicle : MonoBehaviour {
 						else if( this.GetComponent<GamepadController>() != null ) {
 							this.GetComponent<GamepadController>().enabled = true ;
 						}
-						else if( this.GetComponent<Xbox360Controller>() != null ) {
-							this.GetComponent<Xbox360Controller>().enabled = true ;
-						}
+						//else if( this.GetComponent<Xbox360Controller>() != null ) {
+						//	this.GetComponent<Xbox360Controller>().enabled = true ;
+						//}
 						else
 							this.GetComponent<AIDriver>().enabled = true ;
 					}	
@@ -294,7 +294,7 @@ public class Vehicle : MonoBehaviour {
 		
 		//if vehicle is boosted by player, temperature rises
 		if( !boostPad )
-			RaiseTemperaturePerSecond( 10f ) ;
+			RaiseTemperaturePerSecond( 40f ) ;
 		
 		m_boosted = true ;
 		m_boost_time = Time.time + boostTime ;

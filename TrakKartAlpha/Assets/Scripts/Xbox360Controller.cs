@@ -55,8 +55,7 @@ public class Xbox360Controller : MonoBehaviour {
 							
 							//rotate gun/shield whenever right thumbstick is used
 							if (aim360_dir != Vector3.zero){
-								if(aim360_dir != Vector3.zero)
-									myGunShieldRot.updateRotationToVec3(aim360_dir) ;
+								myGunShieldRot.updateRotationToVec3(aim360_dir) ;
 							}
 							
 							//move vehicle

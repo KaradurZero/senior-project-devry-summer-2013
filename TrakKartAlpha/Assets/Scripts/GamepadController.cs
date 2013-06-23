@@ -79,7 +79,7 @@ public class GamepadController : MonoBehaviour {
 							}
 							
 							//swap gun/shield
-							if(Input.GetKeyDown(KeyCode.Joystick1Button0) && !m_swapButtonDown){
+							if(Input.GetKeyDown(KeyCode.Joystick1Button2) && !m_swapButtonDown){
 								m_swapButtonDown = true ;
 								myGunShieldRot.swapGunShield() ;	
 							}
@@ -96,7 +96,7 @@ public class GamepadController : MonoBehaviour {
 							}
 						
 							//use powerup
-							if( Input.GetKeyDown(KeyCode.Joystick1Button1)) {
+							if( Input.GetKeyDown(KeyCode.Joystick1Button0)) {
 							if( player.myPowerup.item != 0 )
 								player.FirePowerUp() ;
 						}

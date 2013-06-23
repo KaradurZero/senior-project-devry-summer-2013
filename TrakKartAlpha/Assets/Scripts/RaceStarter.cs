@@ -20,8 +20,8 @@ public class RaceStarter : MonoBehaviour {
 					racer.GetComponent<KeyboardMouseController>().enabled = false ;
 				else if( racer.GetComponent<GamepadController>() != null )
 					racer.GetComponent<GamepadController>().enabled = false ;
-				else if( racer.GetComponent<Xbox360Controller>() != null )
-					racer.GetComponent<Xbox360Controller>().enabled = false ;	
+				//else if( racer.GetComponent<Xbox360Controller>() != null )
+				//	racer.GetComponent<Xbox360Controller>().enabled = false ;	
 			}
 			else {
 				racer.GetComponent<AIDriver>().enabled = false ;
@@ -72,8 +72,8 @@ public class RaceStarter : MonoBehaviour {
 						racer.GetComponent<KeyboardMouseController>().enabled = true ;
 					else if( racer.GetComponent<GamepadController>() != null )
 						racer.GetComponent<GamepadController>().enabled = true ;
-					else if( racer.GetComponent<Xbox360Controller>() != null )
-						racer.GetComponent<Xbox360Controller>().enabled = true ;	
+					//else if( racer.GetComponent<Xbox360Controller>() != null )
+					//	racer.GetComponent<Xbox360Controller>().enabled = true ;	
 				}
 				else {
 					racer.GetComponent<AIDriver>().enabled = true ;

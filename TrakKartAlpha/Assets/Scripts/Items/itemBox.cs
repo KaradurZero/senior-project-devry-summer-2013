@@ -109,7 +109,6 @@ public class itemBox : MonoBehaviour {
 					if(c.name == "Player")
 					{
 						sparks.GetComponent<BreakBox>().isPlayer = true;
-						GameObject.Find("powerupDisplay").GetComponent<PowerUpDisplay>().DisplayPowerup(c.GetComponent<vehicleItems>().m_item);
 					}
 				}
 			}

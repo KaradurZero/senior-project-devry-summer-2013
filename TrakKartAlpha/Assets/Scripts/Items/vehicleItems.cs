@@ -154,9 +154,6 @@ public class vehicleItems : MonoBehaviour {
 				//do nothing
 				break;
 			}
-			//Debug.Log("Item Used");
-		if(gameObject.name == "Player")
-			GameObject.Find("powerupDisplay").GetComponent<PowerUpDisplay>().DisplayPowerup(m_item);
 	}
 	
 	public int item {
@@ -175,14 +172,8 @@ public class vehicleItems : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.Alpha9))
-		{
-			if(gameObject.name == "Player") {
-				m_item = (int)items.itemSteal ;
-				GameObject.Find("powerupDisplay").GetComponent<PowerUpDisplay>().DisplayPowerup(m_item);
-			}
-			
-		}
+		if(gameObject.name == "Player")
+			GameObject.Find("powerupDisplay").GetComponent<PowerUpDisplay>().DisplayPowerup(m_item);
 	}
 	
 
