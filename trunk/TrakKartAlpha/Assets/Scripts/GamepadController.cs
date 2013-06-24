@@ -33,8 +33,8 @@ public class GamepadController : MonoBehaviour {
 				if(!player.isFrozen()) {
 					if( !player.stat.isOverheated() ) {
 						//input poll
-						float analogHorMovement = Input.GetAxisRaw("HorizontalJ");
-						float analogVertMovement = Input.GetAxisRaw("VerticalJ");
+						float analogHorMovement = Input.GetAxis("HorizontalJ");
+						float analogVertMovement = Input.GetAxis("VerticalJ");
 						float weaponHoriz = Input.GetAxis("Weapon_Horizontal");
 						float weaponVert = Input.GetAxis("Weapon_Vertical");
 						Vector3 analogMoveDirection= new Vector3 (analogHorMovement, 0, analogVertMovement);
