@@ -182,7 +182,7 @@ public class CarStat : MonoBehaviour {
 			menuStats = GameObject.Find("MenuStats").GetComponent<statsFromMenu>();
 			if(menuStats != null)
 			{
-				m_maxVelocity 	= m_defaultMaxVelocity 	= menuStats.GetSpeed() + 20;
+				m_maxVelocity 	= m_defaultMaxVelocity 	= menuStats.GetSpeed() + 15;
 				m_acceleration 	= m_defaultAcceleration = menuStats.GetAccel() + 10;
 				m_maxTemp 		= 100 + (menuStats.GetTemp() * 20);
 				m_boostVelocity = m_maxVelocity + (menuStats.GetBoost() * 3);
